@@ -1,0 +1,19 @@
+/Debug/
+/Release/
+/src/html/
+sdrdab.doxytag
+*.db
+*.aac
+*.ogg
+<<<<<<< HEAD
+/matlab/*~
+/matlab/ref/*~
+<<<<<<< HEAD
+/matlab/*.png
+=======
+=======
+>>>>>>> refs/remotes/origin/development
+>>>>>>> branch 'performance_test' of https://sdr.kt.agh.edu.pl/developers/sdr.git
+/core
+/*_debug
+

@@ -1,0 +1,10 @@
+input samples for matlab code, various type (clean, noise, etc...)
+
+describe all files here, entire directory added to .gitignore
+
+FILES:
+    download.sh - download samples from http://sdr.kt.agh.edu.pl/...
+
+    Record3_katowice_iq.dat - generated input signal, clean, no noise
+    antena-1_dab_229072kHz_fs2048kHz_gain42_1.raw - real signal, acquired by rtl-sdr device, Krakow, Lipsk lab, standard antenna, good SNR
+

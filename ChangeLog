@@ -1,0 +1,18 @@
+=========================================
+Software Defined Radio - DAB+ (libsdrdab)
+=========================================
+
+
+Version. 1.0 BETA, 2015-07-07
+=============================
+    - x86, real-time implementation (i7-3520M: 20-100% CPU utilization depends on configuration)
+    - decoding type: file2file, file2speaker, air2file, air2speaker
+    - MODE I, MODE II, MODE IV (MODE III supported but buggy - do not works)
+    - input devices: all tuners supported by sdrlib (tested on RLT2832U + R820T, R820T2)
+    - input file: biarny, 8 bits per I/Q sample (unsigned int, 127 == 0), format: IQIQIQIQIQ...
+    - change carrier frequency on air2* mode
+    - fine tune carrier frequency (ppm)
+    - 2.048 MHz base sampling frequency (resampling if necessary in file2* mode)
+    - decode station list with names
+    - switch between station in real-time
+    - DAB+ (AAC) without XPAD, only audio (old DAB MPEG supported but buggy - do not works)

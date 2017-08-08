@@ -1,0 +1,82 @@
+#!/bin/bash
+# v2:   2016.05.04 refactoring, add more options (kwant)
+
+if [ $# -eq 0 ]; then
+    echo "Usage:"
+    echo -e "\033[31m./sdrtool\e[0m build [Scanbuild|Debug|Profiling|Release|Unittest|clean]- builds sdrdab and sdrdab-cli in ./build/. Default target is Debug"
+    echo -e "\033[31m./sdrtool\e[0m test-antena [-v] - decode *antena file* to speakers"
+    echo -e "\033[31m./sdrtool\e[0m test-katowice [-v] - decode *Katowice file* to speakers"
+    echo -e ""
+    echo -e "\033[31m./sdrtool\e[0m run-unittests - runs prebuilt unittests"
+    echo -e "\033[31m./sdrtool\e[0m valgrind-antena - runs valgrind on *Antena* file"
+    echo -e "\033[31m./sdrtool\e[0m valgrind-katowice - runs valgrind on *Katowice* file"
+    echo -e "\033[31m./sdrtool\e[0m valgrind-ut - runs valgrind on unittests"
+    echo -e ""
+    echo -e "\033[31m./sdrtool\e[0m install-deps - installs dependencies"
+    echo -e "\033[31m./sdrtool\e[0m download-data-light - download a few IQ samples"
+    echo -e "\033[31m./sdrtool\e[0m download-data - download all IQ samples (huge!!!)"
+    echo -e "\033[31m./sdrtool\e[0m download-ut - download data for UT"
+    echo -e "\033[31m./sdrtool\e[0m download-all - download everything"
+    echo -e ""
+    echo -e "\033[31m./sdrtool\e[0m doxy - generates docs with doxygen"
+    echo -e "\033[31m./sdrtool\e[0m matlab - generates unittest data by Matlab"
+    exit 0
+fi
+
+command=$1
+shift
+case "$command" in
+    build)
+        bash scripts/build.sh "$@"
+        ;;
+    run-unittests)
+        bash scripts/runTests.sh "$@"
+        ;;
+    test-antena)
+        bash scripts/runSimpleDebug.sh antena "$@"
+        ;;
+    test-katowice)
+        bash scripts/runSimpleDebug.sh katowice "$@"
+        ;;
+    valgrind-antena)
+        bash scripts/runValgrindAntena.sh
+        ;;
+    valgrind-katowice)
+        bash scripts/runValgrindKatowice.sh
+        ;;
+    valgrind-ut)
+        bash scripts/runValgrindUnittests.sh "$@"
+        ;;
+    install-deps)
+        bash scripts/installDependencies.sh
+        ;;
+    download-data-light)
+        bash scripts/runDownload.sh "data-light"
+        ;;
+    download-data)
+        bash scripts/runDownload.sh "data"
+        ;;
+    download-ut)
+        bash scripts/runDownload.sh "ut"
+        ;;
+    download-all)
+        bash scripts/runDownload.sh "data"
+        bash scripts/runDownload.sh "ut"
+        ;;
+    doxy)
+        bash scripts/runDoxygen.sh
+        ;;
+    matlab)
+        # make sure data/ut/ exists
+        mkdir -p data/ut/
+        # delete data for UT
+        rm data/ut/*
+        bash scripts/runDownload.sh "ut"
+        bash scripts/runMatlab.sh
+        ;;
+    *)
+        echo ""
+        echo ""
+        echo "unrecognized option!!!"
+esac
+

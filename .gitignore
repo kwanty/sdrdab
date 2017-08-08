@@ -1,0 +1,46 @@
+*.pydevproject
+.gradle
+bin/
+tmp/
+*.tmp
+*.bak
+*.swp
+*~.nib
+local.properties
+.loadpath
+.idea
+*~
+/src/sdrdab-gui/ui_*.h
+
+# Eclipse Core
+.metadata
+.settings/
+
+# CDT-specific
+
+# JDT-specific (Eclipse Java Development Tools)
+.classpath
+
+# PDT-specific
+.buildpath
+
+# sbteclipse plugin
+.target
+
+# TeXlipse plugin
+.texlipse
+
+# Sublime ST3
+.sublime-project.sublime-workspace
+
+# CMake build dir
+build/
+
+# Doxygen
+doc/
+
+# Matlab
+matlab/**/*.aac
+
+# Data files
+data/

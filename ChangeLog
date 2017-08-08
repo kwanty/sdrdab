@@ -2,17 +2,36 @@
 Software Defined Radio - DAB+ (libsdrdab)
 =========================================
 
+Version. 2.0, 2016-06-07
+=============================
+    - new Scheduler: faster, more stable, readable code
+    - refactored DataDecoder
+    - rewritten remodulation (fc): make use of LUT
+    - Viterbi optimization by means of SSE3 (up to 3x improvement)
+    - refactored Synchronizer
+    - support legacy DAB (MPEG) and DAB+ (AAC)
+    - added two versions of SNR calculation: from spectrum (RAW) and prefix
+    - rewritten build system, now using cmake instead of Eclipse
+    - MacOS X support
+    - improved debug logging 
+    - refactored DataFeeder (needs even more refactoring)
+    - simple GUI implementation (needs to be rewritten and improved)
+    - acquired DAB+ signal for testing
+    - upgraded sdrdab-cli (more parameters)
+    - Matlab reference software for DAB(+) decoder
+    - included UnitTests
+    - MODE III still not supported    
 
 Version. 1.0 BETA, 2015-07-07
 =============================
-    - x86, real-time implementation (i7-3520M: 20-100% CPU utilization depends on configuration)
+    - x86, real-time implementation (i7-3520M: 20-100% CPU utilization depending on configuration)
     - decoding type: file2file, file2speaker, air2file, air2speaker
-    - MODE I, MODE II, MODE IV (MODE III supported but buggy - do not works)
-    - input devices: all tuners supported by sdrlib (tested on RLT2832U + R820T, R820T2)
+    - MODE I, MODE II, MODE IV (MODE III supported but buggy - does not works)
+    - input devices: all tuners supported by rtlsdr (tested on RLT2832U + R820T, R820T2)
     - input file: biarny, 8 bits per I/Q sample (unsigned int, 127 == 0), format: IQIQIQIQIQ...
     - change carrier frequency on air2* mode
     - fine tune carrier frequency (ppm)
     - 2.048 MHz base sampling frequency (resampling if necessary in file2* mode)
     - decode station list with names
-    - switch between station in real-time
-    - DAB+ (AAC) without XPAD, only audio (old DAB MPEG supported but buggy - do not works)
+    - switch between stations in real-time
+    - DAB+ (AAC) without XPAD, only audio (old DAB MPEG supported but buggy - does not works)

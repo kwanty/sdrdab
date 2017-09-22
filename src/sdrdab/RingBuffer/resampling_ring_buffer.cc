@@ -1,9 +1,10 @@
-/*
+﻿/*
  * @author: Paweł Szulc <pawel_szulc@onet.pl>
  * @date 7 July 2015 - version 1.0 beta
  * @date 7 July 2016 - version 2.0 beta
  * @date 1 November 2016 - version 2.0
- * @version 2.0
+ * @date 7 July 2017 - version 3.0
+ * @version 3.0
  * @copyright Copyright (c) 2015 Paweł Szulc
  * @par License
  *
@@ -25,19 +26,22 @@
 
 #include "resampling_ring_buffer.h"
 
-ResamplingRingBuffer::ResamplingRingBuffer(int quality, size_t size, int channels) : RingBuffer(size){
+ResamplingRingBuffer::ResamplingRingBuffer(resample_quality quality, size_t size, int channels) : RingBuffer(size){
+    fprintf(stderr, "ResamplingRingBuffer mode: %d", quality);
     resampler = new Resampler(quality, channels);
+
 }
 
 ResamplingRingBuffer::~ResamplingRingBuffer(){
     delete resampler;
 }
 
-size_t ResamplingRingBuffer::WriteResampledInto(float *source_buffer,size_t number_to_read, float ratio){
-
-    if (ratio==1.0)
-        return sWriteInto(source_buffer,number_to_read);
-
+size_t ResamplingRingBuffer::WriteResampledInto(float *source_buffer,size_t number_to_read, float ratio) {
+    //printf("ratio : %0.16f\n",ratio);
+    if (ratio == 1.0) {
+        return sWriteInto(source_buffer, number_to_read);   
+    }
+    
     size_t number_written = 0;
 
     size_t max_number_to_write = HeadToRightEnd();

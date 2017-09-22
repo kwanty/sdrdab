@@ -30,7 +30,7 @@ class ResamplerTestLinear: public testing::Test {
 
         virtual void SetUp() {
             resample_data_loaded_ = MatlabIO::ReadData(resample_data_, "./data/ut/resampler_linear_data.txt", length_);
-            resample_result_loaded_ = MatlabIO::ReadData(resample_expected_results_, "./data/ut/resampler_linear_expected_results.txt", length_*2);
+            resample_result_loaded_ = MatlabIO::ReadData(resample_expected_results_, "./data/ut/resampler_linear_expected_results.txt", length_*1.5);
 
             resampler_ = new Resampler(conv_type_, channels_);
         }
@@ -64,6 +64,8 @@ class ResamplerTestInterleaved: public testing::Test {
 
                 resample_data_ = new float[length_];
                 resample_expected_results_ = new float[length_*2];
+
+                resampler_ = new Resampler(conv_type_, channels_);
             }
 
         virtual ~ResamplerTestInterleaved() {
@@ -73,9 +75,9 @@ class ResamplerTestInterleaved: public testing::Test {
 
         virtual void SetUp() {
             resample_data_loaded_ = MatlabIO::ReadData(resample_data_, "./data/ut/resampler_interleaved_data.txt", length_);
-            resample_result_loaded_ = MatlabIO::ReadData(resample_expected_results_, "./data/ut/resampler_interleaved_expected_results.txt", length_*2);
+            resample_result_loaded_ = MatlabIO::ReadData(resample_expected_results_, "./data/ut/resampler_interleaved_expected_results.txt", length_*1.5);
 
-            resampler_ = new Resampler(conv_type_, channels_);
+           
         }
 
         virtual void TearDown() {
@@ -94,6 +96,7 @@ class ResamplerTestInterleaved: public testing::Test {
 };
 
 TEST_F(ResamplerTestLinear, number_of_returned_samples) {
+
     ASSERT_TRUE(resample_data_loaded_) << "TESTING CODE FAILED... could not load expected data";
     ASSERT_TRUE(resample_result_loaded_) << "TESTING CODE FAILED... could not load expected data";
 
@@ -107,6 +110,7 @@ TEST_F(ResamplerTestLinear, number_of_returned_samples) {
 }
 
 TEST_F(ResamplerTestLinear, values_of_returned) {
+
     ASSERT_TRUE(resample_data_loaded_) << "TESTING CODE FAILED... could not load expected data";
     ASSERT_TRUE(resample_result_loaded_) << "TESTING CODE FAILED... could not load expected data";
 
@@ -136,6 +140,7 @@ TEST_F(ResamplerTestLinear, values_of_returned) {
 }
 
 TEST_F(ResamplerTestLinear, short_buffer_test) {
+
     ASSERT_TRUE(resample_data_loaded_) << "TESTING CODE FAILED... could not load expected data";
     ASSERT_TRUE(resample_result_loaded_) << "TESTING CODE FAILED... could not load expected data";
 
@@ -146,14 +151,19 @@ TEST_F(ResamplerTestLinear, short_buffer_test) {
     resampler_->SetSourceBuffer(resample_data_, length_);
     int returned_samples = resampler_->Resample(result, length_, ratio);
 
+    cout << "Number of returned samples at first " << returned_samples << endl;
+
     EXPECT_PRED3(DifferenceLimit, length_, returned_samples, channels_);
 
     returned_samples = resampler_->Resample(result, length_, ratio);
+
+    cout << "Number of returned samples at second " << returned_samples << endl;
 
     EXPECT_PRED3(DifferenceLimit, ex_len-length_, returned_samples, channels_);
 }
 
 TEST_F(ResamplerTestInterleaved, number_of_returned_samples) {
+
     ASSERT_TRUE(resample_data_loaded_) << "TESTING CODE FAILED... could not load expected data";
     ASSERT_TRUE(resample_result_loaded_) << "TESTING CODE FAILED... could not load expected data";
 
@@ -167,6 +177,7 @@ TEST_F(ResamplerTestInterleaved, number_of_returned_samples) {
 }
 
 TEST_F(ResamplerTestInterleaved, values_of_returned) {
+
     ASSERT_TRUE(resample_data_loaded_) << "TESTING CODE FAILED... could not load expected data";
     ASSERT_TRUE(resample_result_loaded_) << "TESTING CODE FAILED... could not load expected data";
 
@@ -196,6 +207,7 @@ TEST_F(ResamplerTestInterleaved, values_of_returned) {
 }
 
 TEST_F(ResamplerTestInterleaved, short_buffer_test) {
+	
     ASSERT_TRUE(resample_data_loaded_) << "TESTING CODE FAILED... could not load expected data";
     ASSERT_TRUE(resample_result_loaded_) << "TESTING CODE FAILED... could not load expected data";
 
@@ -227,5 +239,37 @@ TEST(ResamplerRatioTest, variable_ratio_test) {
         resampler.SetSourceBuffer(data, data_length);
         int returned_samples = resampler.Resample(result, data_length*2, ratios[i]);
         EXPECT_NE(0, returned_samples) << "process did not return any samples";
+    }
+}
+
+TEST_F(ResamplerTestInterleaved, continuity_test) {
+    ASSERT_TRUE(resample_data_loaded_) << "TESTING CODE FAILED... could not load expected data";
+    ASSERT_TRUE(resample_result_loaded_) << "TESTING CODE FAILED... could not load expected data";
+
+    float result[length_*2];
+    float ratio = 1.5;
+    int fail_counter = 0;
+    float limit = 4e-2;
+
+    int block_len = 22;
+    size_t returned_samples = 0;
+
+    resampler_->SetSourceBuffer(resample_data_, length_);
+
+    for(int j = 0; j < 100; j++){
+        returned_samples = resampler_->Resample(result+j*block_len, block_len, ratio);
+    }
+
+    for(int i=0; i<returned_samples; i++) {
+        if(float diff = fabs(resample_expected_results_[i]-result[i]) > limit) {
+            printf("Expected result and calculated result do not match at index %d\n", i);
+            printf("%.6f : %.6f \n",resample_expected_results_[i],result[i]);
+            printf("Difference: %f\n", diff);
+            printf("Failed %d time(s)\n",++fail_counter);
+            printf("#####################\n");
+        }
+        if (fail_counter > 2) {
+            FAIL();
+        }
     }
 }

@@ -1,0 +1,436 @@
+sdrdab_2.0/src/sdrdab/data_format.h:876: warning: Compound demodulatorData is not documented.
+sdrdab_2.0/src/sdrdab/DataDecoder/depuncturer.h:94: warning: Compound DePuncturer::DePuncturInfo is not documented.
+sdrdab_2.0/src/sdrdab/DataFeeder/abstract_data_feeder.h:70: warning: Compound AbstractDataFeeder is not documented.
+sdrdab_2.0/src/sdrdab/AudioDecoder/pulse_sink.h:60: warning: Compound PulseSink is not documented.
+sdrdab_2.0/src/sdrdab/DataDecoder/superframe.h:40: warning: Compound MscDecoderInfo is not documented.
+sdrdab_2.0/src/sdrdab/data_format.h:883: warning: Compound datadecoderData is not documented.
+sdrdab_2.0/src/sdrdab/DataFeeder/file_data_feeder.h:40: warning: Compound FileDataFeeder is not documented.
+sdrdab_2.0/src/sdrdab/data_decoder.h:211: warning: Compound DataDecoder::Padding is not documented.
+sdrdab_2.0/src/sdrdab/data_format.h:870: warning: Compound synchronizerData is not documented.
+sdrdab_2.0/src/sdrdab/DataDecoder/data_decoder_data.h:140: warning: Compound SubChannel_Basic_Unique is not documented.
+sdrdab_2.0/src/sdrdab/data_format.h:741: warning: Compound userData is not documented.
+sdrdab_2.0/src/sdrdab/scheduler.h:505: warning: Found unknown command `\parm'
+sdrdab_2.0/src/sdrdab/synchronizer.h:193: warning: Found unknown command `\parm'
+sdrdab_2.0/src/sdrdab/synchronizer.h:194: warning: Found unknown command `\parm'
+sdrdab_2.0/src/sdrdab/DataFeeder/abstract_data_feeder.h:136: warning: Member IsRunning() (function) of class AbstractDataFeeder is not documented.
+sdrdab_2.0/src/sdrdab/DataFeeder/abstract_data_feeder.h:138: warning: Member EverythingOK(void)=0 (function) of class AbstractDataFeeder is not documented.
+sdrdab_2.0/src/sdrdab/DataFeeder/abstract_data_feeder.h:140: warning: Member RunRemodulate(float *data, size_t size, float frequencyShift) (function) of class AbstractDataFeeder is not documented.
+sdrdab_2.0/src/sdrdab/DataFeeder/abstract_data_feeder.h:145: warning: Member running (variable) of class AbstractDataFeeder is not documented.
+sdrdab_2.0/src/sdrdab/DataFeeder/abstract_data_feeder.h:147: warning: Member verbose (variable) of class AbstractDataFeeder is not documented.
+sdrdab_2.0/src/sdrdab/DataFeeder/abstract_data_feeder.h:147: warning: Member debug (variable) of class AbstractDataFeeder is not documented.
+sdrdab_2.0/src/sdrdab/DataFeeder/abstract_data_feeder.h:170: warning: Member sin_length (variable) of class AbstractDataFeeder is not documented.
+sdrdab_2.0/src/sdrdab/DataFeeder/abstract_data_feeder.h:171: warning: Member sine_tab (variable) of class AbstractDataFeeder is not documented.
+sdrdab_2.0/src/sdrdab/DataFeeder/abstract_data_feeder.h:172: warning: Member current_fs_offset (variable) of class AbstractDataFeeder is not documented.
+sdrdab_2.0/src/sdrdab/DataFeeder/abstract_data_feeder.h:173: warning: Member current_fc_offset (variable) of class AbstractDataFeeder is not documented.
+sdrdab_2.0/src/sdrdab/DataFeeder/abstract_data_feeder.h:174: warning: Member previous_write_here (variable) of class AbstractDataFeeder is not documented.
+sdrdab_2.0/src/sdrdab/DataFeeder/abstract_data_feeder.h:175: warning: Member real_dc_rb (variable) of class AbstractDataFeeder is not documented.
+sdrdab_2.0/src/sdrdab/DataFeeder/abstract_data_feeder.h:176: warning: Member imag_dc_rb (variable) of class AbstractDataFeeder is not documented.
+sdrdab_2.0/src/sdrdab/DataFeeder/abstract_data_feeder.h:179: warning: Member do_remodulate (variable) of class AbstractDataFeeder is not documented.
+sdrdab_2.0/src/sdrdab/DataFeeder/abstract_data_feeder.h:179: warning: Member do_handle_fs (variable) of class AbstractDataFeeder is not documented.
+sdrdab_2.0/src/sdrdab/DataFeeder/abstract_data_feeder.h:179: warning: Member do_agc (variable) of class AbstractDataFeeder is not documented.
+sdrdab_2.0/src/sdrdab/DataFeeder/abstract_data_feeder.h:182: warning: Member inner_buf_num (variable) of class AbstractDataFeeder is not documented.
+sdrdab_2.0/src/sdrdab/DataFeeder/abstract_data_feeder.h:182: warning: Member inner_buff_size (variable) of class AbstractDataFeeder is not documented.
+sdrdab_2.0/src/sdrdab/DataFeeder/abstract_data_feeder.h:178: warning: Member two_pi (variable) of class AbstractDataFeeder is not documented.
+sdrdab_2.0/src/sdrdab/threading/blocking_queue.h:101: warning: Member queue_ (variable) of class BlockingQueue is not documented.
+sdrdab_2.0/src/sdrdab/threading/blocking_queue.h:102: warning: Member cond_ (variable) of class BlockingQueue is not documented.
+sdrdab_2.0/src/sdrdab/threading/blocking_queue.h:103: warning: Member lock_ (variable) of class BlockingQueue is not documented.
+sdrdab_2.0/src/sdrdab/data_decoder.h:66: warning: Member conv_decoder_alg_t (enumeration) of class DataDecoder is not documented.
+sdrdab_2.0/src/sdrdab/DataDecoder/extract_from_bitstream.h:45: warning: Member Table6SubChannelShortInfo_[][4] (variable) of class ExtractFromBitstream is not documented.
+sdrdab_2.0/src/sdrdab/DataDecoder/deviterbi.h:40: warning: Member gen_[28] (variable) of class DeViterbi is not documented.
+sdrdab_2.0/src/sdrdab/DataDecoder/deviterbi.h:41: warning: Member nextBits_[384] (variable) of class DeViterbi is not documented.
+sdrdab_2.0/src/sdrdab/DataDecoder/superframe.h:54: warning: Member firecode_g_[16] (variable) of class SuperFrame is not documented.
+sdrdab_2.0/src/sdrdab/data_decoder.h:219: warning: Member current_conv_decoder_init (variable) of class DataDecoder is not documented.
+sdrdab_2.0/src/sdrdab/data_decoder.h:220: warning: Member current_conv_decoder (variable) of class DataDecoder is not documented.
+sdrdab_2.0/src/sdrdab/DataDecoder/depuncturer.h:84: warning: Member mode_parameters_ (variable) of class DePuncturer is not documented.
+sdrdab_2.0/src/sdrdab/DataDecoder/depuncturer.h:85: warning: Member station_info_ (variable) of class DePuncturer is not documented.
+sdrdab_2.0/src/sdrdab/DataDecoder/extract_from_bitstream.h:133: warning: Member last_appty_ (variable) of class ExtractFromBitstream is not documented.
+sdrdab_2.0/src/sdrdab/DataDecoder/extract_from_bitstream.h:135: warning: Member xpad_length_declared_ (variable) of class ExtractFromBitstream is not documented.
+sdrdab_2.0/src/sdrdab/DataDecoder/extract_from_bitstream.h:137: warning: Member decoding_state_ (variable) of class ExtractFromBitstream is not documented.
+sdrdab_2.0/src/sdrdab/DataDecoder/energy_dispersal.h:64: warning: Member mode_parameters_ (variable) of class EnergyDispersal is not documented.
+sdrdab_2.0/src/sdrdab/DataDecoder/superframe.h:109: warning: Member mode_parameters_ (variable) of class SuperFrame is not documented.
+sdrdab_2.0/src/sdrdab/DataDecoder/superframe.h:110: warning: Member station_info_ (variable) of class SuperFrame is not documented.
+sdrdab_2.0/src/sdrdab/DataDecoder/superframe.h:110: warning: Member msc_info_ (variable) of class SuperFrame is not documented.
+sdrdab_2.0/src/sdrdab/DataDecoder/superframe.h:112: warning: Member firecode_tab_[256] (variable) of class SuperFrame is not documented.
+sdrdab_2.0/src/sdrdab/data_decoder.h:71: warning: argument 'mode_parameters' of command @param is not found in the argument list of DataDecoder::DataDecoder(ModeParameters *param)
+sdrdab_2.0/src/sdrdab/data_decoder.h:71: warning: The following parameters of DataDecoder::DataDecoder(ModeParameters *param) are not documented:
+  parameter 'param'
+sdrdab_2.0/src/sdrdab/data_decoder.h:77: warning: argument 'mode_parameters' of command @param is not found in the argument list of DataDecoder::DataDecoder(stationInfo *info, ModeParameters *param, conv_decoder_alg_t conv_decoder)
+sdrdab_2.0/src/sdrdab/data_decoder.h:77: warning: argument 'station_info' of command @param is not found in the argument list of DataDecoder::DataDecoder(stationInfo *info, ModeParameters *param, conv_decoder_alg_t conv_decoder)
+sdrdab_2.0/src/sdrdab/data_decoder.h:77: warning: The following parameters of DataDecoder::DataDecoder(stationInfo *info, ModeParameters *param, conv_decoder_alg_t conv_decoder) are not documented:
+  parameter 'info'
+  parameter 'param'
+  parameter 'conv_decoder'
+sdrdab_2.0/src/sdrdab/data_decoder.h:145: warning: parameters of member DataDecoder::InterpretCharset are not (all) documented
+sdrdab_2.0/src/sdrdab/data_decoder.h:145: warning: return type of member DataDecoder::InterpretCharset is not documented
+sdrdab_2.0/src/sdrdab/demodulator.h:46: warning: Member Demodulator(ModeParameters *mode_parameters) (function) of class Demodulator is not documented.
+sdrdab_2.0/src/sdrdab/DataDecoder/depuncturer.h:84: warning: Member mode_parameters_ (variable) of class DePuncturer is not documented.
+sdrdab_2.0/src/sdrdab/DataDecoder/depuncturer.h:85: warning: Member station_info_ (variable) of class DePuncturer is not documented.
+sdrdab_2.0/src/sdrdab/DataDecoder/depuncturer.h:44: warning: argument 'mode_parameters' of command @param is not found in the argument list of DePuncturer::DePuncturer(ModeParameters *param)
+sdrdab_2.0/src/sdrdab/DataDecoder/depuncturer.h:44: warning: The following parameters of DePuncturer::DePuncturer(ModeParameters *param) are not documented:
+  parameter 'param'
+sdrdab_2.0/src/sdrdab/DataDecoder/depuncturer.h:50: warning: argument 'mode_parameters' of command @param is not found in the argument list of DePuncturer::DePuncturer(stationInfo *info, ModeParameters *param)
+sdrdab_2.0/src/sdrdab/DataDecoder/depuncturer.h:50: warning: argument 'station_info' of command @param is not found in the argument list of DePuncturer::DePuncturer(stationInfo *info, ModeParameters *param)
+sdrdab_2.0/src/sdrdab/DataDecoder/depuncturer.h:50: warning: The following parameters of DePuncturer::DePuncturer(stationInfo *info, ModeParameters *param) are not documented:
+  parameter 'info'
+  parameter 'param'
+sdrdab_2.0/src/sdrdab/DataDecoder/deviterbi.h:40: warning: Member gen_[28] (variable) of class DeViterbi is not documented.
+sdrdab_2.0/src/sdrdab/DataDecoder/deviterbi.h:41: warning: Member nextBits_[384] (variable) of class DeViterbi is not documented.
+sdrdab_2.0/src/sdrdab/DataDecoder/energy_dispersal.h:64: warning: Member mode_parameters_ (variable) of class EnergyDispersal is not documented.
+sdrdab_2.0/src/sdrdab/DataDecoder/energy_dispersal.h:40: warning: argument 'mode_parameters' of command @param is not found in the argument list of EnergyDispersal::EnergyDispersal(ModeParameters *param)
+sdrdab_2.0/src/sdrdab/DataDecoder/energy_dispersal.h:40: warning: The following parameters of EnergyDispersal::EnergyDispersal(ModeParameters *param) are not documented:
+  parameter 'param'
+sdrdab_2.0/src/sdrdab/DataDecoder/extract_from_bitstream.h:133: warning: Member last_appty_ (variable) of class ExtractFromBitstream is not documented.
+sdrdab_2.0/src/sdrdab/DataDecoder/extract_from_bitstream.h:135: warning: Member xpad_length_declared_ (variable) of class ExtractFromBitstream is not documented.
+sdrdab_2.0/src/sdrdab/DataDecoder/extract_from_bitstream.h:137: warning: Member decoding_state_ (variable) of class ExtractFromBitstream is not documented.
+sdrdab_2.0/src/sdrdab/DataDecoder/extract_from_bitstream.h:45: warning: Member Table6SubChannelShortInfo_[][4] (variable) of class ExtractFromBitstream is not documented.
+sdrdab_2.0/src/sdrdab/DataDecoder/extract_from_bitstream.h:95: warning: argument 'buf' of command @param is not found in the argument list of ExtractFromBitstream::EBULatinToUTF8(char ebu)
+sdrdab_2.0/src/sdrdab/AudioDecoder/fake_sink.h:89: warning: Member FakeSinkCallbacks::UnlinkCallFakeSink(GstPad *, GstPadProbeInfo *, gpointer) (friend) of class FakeSink is not documented.
+sdrdab_2.0/src/sdrdab/AudioDecoder/fake_sink.h:90: warning: Member FakeSinkCallbacks::SinkHandoffCall(GstElement *, GstBuffer *, GstPad *, gpointer) (friend) of class FakeSink is not documented.
+sdrdab_2.0/src/sdrdab/DataFeeder/file_data_feeder.h:58: warning: Member EverythingOK(void) (function) of class FileDataFeeder is not documented.
+sdrdab_2.0/src/sdrdab/DataFeeder/abstract_data_feeder.h:136: warning: Member IsRunning() (function) of class AbstractDataFeeder is not documented.
+sdrdab_2.0/src/sdrdab/DataFeeder/abstract_data_feeder.h:140: warning: Member RunRemodulate(float *data, size_t size, float frequencyShift) (function) of class AbstractDataFeeder is not documented.
+sdrdab_2.0/src/sdrdab/DataFeeder/file_data_feeder.h:83: warning: Member Normalize(size_t data_size) (function) of class FileDataFeeder is not documented.
+sdrdab_2.0/src/sdrdab/DataFeeder/file_data_feeder.h:84: warning: Member WriteResampledOut(data_feeder_ctx_t *ptctx, BlockingQueue< int > *event_queue) (function) of class FileDataFeeder is not documented.
+sdrdab_2.0/src/sdrdab/DataFeeder/file_data_feeder.h:85: warning: Member EnoughDataInBuffer(size_t expected_amount) (function) of class FileDataFeeder is not documented.
+sdrdab_2.0/src/sdrdab/DataFeeder/file_data_feeder.h:86: warning: Member PickRatio(size_t block_size) (function) of class FileDataFeeder is not documented.
+sdrdab_2.0/src/sdrdab/DataFeeder/file_data_feeder.h:87: warning: Member ReadFromFile(size_t block_size) (function) of class FileDataFeeder is not documented.
+sdrdab_2.0/src/sdrdab/DataFeeder/file_data_feeder.h:88: warning: Member EnoughDataReadFromFile(size_t number_written, data_feeder_ctx_t *params, BlockingQueue< int > *event_queue) (function) of class FileDataFeeder is not documented.
+sdrdab_2.0/src/sdrdab/DataFeeder/file_data_feeder.h:89: warning: Member SetDelay(timeval play_start_time, timeval play_end_time) (function) of class FileDataFeeder is not documented.
+sdrdab_2.0/src/sdrdab/DataFeeder/file_data_feeder.h:74: warning: Member file_descriptor_ (variable) of class FileDataFeeder is not documented.
+sdrdab_2.0/src/sdrdab/DataFeeder/file_data_feeder.h:75: warning: Member s_rate_ (variable) of class FileDataFeeder is not documented.
+sdrdab_2.0/src/sdrdab/DataFeeder/file_data_feeder.h:76: warning: Member file_wrapper_buffer_ (variable) of class FileDataFeeder is not documented.
+sdrdab_2.0/src/sdrdab/DataFeeder/file_data_feeder.h:77: warning: Member normalization_buffer_ (variable) of class FileDataFeeder is not documented.
+sdrdab_2.0/src/sdrdab/DataFeeder/file_data_feeder.h:78: warning: Member resampling_buffer_ (variable) of class FileDataFeeder is not documented.
+sdrdab_2.0/src/sdrdab/DataFeeder/file_data_feeder.h:82: warning: Member read_delay (variable) of class FileDataFeeder is not documented.
+sdrdab_2.0/src/sdrdab/DataFeeder/abstract_data_feeder.h:145: warning: Member running (variable) of class AbstractDataFeeder is not documented.
+sdrdab_2.0/src/sdrdab/DataFeeder/abstract_data_feeder.h:147: warning: Member verbose (variable) of class AbstractDataFeeder is not documented.
+sdrdab_2.0/src/sdrdab/DataFeeder/abstract_data_feeder.h:147: warning: Member debug (variable) of class AbstractDataFeeder is not documented.
+sdrdab_2.0/src/sdrdab/DataFeeder/abstract_data_feeder.h:170: warning: Member sin_length (variable) of class AbstractDataFeeder is not documented.
+sdrdab_2.0/src/sdrdab/DataFeeder/abstract_data_feeder.h:171: warning: Member sine_tab (variable) of class AbstractDataFeeder is not documented.
+sdrdab_2.0/src/sdrdab/DataFeeder/abstract_data_feeder.h:172: warning: Member current_fs_offset (variable) of class AbstractDataFeeder is not documented.
+sdrdab_2.0/src/sdrdab/DataFeeder/abstract_data_feeder.h:173: warning: Member current_fc_offset (variable) of class AbstractDataFeeder is not documented.
+sdrdab_2.0/src/sdrdab/DataFeeder/abstract_data_feeder.h:174: warning: Member previous_write_here (variable) of class AbstractDataFeeder is not documented.
+sdrdab_2.0/src/sdrdab/DataFeeder/abstract_data_feeder.h:175: warning: Member real_dc_rb (variable) of class AbstractDataFeeder is not documented.
+sdrdab_2.0/src/sdrdab/DataFeeder/abstract_data_feeder.h:176: warning: Member imag_dc_rb (variable) of class AbstractDataFeeder is not documented.
+sdrdab_2.0/src/sdrdab/DataFeeder/abstract_data_feeder.h:179: warning: Member do_remodulate (variable) of class AbstractDataFeeder is not documented.
+sdrdab_2.0/src/sdrdab/DataFeeder/abstract_data_feeder.h:179: warning: Member do_handle_fs (variable) of class AbstractDataFeeder is not documented.
+sdrdab_2.0/src/sdrdab/DataFeeder/abstract_data_feeder.h:179: warning: Member do_agc (variable) of class AbstractDataFeeder is not documented.
+sdrdab_2.0/src/sdrdab/DataFeeder/abstract_data_feeder.h:182: warning: Member inner_buf_num (variable) of class AbstractDataFeeder is not documented.
+sdrdab_2.0/src/sdrdab/DataFeeder/abstract_data_feeder.h:182: warning: Member inner_buff_size (variable) of class AbstractDataFeeder is not documented.
+sdrdab_2.0/src/sdrdab/DataFeeder/abstract_data_feeder.h:178: warning: Member two_pi (variable) of class AbstractDataFeeder is not documented.
+sdrdab_2.0/src/sdrdab/AudioDecoder/file_sink.h:69: warning: Member FileSinkCallbacks::UnlinkCallFileSink(GstPad *, GstPadProbeInfo *, gpointer) (friend) of class FileSink is not documented.
+sdrdab_2.0/src/sdrdab/DataDecoder/superframe.h:41: warning: Member cif_count (variable) of class MscDecoderInfo is not documented.
+sdrdab_2.0/src/sdrdab/DataDecoder/superframe.h:42: warning: Member number_dab_frame (variable) of class MscDecoderInfo is not documented.
+sdrdab_2.0/src/sdrdab/DataDecoder/superframe.h:43: warning: Member super_frame_sync (variable) of class MscDecoderInfo is not documented.
+sdrdab_2.0/src/sdrdab/DataDecoder/superframe.h:44: warning: Member adts_dacsbr (variable) of class MscDecoderInfo is not documented.
+sdrdab_2.0/src/sdrdab/DataDecoder/superframe.h:45: warning: Member adts_chanconf (variable) of class MscDecoderInfo is not documented.
+sdrdab_2.0/src/sdrdab/DataDecoder/superframe.h:46: warning: Member number_bits_per_cif (variable) of class MscDecoderInfo is not documented.
+sdrdab_2.0/src/sdrdab/DataDecoder/superframe.h:47: warning: Member number_bits_per_frame (variable) of class MscDecoderInfo is not documented.
+<adts_chanconf>:1: warning: parameters of member MscDecoderInfo::adts_chanconf are not (all) documented
+<adts_dacsbr>:1: warning: parameters of member MscDecoderInfo::adts_dacsbr are not (all) documented
+<cif_count>:1: warning: parameters of member MscDecoderInfo::cif_count are not (all) documented
+<number_bits_per_cif>:1: warning: parameters of member MscDecoderInfo::number_bits_per_cif are not (all) documented
+<number_bits_per_frame>:1: warning: parameters of member MscDecoderInfo::number_bits_per_frame are not (all) documented
+<number_dab_frame>:1: warning: parameters of member MscDecoderInfo::number_dab_frame are not (all) documented
+<super_frame_sync>:1: warning: parameters of member MscDecoderInfo::super_frame_sync are not (all) documented
+sdrdab_2.0/src/sdrdab/AudioDecoder/null_sink.h:65: warning: Member NullSinkCallbacks::UnlinkCallNullSink(GstPad *, GstPadProbeInfo *, gpointer) (friend) of class NullSink is not documented.
+sdrdab_2.0/src/sdrdab/AudioDecoder/ogg_sink.h:69: warning: Member OggSinkCallbacks::UnlinkCallOggSink(GstPad *, GstPadProbeInfo *, gpointer) (friend) of class OggSink is not documented.
+sdrdab_2.0/src/sdrdab/AudioDecoder/player.h:170: warning: Member PlayerCallbacks::SaveTags(const GstTagList *, const gchar *, gpointer) (friend) of class Player is not documented.
+sdrdab_2.0/src/sdrdab/AudioDecoder/player.h:171: warning: Member PlayerCallbacks::BusCall(GstBus *, GstMessage *, gpointer) (friend) of class Player is not documented.
+sdrdab_2.0/src/sdrdab/AudioDecoder/pulse_sink.h:70: warning: Member PulseSinkCallbacks::UnlinkCallPulseSink(GstPad *, GstPadProbeInfo *, gpointer) (friend) of class PulseSink is not documented.
+sdrdab_2.0/src/sdrdab/RingBuffer/resampling_ring_buffer.h:36: warning: Member ResamplingRingBuffer(int quality, size_t size, int channels) (function) of class ResamplingRingBuffer is not documented.
+sdrdab_2.0/src/sdrdab/RingBuffer/resampling_ring_buffer.h:40: warning: Member WriteResampledInto(float *source_buffer, size_t number_to_read, float ratio) (function) of class ResamplingRingBuffer is not documented.
+sdrdab_2.0/src/sdrdab/RingBuffer/ring_buffer.h:43: warning: Member RingBuffer(size_t size) (function) of class RingBuffer< float > is not documented.
+sdrdab_2.0/src/sdrdab/RingBuffer/ring_buffer.h:48: warning: Member ReadNext() (function) of class RingBuffer< float > is not documented.
+sdrdab_2.0/src/sdrdab/RingBuffer/ring_buffer.h:51: warning: Member WriteNext(floatf) (function) of class RingBuffer< float > is not documented.
+sdrdab_2.0/src/sdrdab/RingBuffer/ring_buffer.h:54: warning: Member sReadNext() (function) of class RingBuffer< float > is not documented.
+sdrdab_2.0/src/sdrdab/RingBuffer/ring_buffer.h:55: warning: Member sWriteNext(floatf) (function) of class RingBuffer< float > is not documented.
+sdrdab_2.0/src/sdrdab/RingBuffer/ring_buffer.h:58: warning: Member ReadFrom(float *dest_buffer, size_t number_to_write) (function) of class RingBuffer< float > is not documented.
+sdrdab_2.0/src/sdrdab/RingBuffer/ring_buffer.h:61: warning: Member WriteInto(float *source_buffer, size_t number_to_write) (function) of class RingBuffer< float > is not documented.
+sdrdab_2.0/src/sdrdab/RingBuffer/ring_buffer.h:64: warning: Member sReadFrom(float *dest_buffer, size_t number_to_write) (function) of class RingBuffer< float > is not documented.
+sdrdab_2.0/src/sdrdab/RingBuffer/ring_buffer.h:65: warning: Member sWriteInto(float *source_buffer, size_t number_to_write) (function) of class RingBuffer< float > is not documented.
+sdrdab_2.0/src/sdrdab/RingBuffer/ring_buffer.h:68: warning: Member DataStored() const (function) of class RingBuffer< float > is not documented.
+sdrdab_2.0/src/sdrdab/RingBuffer/ring_buffer.h:71: warning: Member FreeSpace() const (function) of class RingBuffer< float > is not documented.
+sdrdab_2.0/src/sdrdab/RingBuffer/ring_buffer.h:74: warning: Member Sum() (function) of class RingBuffer< float > is not documented.
+sdrdab_2.0/src/sdrdab/RingBuffer/ring_buffer.h:77: warning: Member Mean() (function) of class RingBuffer< float > is not documented.
+sdrdab_2.0/src/sdrdab/RingBuffer/ring_buffer.h:80: warning: Member Reset() (function) of class RingBuffer< float > is not documented.
+sdrdab_2.0/src/sdrdab/RingBuffer/ring_buffer.h:83: warning: Member Initialize(floatf) (function) of class RingBuffer< float > is not documented.
+sdrdab_2.0/src/sdrdab/RingBuffer/resampling_ring_buffer.h:44: warning: Member resampler (variable) of class ResamplingRingBuffer is not documented.
+sdrdab_2.0/src/sdrdab/RingBuffer/ring_buffer.h:86: warning: Member HeadToRightEnd() (function) of class RingBuffer< float > is not documented.
+sdrdab_2.0/src/sdrdab/RingBuffer/ring_buffer.h:87: warning: Member TailToRightEnd() (function) of class RingBuffer< float > is not documented.
+sdrdab_2.0/src/sdrdab/RingBuffer/ring_buffer.h:88: warning: Member buffer (variable) of class RingBuffer< float > is not documented.
+sdrdab_2.0/src/sdrdab/RingBuffer/ring_buffer.h:89: warning: Member head (variable) of class RingBuffer< float > is not documented.
+sdrdab_2.0/src/sdrdab/RingBuffer/ring_buffer.h:89: warning: Member tail (variable) of class RingBuffer< float > is not documented.
+sdrdab_2.0/src/sdrdab/RingBuffer/ring_buffer.h:90: warning: Member last_op_write (variable) of class RingBuffer< float > is not documented.
+sdrdab_2.0/src/sdrdab/RingBuffer/ring_buffer.h:91: warning: Member length (variable) of class RingBuffer< float > is not documented.
+sdrdab_2.0/src/sdrdab/RingBuffer/ring_buffer.h:43: warning: Member RingBuffer(size_t size) (function) of class RingBuffer is not documented.
+sdrdab_2.0/src/sdrdab/RingBuffer/ring_buffer.h:48: warning: Member ReadNext() (function) of class RingBuffer is not documented.
+sdrdab_2.0/src/sdrdab/RingBuffer/ring_buffer.h:51: warning: Member WriteNext(T f) (function) of class RingBuffer is not documented.
+sdrdab_2.0/src/sdrdab/RingBuffer/ring_buffer.h:54: warning: Member sReadNext() (function) of class RingBuffer is not documented.
+sdrdab_2.0/src/sdrdab/RingBuffer/ring_buffer.h:55: warning: Member sWriteNext(T f) (function) of class RingBuffer is not documented.
+sdrdab_2.0/src/sdrdab/RingBuffer/ring_buffer.h:58: warning: Member ReadFrom(T *dest_buffer, size_t number_to_write) (function) of class RingBuffer is not documented.
+sdrdab_2.0/src/sdrdab/RingBuffer/ring_buffer.h:61: warning: Member WriteInto(T *source_buffer, size_t number_to_write) (function) of class RingBuffer is not documented.
+sdrdab_2.0/src/sdrdab/RingBuffer/ring_buffer.h:64: warning: Member sReadFrom(T *dest_buffer, size_t number_to_write) (function) of class RingBuffer is not documented.
+sdrdab_2.0/src/sdrdab/RingBuffer/ring_buffer.h:65: warning: Member sWriteInto(T *source_buffer, size_t number_to_write) (function) of class RingBuffer is not documented.
+sdrdab_2.0/src/sdrdab/RingBuffer/ring_buffer.h:68: warning: Member DataStored() const  (function) of class RingBuffer is not documented.
+sdrdab_2.0/src/sdrdab/RingBuffer/ring_buffer.h:71: warning: Member FreeSpace() const  (function) of class RingBuffer is not documented.
+sdrdab_2.0/src/sdrdab/RingBuffer/ring_buffer.h:74: warning: Member Sum() (function) of class RingBuffer is not documented.
+sdrdab_2.0/src/sdrdab/RingBuffer/ring_buffer.h:77: warning: Member Mean() (function) of class RingBuffer is not documented.
+sdrdab_2.0/src/sdrdab/RingBuffer/ring_buffer.h:80: warning: Member Reset() (function) of class RingBuffer is not documented.
+sdrdab_2.0/src/sdrdab/RingBuffer/ring_buffer.h:83: warning: Member Initialize(T f) (function) of class RingBuffer is not documented.
+sdrdab_2.0/src/sdrdab/RingBuffer/ring_buffer.h:86: warning: Member HeadToRightEnd() (function) of class RingBuffer is not documented.
+sdrdab_2.0/src/sdrdab/RingBuffer/ring_buffer.h:87: warning: Member TailToRightEnd() (function) of class RingBuffer is not documented.
+sdrdab_2.0/src/sdrdab/RingBuffer/ring_buffer.h:88: warning: Member buffer (variable) of class RingBuffer is not documented.
+sdrdab_2.0/src/sdrdab/RingBuffer/ring_buffer.h:89: warning: Member head (variable) of class RingBuffer is not documented.
+sdrdab_2.0/src/sdrdab/RingBuffer/ring_buffer.h:89: warning: Member tail (variable) of class RingBuffer is not documented.
+sdrdab_2.0/src/sdrdab/RingBuffer/ring_buffer.h:90: warning: Member last_op_write (variable) of class RingBuffer is not documented.
+sdrdab_2.0/src/sdrdab/RingBuffer/ring_buffer.h:91: warning: Member length (variable) of class RingBuffer is not documented.
+sdrdab_2.0/src/sdrdab/AudioDecoder/ring_src.h:174: warning: Member flush_ (variable) of class RingSrc is not documented.
+sdrdab_2.0/src/sdrdab/AudioDecoder/ring_src.h:154: warning: Member RingSrcCallbacks::ReadData(gpointer) (friend) of class RingSrc is not documented.
+sdrdab_2.0/src/sdrdab/AudioDecoder/ring_src.h:155: warning: Member RingSrcCallbacks::StartFeed(GstElement *, guint, gpointer) (friend) of class RingSrc is not documented.
+sdrdab_2.0/src/sdrdab/AudioDecoder/ring_src.h:156: warning: Member RingSrcCallbacks::StopFeed(GstElement *, gpointer) (friend) of class RingSrc is not documented.
+sdrdab_2.0/src/sdrdab/DataFeeder/rtl_data_feeder.h:40: warning: Member GetDongleList(std::list< std::string > *device_list) (function) of class RtlDataFeeder is not documented.
+sdrdab_2.0/src/sdrdab/DataFeeder/rtl_data_feeder.h:57: warning: Member StopProcessing(void) (function) of class RtlDataFeeder is not documented.
+sdrdab_2.0/src/sdrdab/DataFeeder/rtl_data_feeder.h:79: warning: Member FromFile(void) (function) of class RtlDataFeeder is not documented.
+sdrdab_2.0/src/sdrdab/DataFeeder/rtl_data_feeder.h:81: warning: Member FromDongle(void) (function) of class RtlDataFeeder is not documented.
+sdrdab_2.0/src/sdrdab/DataFeeder/rtl_data_feeder.h:83: warning: Member EverythingOK(void) (function) of class RtlDataFeeder is not documented.
+sdrdab_2.0/src/sdrdab/DataFeeder/abstract_data_feeder.h:136: warning: Member IsRunning() (function) of class AbstractDataFeeder is not documented.
+sdrdab_2.0/src/sdrdab/DataFeeder/abstract_data_feeder.h:140: warning: Member RunRemodulate(float *data, size_t size, float frequencyShift) (function) of class AbstractDataFeeder is not documented.
+sdrdab_2.0/src/sdrdab/DataFeeder/rtl_data_feeder.h:88: warning: Member increment_gain_factor (variable) of class RtlDataFeeder is not documented.
+sdrdab_2.0/src/sdrdab/DataFeeder/rtl_data_feeder.h:89: warning: Member dev (variable) of class RtlDataFeeder is not documented.
+sdrdab_2.0/src/sdrdab/DataFeeder/rtl_data_feeder.h:90: warning: Member tuner_gains (variable) of class RtlDataFeeder is not documented.
+sdrdab_2.0/src/sdrdab/DataFeeder/rtl_data_feeder.h:91: warning: Member tuner_gain_count (variable) of class RtlDataFeeder is not documented.
+sdrdab_2.0/src/sdrdab/DataFeeder/rtl_data_feeder.h:92: warning: Member gain_index (variable) of class RtlDataFeeder is not documented.
+sdrdab_2.0/src/sdrdab/DataFeeder/rtl_data_feeder.h:94: warning: Member almost_treshold (variable) of class RtlDataFeeder is not documented.
+sdrdab_2.0/src/sdrdab/DataFeeder/abstract_data_feeder.h:145: warning: Member running (variable) of class AbstractDataFeeder is not documented.
+sdrdab_2.0/src/sdrdab/DataFeeder/abstract_data_feeder.h:147: warning: Member verbose (variable) of class AbstractDataFeeder is not documented.
+sdrdab_2.0/src/sdrdab/DataFeeder/abstract_data_feeder.h:147: warning: Member debug (variable) of class AbstractDataFeeder is not documented.
+sdrdab_2.0/src/sdrdab/DataFeeder/abstract_data_feeder.h:170: warning: Member sin_length (variable) of class AbstractDataFeeder is not documented.
+sdrdab_2.0/src/sdrdab/DataFeeder/abstract_data_feeder.h:171: warning: Member sine_tab (variable) of class AbstractDataFeeder is not documented.
+sdrdab_2.0/src/sdrdab/DataFeeder/abstract_data_feeder.h:172: warning: Member current_fs_offset (variable) of class AbstractDataFeeder is not documented.
+sdrdab_2.0/src/sdrdab/DataFeeder/abstract_data_feeder.h:173: warning: Member current_fc_offset (variable) of class AbstractDataFeeder is not documented.
+sdrdab_2.0/src/sdrdab/DataFeeder/abstract_data_feeder.h:174: warning: Member previous_write_here (variable) of class AbstractDataFeeder is not documented.
+sdrdab_2.0/src/sdrdab/DataFeeder/abstract_data_feeder.h:175: warning: Member real_dc_rb (variable) of class AbstractDataFeeder is not documented.
+sdrdab_2.0/src/sdrdab/DataFeeder/abstract_data_feeder.h:176: warning: Member imag_dc_rb (variable) of class AbstractDataFeeder is not documented.
+sdrdab_2.0/src/sdrdab/DataFeeder/abstract_data_feeder.h:179: warning: Member do_remodulate (variable) of class AbstractDataFeeder is not documented.
+sdrdab_2.0/src/sdrdab/DataFeeder/abstract_data_feeder.h:179: warning: Member do_handle_fs (variable) of class AbstractDataFeeder is not documented.
+sdrdab_2.0/src/sdrdab/DataFeeder/abstract_data_feeder.h:179: warning: Member do_agc (variable) of class AbstractDataFeeder is not documented.
+sdrdab_2.0/src/sdrdab/DataFeeder/abstract_data_feeder.h:182: warning: Member inner_buf_num (variable) of class AbstractDataFeeder is not documented.
+sdrdab_2.0/src/sdrdab/DataFeeder/abstract_data_feeder.h:182: warning: Member inner_buff_size (variable) of class AbstractDataFeeder is not documented.
+sdrdab_2.0/src/sdrdab/DataFeeder/abstract_data_feeder.h:178: warning: Member two_pi (variable) of class AbstractDataFeeder is not documented.
+sdrdab_2.0/src/sdrdab/DataFeeder/rtl_data_feeder.h:42: warning: The following parameters of RtlDataFeeder::RtlDataFeeder(const char *dongle_name, int buf_n, size_t buf_s, uint32_t sample_rate, uint32_t carrier_freq, int number_of_bits) are not documented:
+  parameter 'number_of_bits'
+sdrdab_2.0/src/sdrdab/scheduler.h:356: warning: Member data_source_t (enumeration) of class Scheduler is not documented.
+sdrdab_2.0/src/sdrdab/scheduler.h:485: warning: Member sdr_parameter_t (enumeration) of class Scheduler is not documented.
+sdrdab_2.0/src/sdrdab/scheduler.h:497: warning: Member ParametersToSDR(sdr_parameter_t param, DataDecoder::conv_decoder_alg_t arg) (function) of class Scheduler is not documented.
+sdrdab_2.0/src/sdrdab/scheduler.h:505: warning: Found unknown command `\parm'
+sdrdab_2.0/src/sdrdab/scheduler.h:361: warning: Member data_source_ (variable) of class Scheduler is not documented.
+sdrdab_2.0/src/sdrdab/scheduler.h:351: warning: Member ParametersToSDR(scheduler_error_t error) (function) of class Scheduler is not documented.
+sdrdab_2.0/src/sdrdab/scheduler.h:186: warning: Member thread_ids_t (enumeration) of class Scheduler is not documented.
+sdrdab_2.0/src/sdrdab/scheduler.h:294: warning: Member ReportThread(int) (function) of class Scheduler is not documented.
+sdrdab_2.0/src/sdrdab/scheduler.h:296: warning: Member ResumeFeederIfNeeded() (function) of class Scheduler is not documented.
+sdrdab_2.0/src/sdrdab/scheduler.h:297: warning: Member ResumeSynchronizerIfReady() (function) of class Scheduler is not documented.
+sdrdab_2.0/src/sdrdab/scheduler.h:298: warning: Member ResumeDemodulatorIfReady() (function) of class Scheduler is not documented.
+sdrdab_2.0/src/sdrdab/scheduler.h:299: warning: Member ResumeDatadecoderIfReady() (function) of class Scheduler is not documented.
+sdrdab_2.0/src/sdrdab/scheduler.h:52: warning: Member carrier_frequency_ (variable) of class Scheduler is not documented.
+sdrdab_2.0/src/sdrdab/scheduler.h:53: warning: Member sampling_frequency_ (variable) of class Scheduler is not documented.
+sdrdab_2.0/src/sdrdab/scheduler.h:105: warning: Member conv_decoder_alg (variable) of class Scheduler is not documented.
+sdrdab_2.0/src/sdrdab/scheduler.h:117: warning: Member fc_drift_table_ (variable) of class Scheduler is not documented.
+sdrdab_2.0/src/sdrdab/scheduler.h:118: warning: Member fs_drift_table_length_ (variable) of class Scheduler is not documented.
+sdrdab_2.0/src/sdrdab/scheduler.h:119: warning: Member estimated_fc_drift_ (variable) of class Scheduler is not documented.
+sdrdab_2.0/src/sdrdab/scheduler.h:120: warning: Member fc_drift_table_full_ (variable) of class Scheduler is not documented.
+sdrdab_2.0/src/sdrdab/scheduler.h:121: warning: Member fc_converged_ (variable) of class Scheduler is not documented.
+sdrdab_2.0/src/sdrdab/scheduler.h:122: warning: Member recalc_fc_drift_ (variable) of class Scheduler is not documented.
+sdrdab_2.0/src/sdrdab/scheduler.h:123: warning: Member fc_counter_ (variable) of class Scheduler is not documented.
+sdrdab_2.0/src/sdrdab/scheduler.h:125: warning: Member fs_drift_queue_ (variable) of class Scheduler is not documented.
+sdrdab_2.0/src/sdrdab/scheduler.h:135: warning: Member resample_data_ (variable) of class Scheduler is not documented.
+sdrdab_2.0/src/sdrdab/scheduler.h:136: warning: Member synchronizer_data_ (variable) of class Scheduler is not documented.
+sdrdab_2.0/src/sdrdab/scheduler.h:137: warning: Member demodulator_data_ (variable) of class Scheduler is not documented.
+sdrdab_2.0/src/sdrdab/scheduler.h:138: warning: Member datadecoder_data_ (variable) of class Scheduler is not documented.
+sdrdab_2.0/src/sdrdab/scheduler.h:141: warning: Member demod_read_pos_queue_ (variable) of class Scheduler is not documented.
+sdrdab_2.0/src/sdrdab/scheduler.h:144: warning: Member last_data_feeder_write_ (variable) of class Scheduler is not documented.
+sdrdab_2.0/src/sdrdab/scheduler.h:147: warning: Member last_demodulator_write_ (variable) of class Scheduler is not documented.
+sdrdab_2.0/src/sdrdab/scheduler.h:149: warning: Member demodulator_data_waiting_ (variable) of class Scheduler is not documented.
+sdrdab_2.0/src/sdrdab/scheduler.h:152: warning: Member demodulator_write_blocked_ (variable) of class Scheduler is not documented.
+sdrdab_2.0/src/sdrdab/scheduler.h:155: warning: Member synchronizer_report_handled_ (variable) of class Scheduler is not documented.
+sdrdab_2.0/src/sdrdab/scheduler.h:158: warning: Member demodulator_report_handled_ (variable) of class Scheduler is not documented.
+sdrdab_2.0/src/sdrdab/scheduler.h:161: warning: Member datadecoder_report_handled_ (variable) of class Scheduler is not documented.
+sdrdab_2.0/src/sdrdab/scheduler.h:199: warning: Member threads_[NUMBER_OF_THREADS] (variable) of class Scheduler is not documented.
+sdrdab_2.0/src/sdrdab/scheduler.h:204: warning: Member threads_event_queue_ (variable) of class Scheduler is not documented.
+sdrdab_2.0/src/sdrdab/scheduler.h:230: warning: return type of member Scheduler::ConvergedFcHandle is not documented
+sdrdab_2.0/src/sdrdab/scheduler.h:242: warning: return type of member Scheduler::FsChangedFcHandle is not documented
+sdrdab_2.0/src/sdrdab/scheduler.h:491: warning: argument 'new_station' of command @param is not found in the argument list of Scheduler::ParametersToSDR(sdr_parameter_t param, uint8_t arg)
+sdrdab_2.0/src/sdrdab/scheduler.h:491: warning: The following parameters of Scheduler::ParametersToSDR(sdr_parameter_t param, uint8_t arg) are not documented:
+  parameter 'param'
+  parameter 'arg'
+sdrdab_2.0/src/sdrdab/scheduler.h:248: warning: argument 'estimated' of command @param is not found in the argument list of Scheduler::SetFcDrift(float estimated_fc_drift)
+sdrdab_2.0/src/sdrdab/scheduler.h:248: warning: The following parameters of Scheduler::SetFcDrift(float estimated_fc_drift) are not documented:
+  parameter 'estimated_fc_drift'
+sdrdab_2.0/src/sdrdab/scheduler.h:279: warning: return type of member Scheduler::SetModeParameters is not documented
+sdrdab_2.0/src/sdrdab/scheduler.h:236: warning: argument 'mean' of command @param is not found in the argument list of Scheduler::StartFcHandle()
+sdrdab_2.0/src/sdrdab/scheduler.h:311: warning: argument 'data_source' of command @param is not found in the argument list of Scheduler::Sync()
+sdrdab_2.0/src/sdrdab/scheduler.h:305: warning: Member operator()(stationInfo const a, stationInfo const b) (function) of class Scheduler::StationsSort is not documented.
+sdrdab_2.0/src/sdrdab/threading/scoped_lock.h:35: warning: Member lock_ (variable) of class ScopedLock is not documented.
+sdrdab_2.0/src/sdrdab/threading/signaled_worker_thread.h:100: warning: Member is_suspended() (function) of class SignaledWorkerThread is not documented.
+sdrdab_2.0/src/sdrdab/threading/signaled_worker_thread.h:60: warning: Member loop() (function) of class SignaledWorkerThread is not documented.
+sdrdab_2.0/src/sdrdab/threading/signaled_worker_thread.h:63: warning: Member wait_for_resume() (function) of class SignaledWorkerThread is not documented.
+sdrdab_2.0/src/sdrdab/threading/signaled_worker_thread.h:66: warning: Member suspend_thread() (function) of class SignaledWorkerThread is not documented.
+sdrdab_2.0/src/sdrdab/threading/signaled_worker_thread.h:57: warning: Member helper(void *context) (function) of class SignaledWorkerThread is not documented.
+sdrdab_2.0/src/sdrdab/threading/signaled_worker_thread.h:36: warning: Member thread_ (variable) of class SignaledWorkerThread is not documented.
+sdrdab_2.0/src/sdrdab/threading/signaled_worker_thread.h:38: warning: Member cond_ (variable) of class SignaledWorkerThread is not documented.
+sdrdab_2.0/src/sdrdab/threading/signaled_worker_thread.h:40: warning: Member lock_ (variable) of class SignaledWorkerThread is not documented.
+sdrdab_2.0/src/sdrdab/threading/signaled_worker_thread.h:42: warning: Member is_suspended_flag_ (variable) of class SignaledWorkerThread is not documented.
+sdrdab_2.0/src/sdrdab/threading/signaled_worker_thread.h:44: warning: Member finished_flag_ (variable) of class SignaledWorkerThread is not documented.
+sdrdab_2.0/src/sdrdab/threading/signaled_worker_thread.h:46: warning: Member id_ (variable) of class SignaledWorkerThread is not documented.
+sdrdab_2.0/src/sdrdab/threading/signaled_worker_thread.h:48: warning: Member initialized_ (variable) of class SignaledWorkerThread is not documented.
+sdrdab_2.0/src/sdrdab/threading/signaled_worker_thread.h:50: warning: Member worker_)(void *) (variable) of class SignaledWorkerThread is not documented.
+sdrdab_2.0/src/sdrdab/threading/signaled_worker_thread.h:52: warning: Member worker_arg_ (variable) of class SignaledWorkerThread is not documented.
+sdrdab_2.0/src/sdrdab/threading/signaled_worker_thread.h:54: warning: Member signal_queue_ (variable) of class SignaledWorkerThread is not documented.
+sdrdab_2.0/src/sdrdab/DataDecoder/data_decoder_data.h:133: warning: Member operator()(MCI::SubChannel_Basic_Information const subid1, MCI::SubChannel_Basic_Information const subid2) (function) of class SubChannel_Basic_Sort is not documented.
+sdrdab_2.0/src/sdrdab/DataDecoder/data_decoder_data.h:141: warning: Member operator()(MCI::SubChannel_Basic_Information const subid1, MCI::SubChannel_Basic_Information const subid2) (function) of class SubChannel_Basic_Unique is not documented.
+sdrdab_2.0/src/sdrdab/DataDecoder/superframe.h:109: warning: Member mode_parameters_ (variable) of class SuperFrame is not documented.
+sdrdab_2.0/src/sdrdab/DataDecoder/superframe.h:110: warning: Member station_info_ (variable) of class SuperFrame is not documented.
+sdrdab_2.0/src/sdrdab/DataDecoder/superframe.h:110: warning: Member msc_info_ (variable) of class SuperFrame is not documented.
+sdrdab_2.0/src/sdrdab/DataDecoder/superframe.h:112: warning: Member firecode_tab_[256] (variable) of class SuperFrame is not documented.
+sdrdab_2.0/src/sdrdab/DataDecoder/superframe.h:54: warning: Member firecode_g_[16] (variable) of class SuperFrame is not documented.
+sdrdab_2.0/src/sdrdab/DataDecoder/superframe.h:57: warning: argument 'mode_parameters' of command @param is not found in the argument list of SuperFrame::SuperFrame(ModeParameters *param)
+sdrdab_2.0/src/sdrdab/DataDecoder/superframe.h:57: warning: The following parameters of SuperFrame::SuperFrame(ModeParameters *param) are not documented:
+  parameter 'param'
+sdrdab_2.0/src/sdrdab/DataDecoder/superframe.h:62: warning: argument 'mode_parameters' of command @param is not found in the argument list of SuperFrame::SuperFrame(stationInfo *info, ModeParameters *param)
+sdrdab_2.0/src/sdrdab/DataDecoder/superframe.h:62: warning: argument 'station_info' of command @param is not found in the argument list of SuperFrame::SuperFrame(stationInfo *info, ModeParameters *param)
+sdrdab_2.0/src/sdrdab/DataDecoder/superframe.h:62: warning: The following parameters of SuperFrame::SuperFrame(stationInfo *info, ModeParameters *param) are not documented:
+  parameter 'info'
+  parameter 'param'
+sdrdab_2.0/src/sdrdab/DataDecoder/superframe.h:102: warning: return type of member SuperFrame::CRC16 is not documented
+<SuperFrameHandle>:1: warning: parameters of member SuperFrame::SuperFrameHandle are not (all) documented
+sdrdab_2.0/src/sdrdab/synchronizer.h:83: warning: Member SetFcSearchRange(int first_pos, int second_pos, int first_neg, int second_neg) (function) of class Synchronizer is not documented.
+sdrdab_2.0/src/sdrdab/synchronizer.h:193: warning: Found unknown command `\parm'
+sdrdab_2.0/src/sdrdab/synchronizer.h:194: warning: Found unknown command `\parm'
+sdrdab_2.0/src/sdrdab/synchronizer.h:148: warning: Member first_pos_value_ (variable) of class Synchronizer is not documented.
+sdrdab_2.0/src/sdrdab/synchronizer.h:149: warning: Member second_pos_value_ (variable) of class Synchronizer is not documented.
+sdrdab_2.0/src/sdrdab/synchronizer.h:150: warning: Member first_neg_value_ (variable) of class Synchronizer is not documented.
+sdrdab_2.0/src/sdrdab/synchronizer.h:151: warning: Member second_neg_value_ (variable) of class Synchronizer is not documented.
+sdrdab_2.0/src/sdrdab/synchronizer.h:193: warning: Found unknown command `\parm'
+sdrdab_2.0/src/sdrdab/synchronizer.h:194: warning: Found unknown command `\parm'
+sdrdab_2.0/src/sdrdab/synchronizer.h:191: warning: parameters of member Synchronizer::CalculateImpulseResponseShift are not (all) documented
+sdrdab_2.0/src/sdrdab/synchronizer.h:206: warning: argument 'begining' of command @param is not found in the argument list of Synchronizer::calculateSNRfromPREFIX(const float *data)
+sdrdab_2.0/src/sdrdab/synchronizer.h:206: warning: The following parameters of Synchronizer::calculateSNRfromPREFIX(const float *data) are not documented:
+  parameter 'data'
+sdrdab_2.0/src/sdrdab/synchronizer.h:200: warning: argument 'begining' of command @param is not found in the argument list of Synchronizer::calculateSNRfromSPECTRUM(const float *data)
+sdrdab_2.0/src/sdrdab/synchronizer.h:200: warning: The following parameters of Synchronizer::calculateSNRfromSPECTRUM(const float *data) are not documented:
+  parameter 'data'
+sdrdab_2.0/src/sdrdab/synchronizer.h:169: warning: The following parameters of Synchronizer::DetectPhaseReference(const float *data, size_t size, void *datafeeder) are not documented:
+  parameter 'datafeeder'
+sdrdab_2.0/src/sdrdab/synchronizer.h:183: warning: argument 'phase' of command @param is not found in the argument list of Synchronizer::EvaluateFi(const int phase_ref_index_tab[][5], float *fi)
+sdrdab_2.0/src/sdrdab/synchronizer.h:183: warning: argument 'beginning' of command @param is not found in the argument list of Synchronizer::EvaluateFi(const int phase_ref_index_tab[][5], float *fi)
+sdrdab_2.0/src/sdrdab/synchronizer.h:183: warning: The following parameters of Synchronizer::EvaluateFi(const int phase_ref_index_tab[][5], float *fi) are not documented:
+  parameter 'phase_ref_index_tab'
+  parameter 'fi'
+sdrdab_2.0/src/sdrdab/synchronizer.h:101: warning: argument 'true' of command @param is not found in the argument list of Synchronizer::switchOnSNRfromPREFIX(bool switchOn)
+sdrdab_2.0/src/sdrdab/synchronizer.h:101: warning: The following parameters of Synchronizer::switchOnSNRfromPREFIX(bool switchOn) are not documented:
+  parameter 'switchOn'
+sdrdab_2.0/src/sdrdab/synchronizer.h:90: warning: argument 'true' of command @param is not found in the argument list of Synchronizer::switchOnSNRfromSPECTRUM(bool switchOn)
+sdrdab_2.0/src/sdrdab/synchronizer.h:90: warning: The following parameters of Synchronizer::switchOnSNRfromSPECTRUM(bool switchOn) are not documented:
+  parameter 'switchOn'
+sdrdab_2.0/src/sdrdab/AudioDecoder/fake_sink.h:41: warning: return type of member FakeSinkCallbacks::UnlinkCallFakeSink is not documented
+sdrdab_2.0/src/sdrdab/AudioDecoder/file_sink.h:40: warning: return type of member FileSinkCallbacks::UnlinkCallFileSink is not documented
+sdrdab_2.0/src/sdrdab/AudioDecoder/null_sink.h:40: warning: return type of member NullSinkCallbacks::UnlinkCallNullSink is not documented
+sdrdab_2.0/src/sdrdab/AudioDecoder/ogg_sink.h:40: warning: return type of member OggSinkCallbacks::UnlinkCallOggSink is not documented
+sdrdab_2.0/src/sdrdab/AudioDecoder/player.h:94: warning: return type of member PlayerCallbacks::BusCall is not documented
+sdrdab_2.0/src/sdrdab/AudioDecoder/pulse_sink.h:41: warning: return type of member PulseSinkCallbacks::UnlinkCallPulseSink is not documented
+sdrdab_2.0/src/sdrdab/Resampler/resampler.h:43: warning: parameters of member ResamplerCallbacks::WriteCall are not (all) documented
+sdrdab_2.0/src/sdrdab/Resampler/resampler.h:43: warning: return type of member ResamplerCallbacks::WriteCall is not documented
+sdrdab_2.0/src/sdrdab/AudioDecoder/ring_src.h:50: warning: return type of member RingSrcCallbacks::ReadData is not documented
+sdrdab_2.0/src/sdrdab-cli/user_data.h:100: warning: Member degrees_ (variable) of class UserData::coordinate_t is not documented.
+sdrdab_2.0/src/sdrdab-cli/user_data.h:101: warning: Member minutes_ (variable) of class UserData::coordinate_t is not documented.
+sdrdab_2.0/src/sdrdab-cli/user_data.h:102: warning: Member seconds_ (variable) of class UserData::coordinate_t is not documented.
+sdrdab_2.0/src/sdrdab-gui/mainwindow.h:15: warning: Compound MainWindow is not documented.
+sdrdab_2.0/src/sdrdab-gui/user_conf.h:15: warning: Compound UserConf is not documented.
+sdrdab_2.0/src/sdrdab-gui/ui_mainwindow.h:37: warning: Compound Ui_MainWindow is not documented.
+sdrdab_2.0/src/sdrdab-gui/mainwindow.h:173: warning: Member ui (variable) of class MainWindow is not documented.
+sdrdab_2.0/src/sdrdab-gui/mainwindow.h:174: warning: Member ba_ (variable) of class MainWindow is not documented.
+sdrdab_2.0/src/sdrdab-gui/mainwindow.h:174: warning: Member ba1_ (variable) of class MainWindow is not documented.
+sdrdab_2.0/src/sdrdab-gui/mainwindow.h:175: warning: Member timer (variable) of class MainWindow is not documented.
+sdrdab_2.0/src/sdrdab-gui/mainwindow.h:176: warning: Member user_conf_ (variable) of class MainWindow is not documented.
+<@0>:1: warning: parameters of member MainWindow::@0 are not (all) documented
+sdrdab_2.0/src/sdrdab-gui/ui_mainwindow.h:77: warning: Member setupUi(QMainWindow *MainWindow) (function) of class Ui_MainWindow is not documented.
+sdrdab_2.0/src/sdrdab-gui/ui_mainwindow.h:366: warning: Member retranslateUi(QMainWindow *MainWindow) (function) of class Ui_MainWindow is not documented.
+sdrdab_2.0/src/sdrdab-gui/ui_mainwindow.h:39: warning: Member centralWidget (variable) of class Ui_MainWindow is not documented.
+sdrdab_2.0/src/sdrdab-gui/ui_mainwindow.h:40: warning: Member gridLayout_4 (variable) of class Ui_MainWindow is not documented.
+sdrdab_2.0/src/sdrdab-gui/ui_mainwindow.h:41: warning: Member stationList (variable) of class Ui_MainWindow is not documented.
+sdrdab_2.0/src/sdrdab-gui/ui_mainwindow.h:42: warning: Member expandBtn (variable) of class Ui_MainWindow is not documented.
+sdrdab_2.0/src/sdrdab-gui/ui_mainwindow.h:43: warning: Member optionWidget (variable) of class Ui_MainWindow is not documented.
+sdrdab_2.0/src/sdrdab-gui/ui_mainwindow.h:44: warning: Member gridLayout_3 (variable) of class Ui_MainWindow is not documented.
+sdrdab_2.0/src/sdrdab-gui/ui_mainwindow.h:45: warning: Member gridLayout (variable) of class Ui_MainWindow is not documented.
+sdrdab_2.0/src/sdrdab-gui/ui_mainwindow.h:46: warning: Member chooseSignalPath (variable) of class Ui_MainWindow is not documented.
+sdrdab_2.0/src/sdrdab-gui/ui_mainwindow.h:47: warning: Member lblBER (variable) of class Ui_MainWindow is not documented.
+sdrdab_2.0/src/sdrdab-gui/ui_mainwindow.h:48: warning: Member signalPath (variable) of class Ui_MainWindow is not documented.
+sdrdab_2.0/src/sdrdab-gui/ui_mainwindow.h:49: warning: Member lblFreq (variable) of class Ui_MainWindow is not documented.
+sdrdab_2.0/src/sdrdab-gui/ui_mainwindow.h:50: warning: Member lblHz (variable) of class Ui_MainWindow is not documented.
+sdrdab_2.0/src/sdrdab-gui/ui_mainwindow.h:51: warning: Member lblSNR (variable) of class Ui_MainWindow is not documented.
+sdrdab_2.0/src/sdrdab-gui/ui_mainwindow.h:52: warning: Member freqEdit (variable) of class Ui_MainWindow is not documented.
+sdrdab_2.0/src/sdrdab-gui/ui_mainwindow.h:53: warning: Member signalCb (variable) of class Ui_MainWindow is not documented.
+sdrdab_2.0/src/sdrdab-gui/ui_mainwindow.h:54: warning: Member saveCb (variable) of class Ui_MainWindow is not documented.
+sdrdab_2.0/src/sdrdab-gui/ui_mainwindow.h:55: warning: Member berBtn (variable) of class Ui_MainWindow is not documented.
+sdrdab_2.0/src/sdrdab-gui/ui_mainwindow.h:56: warning: Member lblDb (variable) of class Ui_MainWindow is not documented.
+sdrdab_2.0/src/sdrdab-gui/ui_mainwindow.h:57: warning: Member berEdit (variable) of class Ui_MainWindow is not documented.
+sdrdab_2.0/src/sdrdab-gui/ui_mainwindow.h:58: warning: Member lblDevice (variable) of class Ui_MainWindow is not documented.
+sdrdab_2.0/src/sdrdab-gui/ui_mainwindow.h:59: warning: Member spectrumBtn (variable) of class Ui_MainWindow is not documented.
+sdrdab_2.0/src/sdrdab-gui/ui_mainwindow.h:60: warning: Member saveFile (variable) of class Ui_MainWindow is not documented.
+sdrdab_2.0/src/sdrdab-gui/ui_mainwindow.h:61: warning: Member constellationBtn (variable) of class Ui_MainWindow is not documented.
+sdrdab_2.0/src/sdrdab-gui/ui_mainwindow.h:62: warning: Member snrEdit (variable) of class Ui_MainWindow is not documented.
+sdrdab_2.0/src/sdrdab-gui/ui_mainwindow.h:63: warning: Member deviceList (variable) of class Ui_MainWindow is not documented.
+sdrdab_2.0/src/sdrdab-gui/ui_mainwindow.h:64: warning: Member consoleBtn (variable) of class Ui_MainWindow is not documented.
+sdrdab_2.0/src/sdrdab-gui/ui_mainwindow.h:65: warning: Member consoleWidget (variable) of class Ui_MainWindow is not documented.
+sdrdab_2.0/src/sdrdab-gui/ui_mainwindow.h:66: warning: Member verticalLayout (variable) of class Ui_MainWindow is not documented.
+sdrdab_2.0/src/sdrdab-gui/ui_mainwindow.h:67: warning: Member console (variable) of class Ui_MainWindow is not documented.
+sdrdab_2.0/src/sdrdab-gui/ui_mainwindow.h:68: warning: Member gridLayout_2 (variable) of class Ui_MainWindow is not documented.
+sdrdab_2.0/src/sdrdab-gui/ui_mainwindow.h:69: warning: Member volumeSlider (variable) of class Ui_MainWindow is not documented.
+sdrdab_2.0/src/sdrdab-gui/ui_mainwindow.h:70: warning: Member graphic (variable) of class Ui_MainWindow is not documented.
+sdrdab_2.0/src/sdrdab-gui/ui_mainwindow.h:71: warning: Member infoLabel (variable) of class Ui_MainWindow is not documented.
+sdrdab_2.0/src/sdrdab-gui/ui_mainwindow.h:72: warning: Member muteCb (variable) of class Ui_MainWindow is not documented.
+sdrdab_2.0/src/sdrdab-gui/ui_mainwindow.h:73: warning: Member startBtn (variable) of class Ui_MainWindow is not documented.
+sdrdab_2.0/src/sdrdab-gui/ui_mainwindow.h:74: warning: Member stopBtn (variable) of class Ui_MainWindow is not documented.
+sdrdab_2.0/src/sdrdab-gui/ui_mainwindow.h:75: warning: Member statusBar (variable) of class Ui_MainWindow is not documented.
+sdrdab_2.0/src/sdrdab-gui/user_data.h:96: warning: Member degrees_ (variable) of class UserData::coordinate_t is not documented.
+sdrdab_2.0/src/sdrdab-gui/user_data.h:97: warning: Member minutes_ (variable) of class UserData::coordinate_t is not documented.
+sdrdab_2.0/src/sdrdab-gui/user_data.h:98: warning: Member seconds_ (variable) of class UserData::coordinate_t is not documented.
+sdrdab_2.0/src/sdrdab-gui/ui_mainwindow.h:77: warning: Member setupUi(QMainWindow *MainWindow) (function) of class Ui_MainWindow is not documented.
+sdrdab_2.0/src/sdrdab-gui/ui_mainwindow.h:366: warning: Member retranslateUi(QMainWindow *MainWindow) (function) of class Ui_MainWindow is not documented.
+sdrdab_2.0/src/sdrdab-gui/ui_mainwindow.h:39: warning: Member centralWidget (variable) of class Ui_MainWindow is not documented.
+sdrdab_2.0/src/sdrdab-gui/ui_mainwindow.h:40: warning: Member gridLayout_4 (variable) of class Ui_MainWindow is not documented.
+sdrdab_2.0/src/sdrdab-gui/ui_mainwindow.h:41: warning: Member stationList (variable) of class Ui_MainWindow is not documented.
+sdrdab_2.0/src/sdrdab-gui/ui_mainwindow.h:42: warning: Member expandBtn (variable) of class Ui_MainWindow is not documented.
+sdrdab_2.0/src/sdrdab-gui/ui_mainwindow.h:43: warning: Member optionWidget (variable) of class Ui_MainWindow is not documented.
+sdrdab_2.0/src/sdrdab-gui/ui_mainwindow.h:44: warning: Member gridLayout_3 (variable) of class Ui_MainWindow is not documented.
+sdrdab_2.0/src/sdrdab-gui/ui_mainwindow.h:45: warning: Member gridLayout (variable) of class Ui_MainWindow is not documented.
+sdrdab_2.0/src/sdrdab-gui/ui_mainwindow.h:46: warning: Member chooseSignalPath (variable) of class Ui_MainWindow is not documented.
+sdrdab_2.0/src/sdrdab-gui/ui_mainwindow.h:47: warning: Member lblBER (variable) of class Ui_MainWindow is not documented.
+sdrdab_2.0/src/sdrdab-gui/ui_mainwindow.h:48: warning: Member signalPath (variable) of class Ui_MainWindow is not documented.
+sdrdab_2.0/src/sdrdab-gui/ui_mainwindow.h:49: warning: Member lblFreq (variable) of class Ui_MainWindow is not documented.
+sdrdab_2.0/src/sdrdab-gui/ui_mainwindow.h:50: warning: Member lblHz (variable) of class Ui_MainWindow is not documented.
+sdrdab_2.0/src/sdrdab-gui/ui_mainwindow.h:51: warning: Member lblSNR (variable) of class Ui_MainWindow is not documented.
+sdrdab_2.0/src/sdrdab-gui/ui_mainwindow.h:52: warning: Member freqEdit (variable) of class Ui_MainWindow is not documented.
+sdrdab_2.0/src/sdrdab-gui/ui_mainwindow.h:53: warning: Member signalCb (variable) of class Ui_MainWindow is not documented.
+sdrdab_2.0/src/sdrdab-gui/ui_mainwindow.h:54: warning: Member saveCb (variable) of class Ui_MainWindow is not documented.
+sdrdab_2.0/src/sdrdab-gui/ui_mainwindow.h:55: warning: Member berBtn (variable) of class Ui_MainWindow is not documented.
+sdrdab_2.0/src/sdrdab-gui/ui_mainwindow.h:56: warning: Member lblDb (variable) of class Ui_MainWindow is not documented.
+sdrdab_2.0/src/sdrdab-gui/ui_mainwindow.h:57: warning: Member berEdit (variable) of class Ui_MainWindow is not documented.
+sdrdab_2.0/src/sdrdab-gui/ui_mainwindow.h:58: warning: Member lblDevice (variable) of class Ui_MainWindow is not documented.
+sdrdab_2.0/src/sdrdab-gui/ui_mainwindow.h:59: warning: Member spectrumBtn (variable) of class Ui_MainWindow is not documented.
+sdrdab_2.0/src/sdrdab-gui/ui_mainwindow.h:60: warning: Member saveFile (variable) of class Ui_MainWindow is not documented.
+sdrdab_2.0/src/sdrdab-gui/ui_mainwindow.h:61: warning: Member constellationBtn (variable) of class Ui_MainWindow is not documented.
+sdrdab_2.0/src/sdrdab-gui/ui_mainwindow.h:62: warning: Member snrEdit (variable) of class Ui_MainWindow is not documented.
+sdrdab_2.0/src/sdrdab-gui/ui_mainwindow.h:63: warning: Member deviceList (variable) of class Ui_MainWindow is not documented.
+sdrdab_2.0/src/sdrdab-gui/ui_mainwindow.h:64: warning: Member consoleBtn (variable) of class Ui_MainWindow is not documented.
+sdrdab_2.0/src/sdrdab-gui/ui_mainwindow.h:65: warning: Member consoleWidget (variable) of class Ui_MainWindow is not documented.
+sdrdab_2.0/src/sdrdab-gui/ui_mainwindow.h:66: warning: Member verticalLayout (variable) of class Ui_MainWindow is not documented.
+sdrdab_2.0/src/sdrdab-gui/ui_mainwindow.h:67: warning: Member console (variable) of class Ui_MainWindow is not documented.
+sdrdab_2.0/src/sdrdab-gui/ui_mainwindow.h:68: warning: Member gridLayout_2 (variable) of class Ui_MainWindow is not documented.
+sdrdab_2.0/src/sdrdab-gui/ui_mainwindow.h:69: warning: Member volumeSlider (variable) of class Ui_MainWindow is not documented.
+sdrdab_2.0/src/sdrdab-gui/ui_mainwindow.h:70: warning: Member graphic (variable) of class Ui_MainWindow is not documented.
+sdrdab_2.0/src/sdrdab-gui/ui_mainwindow.h:71: warning: Member infoLabel (variable) of class Ui_MainWindow is not documented.
+sdrdab_2.0/src/sdrdab-gui/ui_mainwindow.h:72: warning: Member muteCb (variable) of class Ui_MainWindow is not documented.
+sdrdab_2.0/src/sdrdab-gui/ui_mainwindow.h:73: warning: Member startBtn (variable) of class Ui_MainWindow is not documented.
+sdrdab_2.0/src/sdrdab-gui/ui_mainwindow.h:74: warning: Member stopBtn (variable) of class Ui_MainWindow is not documented.
+sdrdab_2.0/src/sdrdab-gui/ui_mainwindow.h:75: warning: Member statusBar (variable) of class Ui_MainWindow is not documented.

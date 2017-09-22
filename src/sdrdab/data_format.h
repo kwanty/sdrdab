@@ -7,7 +7,8 @@
  * @date 7 July 2015 - version 1.0 beta
  * @date 7 July 2016 - version 2.0 beta
  * @date 1 November 2016 - version 2.0
- * @version 2.0
+ * @date 7 July 2017 - version 3.0
+ * @version 3.0
  * @copyright Copyright (c) 2015 Jaroslaw Bulat, Dawid Rymarczyk
  *
  * @par License
@@ -91,6 +92,19 @@ enum FIG0typeExtension{
 enum FIG1TypeExtension{
     ENSEMBLE_LABEL = 0,
     FM_TEXT_LABEL = 1
+};
+
+/**
+ * Define file type
+ */
+enum fileType_t {
+    type_uint8 = 1,
+    type_int8,
+    type_uint16,
+    type_int16,
+    type_float,
+    type_double,
+    type_raw
 };
 
 /**
@@ -865,6 +879,7 @@ struct audiodecoderData {
 struct resampleData {
     void * data_feeder;
     float fs_drift;
+    float fc_drift;
 };
 
 struct synchronizerData {

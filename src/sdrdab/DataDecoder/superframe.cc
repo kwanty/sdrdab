@@ -4,12 +4,15 @@
  *
  * @author Marcin Trebunia marcintutka94@gmail.com (SuperFrame)
  * @author Jaroslaw Bulat kwant@agh.edu.pl (SuperFrame::CRC16, SuperFrame::BinToDec, SuperFrame::SuperFrameHandle, SuperFrame::SuperframeCircshiftBuff, SuperFrame::FirecodeInit, SuperFrame::FirecodeCheck)
+ * @author Bartlomiej Ogorzalek yogaczyk@gmail.com (SuperFrame::XPADDecoder)
  * @date 7 July 2015 - version 1.0 beta
  * @date 7 July 2016 - version 2.0 beta
  * @date 1 November 2016 - version 2.0
- * @version 2.0
+ * @date 7 July 2017 - version 3.0
+ * @version 3.0
  * @copyright Copyright (c) 2015 Jaroslaw Bulat
  * @copyright Copyright (c) 2016 Jaroslaw Bulat, Marcin Trebunia
+ * @copyright Copyright (c) 2017 Jaroslaw Bulat, Marcin Trebunia, Bartlomiej Ogorzalek
  * @par License
  *
  * This library is free software; you can redistribute it and/or
@@ -33,6 +36,12 @@
 #include <string.h>
 #include <cstddef>
 #include <iostream>
+#include <vector>
+#include <stdint.h>
+#include <stdio.h>
+#include <iostream>
+#include <vector>
+const int SIZE_OF_SUPERFRAME = 1680;
 
 using namespace std;
 
@@ -82,15 +91,9 @@ void SuperFrame::SuperFrameHandle(uint8_t *data, uint8_t *write_data){
     }
 
     uint8_t *adts_frame = data + adts_head_idx_*bytes_per_cif;
-    // uint8_t *adts_frameForCustomRS = data + adts_head_idx_*bytes_per_cif;
 
-    ///@todo how many errors should be trigger for 120/110 RS?
     ReedSolomonCorrection(adts_frame, 5*bytes_per_cif);
-
-    // uint32_t i = 0;
-    // while(adts_frame[i++] != adts_frameForCustomRS[i++]) {
-    //     cout << adts_frame[unsigned(i)] << " " << adts_frameForCustomRS[unsigned(i)] << endl;
-    // }
+    XPADDecoder(adts_frame);
 
     // decoding ADTS starts here
     uint8_t dac_sbr=(adts_frame[2]&0x60)>>5;    // (18-19) dec_rate & sbr_flag at once
@@ -179,6 +182,9 @@ void SuperFrame::SuperFrameHandle(uint8_t *data, uint8_t *write_data){
         adts_header[6] |= 0xFC;
         //adts_header[6] &= 0x03;               // (55:56) frames count in one packet
 
+
+
+            ///////////////////////////////////////////////TUTAJ
         memcpy( write_data+aac_size, adts_header, 7*sizeof(uint8_t) );
         aac_size +=7;
         memcpy( write_data+aac_size, adts_frame+au_start[r], ((au_start[r+1]-au_start[r])-2)*sizeof(uint8_t) );
@@ -272,9 +278,9 @@ bool SuperFrame::FirecodeCheck(const uint8_t *data){
         return false;
 }
 
-uint16_t SuperFrame::BinToDec( uint8_t *data, size_t offset, size_t length ){
-    uint32_t output = (*(data+offset/8)<<16) | ((*(data+offset/8+1)) << 8) | (*(data+offset/8+2));      // should be big/little endian save
-    output >>= 24-length-offset%8;
+uint16_t SuperFrame::BinToDec( uint8_t *data, size_t offset_, size_t length ){
+    uint32_t output = (*(data+offset_/8)<<16) | ((*(data+offset_/8+1)) << 8) | (*(data+offset_/8+2));      // should be big/little endian save
+    output >>= 24-length-offset_%8;
     output &= (0xFFFF>>(16-length));
     return static_cast<uint16_t>(output);
 }
@@ -307,4 +313,155 @@ bool SuperFrame::CRC16( uint8_t *data, size_t length ){
         return false;
     else
         return true;
+}
+
+
+void SuperFrame::XPADDecoder(uint8_t* data){
+    int k=0;
+    offset_=1;
+    for (pointer_=0; pointer_ < SIZE_OF_SUPERFRAME; pointer_++) {
+        data_readed_=0;
+        if (data[pointer_ + 1] == 0x20 && data[pointer_ + 2] == 0x02) {
+            k++;
+            for(int CI=0; CI<4; CI++) {
+                if(data[pointer_-CI]==0x00){
+                    break;
+                }
+                switch (data[pointer_-CI] & 0x1F) {
+                    case 1:
+                        appType_=1;
+                        break;
+                    case 2:
+                        appType_ = 2;
+                        if (data[pointer_ - CI - 1] == 0x00){ //ONE CI OR LAST CI
+
+                            xpad_lenght_declared_ = (data[pointer_ - CI - 2 - data_readed_] & 0x0F) +1;
+                            offset_ = 4 + data_readed_;
+                            if(!data[pointer_-CI-3] & 0x80);
+                            switch(data[pointer_-CI-2] & 0x60) {
+                                case 0x60:
+                                    //printf("ONE AND ONLY ONE\n");
+                                    last_=2;
+                                    break;
+                                case 0x40:
+                                    //printf("FIRST\n");
+                                    last_=0;
+                                    break;
+                                case 0x20:
+                                    //printf("LAST\n");
+                                    if(last_ == 1 || last_ == 0) last_=2;
+                                    break;
+                                case 0x0:
+                                    //printf("INTERMEDIATE\n");
+                                    if(last_==0) last_=1;
+                                    break;
+                            }
+                        }
+                        else if (data[pointer_ - CI - 2] == 0x00){ //TWO CI OR BEFORE LAST
+                            xpad_lenght_declared_ = (data[pointer_ - CI - 3 - data_readed_] & 0x0F) +1;
+                            offset_ = 5 + data_readed_;
+                            //if(data[pointer_-CI-4] & 0x80 == 0) printf("A");
+                        } else { //THREE OR FOUR CI
+                            xpad_lenght_declared_ = (data[pointer_ - CI - 4] & 0x0F) +1;
+                            offset_ = 6 - CI;
+                        }
+
+                        break;
+                    case 3:
+                        //printf("APP TYPE 3 - SEGMENT CONTINUE\n");
+                        appType_ = 3;
+                        if (data[pointer_ - CI - 1] == 0x00) offset_ = 2 - CI;
+                        else if (data[pointer_ - CI - 2] == 0x00) offset_ = 3 - CI;
+                        else offset_ = 4 - CI;
+                        break;
+                    case 12:
+                        //printf("APP TYPE 12 - MOT");
+                        appType_=12;
+                        break;
+                    case 13:
+                        //printf("APP TYPE 13 - MOT");
+                        appType_=13;
+                        break;
+                    default:
+                        appType_ = 0;
+                        break;
+                }
+
+                if (appType_ == 2 || appType_ == 3) {
+                    switch (data[pointer_-CI] & 0xE0) {
+                        case 0x0:
+                            if (appType_ == 2) databytes_ = 2;
+                            else databytes_ = 4;
+                            break;
+
+                        case 0x20:
+                            if (appType_ == 2) databytes_ = 4;
+                            else databytes_ = 6;
+                            break;
+
+                        case 0x40:
+                            if (appType_ == 2) databytes_ = 6;
+                            else databytes_ = 8;
+                            break;
+
+                        case 0x60:
+                            if (appType_ == 2) databytes_ = 10;
+                            else databytes_ = 12;
+                            break;
+
+                        case 0x80:
+                            if (appType_ == 2) databytes_ = 14;
+                            else databytes_ = 16;
+                            break;
+
+                        case 0xA0:
+                            if (appType_ == 2) databytes_ = 22;
+                            else databytes_ = 24;
+                            break;
+
+                        case 0xC0:
+                            if (appType_ == 2) databytes_ = 30;
+                            else databytes_ = 32;
+                            break;
+
+                        case 0xE0:
+                            if (appType_ == 2) databytes_ = 46;
+                            else databytes_ = 48;
+                            break;
+                    }
+                }
+
+
+                switch (appType_) {
+                    case 1:
+                        if(last_==2 && cli_data_ != xpad_data_) {
+                            cli_data_ = xpad_data_;
+//                            printf("\n\n");
+//                            for (int j = 0; j < xpad_data_.size(); j++) {
+//                                printf("%c", xpad_data_[j]);
+//                            }
+//                            printf("\n\n");
+                        }
+                        xpad_data_.clear();
+                        break;
+                    case 2:
+
+                    case 3:
+                        for (int i = 0; i < databytes_; i++) {
+                            if(xpad_lenght_declared_==0)                            {
+//                                TBD: CRC16()
+                                break;
+                            }
+                            xpad_data_.push_back(data[pointer_ - offset_ -i]);
+                            xpad_lenght_declared_--;
+                            data_readed_++;
+                            if(appType_==2) data_readed_+=2;
+                        }
+                        break;
+                    default:
+                        break;
+                }
+            }
+        }
+    }
 }

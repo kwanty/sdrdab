@@ -9,7 +9,8 @@
  * @date 7 July 2015 - version 1.0 beta
  * @date 7 July 2016 - version 2.0 beta
  * @date 1 November 2016 - version 2.0
- * @version 2.0
+ * @date 7 July 2017 - version 3.0
+ * @version 3.0
  * @copyright Copyright (c) 2015 Dawid Rymarczyk, Jan Twardowski, Adrian Karbowiak
  * @copyright Copyright (c) 2016 Dawid Rymarczyk, Jan Twardowski, Adrian Karbowiak, Marcin Trebunia
  *

@@ -1,9 +1,10 @@
-/**
+﻿/**
  * @author: Paweł Szulc <pawel_szulc@onet.pl>
  * @date 7 July 2015 - version 1.0 beta
  * @date 7 July 2016 - version 2.0 beta
  * @date 1 November 2016 - version 2.0
- * @version 2.0
+ * @date 7 July 2017 - version 3.0
+ * @version 3.0
  * @copyright Copyright (c) 2015 Paweł Szulc
  * @par License
  *
@@ -28,12 +29,20 @@
 
 #include "ring_buffer.h"
 #include "Resampler/resampler.h"
+#include "Resampler/resampler2.h"
 
 
 class ResamplingRingBuffer : public RingBuffer<float> {
     public:
-
-        ResamplingRingBuffer(int quality, size_t size, int channels);
+    enum resample_quality
+    {
+        SRC_SINC_BEST_QUALITY		= 0,
+        SRC_SINC_MEDIUM_QUALITY		= 1,
+        SRC_SINC_FASTEST			= 2,
+        SRC_ZERO_ORDER_HOLD			= 3,
+        SRC_LINEAR					= 4,
+    } ;
+        ResamplingRingBuffer(resample_quality quality, size_t size, int channels);
 
         virtual ~ResamplingRingBuffer();
 

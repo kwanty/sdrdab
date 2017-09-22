@@ -2,36 +2,59 @@
 Software Defined Radio - DAB+ (libsdrdab)
 =========================================
 
+Version. 3.0, 2017-09-23
+=============================
+    - Remove custom RTL-SDR, now using system librtlsdr0
+    - Refactoring fs and fc drift support (need more testing and tuning)
+    - Support input RAW IQ files with formats: (u)int8, (u)int16, float, double, raw (uint8)
+    - Custom resampler (RF IQ data) of type NN and Linear, code integrated as Resampler2
+    - Custom implementation of ReedSolomon decoder
+    - Matlab model of various distortions (distort IQ samples for development purpose)
+    - XPAD implementation, text only (need more development and integration)
+    - Refactoring convolutional decoder subsystem, ready for different implementation nad real-time switching
+    - Initial implementation of spiral convolutional decoder
+    - Fix MPEG2 support (classic DAB)
+    - Fix error in decoding EEP-B and EEP-A protection levels
+    - Decode data from NULL
+    - Acquire testing data
+    - Generate mux testing data (DAB/DAB+, all protection levels, X-pad, etc...)
+    - Improve synchronizer (cleaner, faster code)
+    - Framework for extensive test of bitstream-level decoding for various mux configuration
+    - Improve UnitTest for depuncturer (supports all combination)
+    - Fix, improve and extend sdrdab-cli reference implementation
+    - Fix synchronization audio player with data decoder (audio buffer is no longer overloaded)
+    - Ubuntu package generator (need review and testing)
+
 Version. 2.0, 2016-06-07
 =============================
     - new Scheduler: faster, more stable, readable code
     - refactored DataDecoder
-    - rewritten remodulation (fc): make use of LUT
+    - rewritten remodulation (fc): LUT-based
     - Viterbi optimization by means of SSE3 (up to 3x improvement)
     - refactored Synchronizer
     - support legacy DAB (MPEG) and DAB+ (AAC)
-    - added two versions of SNR calculation: from spectrum (RAW) and prefix
+    - add two version of SNR calculation: from spectrum (RAW) and prefix
     - rewritten build system, now using cmake instead of Eclipse
     - MacOS X support
     - improved debug logging 
-    - refactored DataFeeder (needs even more refactoring)
-    - simple GUI implementation (needs to be rewritten and improved)
+    - refactoring DataFeeder (need even more refactoring)
+    - simple GUI implementation (need to be rewritten and improved)
     - acquired DAB+ signal for testing
     - upgraded sdrdab-cli (more parameters)
     - Matlab reference software for DAB(+) decoder
-    - included UnitTests
+    - included unittest
     - MODE III still not supported    
 
 Version. 1.0 BETA, 2015-07-07
 =============================
-    - x86, real-time implementation (i7-3520M: 20-100% CPU utilization depending on configuration)
+    - x86, real-time implementation (i7-3520M: 20-100% CPU utilization depends on configuration)
     - decoding type: file2file, file2speaker, air2file, air2speaker
-    - MODE I, MODE II, MODE IV (MODE III supported but buggy - does not works)
-    - input devices: all tuners supported by rtlsdr (tested on RLT2832U + R820T, R820T2)
+    - MODE I, MODE II, MODE IV (MODE III supported but buggy - do not works)
+    - input devices: all tuners supported by sdrlib (tested on RLT2832U + R820T, R820T2)
     - input file: biarny, 8 bits per I/Q sample (unsigned int, 127 == 0), format: IQIQIQIQIQ...
     - change carrier frequency on air2* mode
     - fine tune carrier frequency (ppm)
     - 2.048 MHz base sampling frequency (resampling if necessary in file2* mode)
     - decode station list with names
-    - switch between stations in real-time
-    - DAB+ (AAC) without XPAD, only audio (old DAB MPEG supported but buggy - does not works)
+    - switch between station in real-time
+    - DAB+ (AAC) without XPAD, only audio (old DAB MPEG supported but buggy - do not works)

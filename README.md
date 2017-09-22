@@ -1,4 +1,4 @@
-# Software Defined Radio - DAB+ (libsdrdab), version 2.0
+# Software Defined Radio - DAB+ (libsdrdab), version 3.0 beta
 
 It is implementation of DAB/DAB+ software decoder. Input samples could be retrived from file or tuner (librtlsdr). Output sound could be save to file or played via GStreamer.
 
@@ -15,19 +15,25 @@ Tested on Ubuntu 14.x, 16.x and other. Need: gcc and a few standard libraries. l
 * unpack
 * install dependencies: ./sdrtool install-deps
 * build: ./sdrtool build Release
-* run: ./build/bin/sdrdab-cli
+* data: ./sdrtool download-data-light					# optional for IQ raw data
+* run: 
+*  ./build/bin/sdrdab-cli 						# from SDR USB tuner
+*  ./build/bin/sdrdab-cli --open-file=./data/*.raw			# default is --file-type=raw
+*  ./build/bin/sdrdab-cli --open-file=./data/*.raw --file-type=uint8	# or --file-type=raw
+*  ./build/bin/sdrdab-cli --open-file=./data/*.dat --file-type=float
+
 
 library is located in ./build/src/sdrdab/libsdrdab.a
 cli-reference-implemenation is located in ./build/bin/sdrdab-cli
 
-Installation is not supported so far. 
+Installation is not supported so far. Experimental package building is supportet via ./sdrtool
 
 ## UnitTests
 
-This implementation include unittests. They are only for developing purpose. Steps necessary to perform unittests:
+UnitTests may be useful for developing purpose. Steps necessary to perform it:
 
 * ./sdrtool download-ut     # download raw data
-* ./sdrtool matlab          # generate input and output for unittests
+* ./sdrtool matlab          # generate input and output for unittests (require Matlab(C) version 2006+)
 * ./sdrtool build Unittest  # build library with unittests
 * ./sdrtool run-unittests   # perform all unittests
 
@@ -48,13 +54,12 @@ It is possible to download some data (./sdrtool download-*) necessary for unitte
 * resampling (fs) made by means of remodulate+FEQ+interpolation after FFT
 * custom resampling (fs), only necessary parts (like FFT in MSC), remove RingBuffer
 * resampling == own thread? CPU vector (SSE/NEON) optimization?
-* implementation of convolutional code simpler than Viterbi decoder (hard-decision, BCJR, soft-decision)
+* implementation of convolutional code simpler than Viterbi decoder (hard-decision, BCJR)
 * smart algorithm for convolutional decoder choise (based on SNR?), independent FIC and MSC?
 * USRP supports (input signal), other hardware?
-* extend input file support: float, double, uint16_t/int16_t, automatic (smart) detection
+* extend input file support: automatic (smart) detection
 * decompress to raw samples (get rid of GStreamer and other framework), make resampling in time domain
 * decoding extra data (images, etc…)
-* ReedSolomon custom implementation (optimized to DAB)
 * RS smart on/off (depends on previous errors, CRC and firecode)
 * support Rayleigh fading channels
 * memory optimization (smaller buffer, adaptive buffers?)
@@ -62,9 +67,8 @@ It is possible to download some data (./sdrtool download-*) necessary for unitte
 * FIC SNR improvement: CIF’s repeats (energy could be accumulated before Viterbi and thus improve SNR)
 * decode many (all) audio streams simultaneously
 * FIle2FIle should not skip frames from beginning of stream
-* extensive unittest: all possible bitstreams, types, modes (I, II, III and IV), additional data and various configuration of multiplex
 * test and tune to mobile case (Rayleigh channel)
-* improve GUI (with vizualization: spectrum, SNR, errors, extra data (images), etc...)
+* rewrite GUI (with vizualization: spectrum, SNR, errors, extra data (images), etc...)
 * merge arm-development into development (extra CMake, stats generator, performance improvements, Neon instructions support, psd and snr estimation)
 * performance (time) test integrated with build (per method on release build)
 * performance (erorr) test integrated with build - parameters: SNR, fc, fs
@@ -74,21 +78,20 @@ It is possible to download some data (./sdrtool download-*) necessary for unitte
 * x86 MacOS: more test, build is already done
 * refactoring DataFeeder (too complex)
 * refactoring AudioDecoder (too complex?)
-* package for Linux (Ubuntu and other distros)
 * all code (including library) on LGPL license
 * integration with vlc/mplayer/kino/kodi plugin/other media player
-* improve UnitTest for depuncturer (implement testing code for all cases)
 * recover broken UnitTest
 * improve Synchronizer (chose algorithm, remove or repair dependencies for remodulation)
 * test synchronizer for weak signal (+-10 levels for 8-bit input sample)
-* refactoring DataDecoder::DePuncturerProcess()
-* add UnitTest for audio verification (all channels, different modes, various modes, etc...)
-* decode NULL
+* show information from NULL decoding (transmitter ID)
 * software MIMO (check if it's possible to use two or more RTL dongle, synchronize and use MIMO algorithms)
 * calculate SNR from PR (3rd algorithm for SNR calculation)
 * analyze algorithm for SNR calculation from Demodulator
-* refactoring fs and fc drifts
+* improve fs and fc drifts
 * implement time signatures/counter for signal in all classes (allows for precise synchronization)
+* auto-scanning, search for all allowed frequency for DAB/DAB+ signal
+* add CRC verification for XPAD (text)
+* improve XPAD decoding (images)
 
 
 ### build (unsorted)
@@ -114,6 +117,24 @@ It is possible to download some data (./sdrtool download-*) necessary for unitte
 * supports simulation of various disturbances: AWGN, NBI, fading channels, rayleigh fading channels, etc...
 
 ## copyright
+
+2017:
+* Tomasz P. Zieliński (tzielin@agh.edu.pl)
+* Jarosław Bułat (kwant@agh.edu.pl)          <---- contact person
+* Konrad Bańka
+* Szymon Bar
+* Marcin Chroń
+* Szymon Flakus
+* Dominik Koza
+* Piotr Kmiecik
+* Krystian Majer
+* Bartłomiej Ogorzałek
+* Michał Piech
+* Grzegorz Skołyszewski
+* Mirosław Szewczyk
+* Miłosz Śliwiński
+* Marek Winiarski
+* Mateusz Ziarko
 
 2016:
 * Tomasz P. Zieliński (tzielin@agh.edu.pl)

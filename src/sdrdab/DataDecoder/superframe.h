@@ -4,12 +4,15 @@
  *
  * @author Marcin Trebunia marcintutka94@gmail.com (SuperFrame)
  * @author Jaroslaw Bulat kwant@agh.edu.pl (SuperFrame::CRC16, SuperFrame::BinToDec, SuperFrame::SuperFrameHandle, SuperFrame::SuperframeCircshiftBuff, SuperFrame::FirecodeInit, SuperFrame::FirecodeCheck)
+ * @author Bartlomiej Ogorzalek yogaczyk@gmail.com (SuperFrame::XPADDecoder)
  * @date 7 July 2015 - version 1.0 beta
  * @date 7 July 2016 - version 2.0 beta
  * @date 1 November 2016 - version 2.0
- * @version 2.0
+ * @date 7 July 2017 - version 3.0
+ * @version 3.0
  * @copyright Copyright (c) 2015 Jaroslaw Bulat
  * @copyright Copyright (c) 2016 Jaroslaw Bulat, Marcin Trebunia
+ * @copyright Copyright (c) 2017 Jaroslaw Bulat, Marcin Trebunia, Bartlomiej Ogorzalek
  * @par License
  *
  * This library is free software; you can redistribute it and/or
@@ -29,12 +32,13 @@
 
 #ifndef SUPERFRAME_H_
 #define SUPERFRAME_H_
-
+#include <vector>
 #include <stdint.h>
 #include <cstddef>
 #include "data_format.h"
 #include "reed_solomon.h"
-
+#include <cwchar>
+#include <string>
 /// @name MSC iterators
 ///@{
 struct MscDecoderInfo{
@@ -75,6 +79,19 @@ public:
      * @param data - buffer for circshift
      */
     void CircshiftBuff(uint8_t *data);
+
+    /**
+     * @todo change the type from vector to tab for CRC check
+     */
+    std::vector <uint8_t> xpad_data_;
+    std::vector <uint8_t> cli_data_; //vector to gather text from xpad
+    int xpad_lenght_declared_,data_readed_, pointer_, databytes_, appType_, offset_, last_;
+
+    /**
+     * Decode XPAD Data from superframe
+     * @param data pointer to superframe
+     */
+    void XPADDecoder(uint8_t* data);
 
     /**
      * Firecode CRC, implementation from GNU Radio, updated by sdr-j

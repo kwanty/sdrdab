@@ -1,4 +1,4 @@
-/*
+﻿/*
  * @class AbstractDataFeeder
  * @brief provides data to the system
  *
@@ -14,7 +14,8 @@
  * @date 7 July 2015 - version 1.0 beta
  * @date 7 July 2016 - version 2.0 beta
  * @date 1 November 2016 - version 2.0
- * @version 2.0
+ * @date 7 July 2017 - version 3.0
+ * @version 3.0
  * @copyright Copyright (c) 2015 Wojciech Szmyd, Kacper Patro, Pawel Szulc
  * @copyright Copyright (c) 2016 Wojciech Szmyd, Kacper Patro, Pawel Szulc, Alicja Gegotek
  * @par License
@@ -120,9 +121,9 @@ class AbstractDataFeeder {
         virtual uint32_t SetSamplingFrequency(uint32_t fs) = 0;
 
         /**
-         * Method in which Synchronizer gives feedback about frequency drifts
-         * If only 1 parameter calculated, second one should  be 0
-         *
+         * Method in which Synchronizer gives feedback about frequency drifts.
+         * Parameters should be 0 if no changes required.
+         * This method should be called every DAB frame.
          * @param fc_drift drift of carrier frequency in Hertz
          * @param fs_drift drift of sampling frequency in ppm
          *
@@ -166,20 +167,20 @@ class AbstractDataFeeder {
          * @param data beginning of data in rtl_samples_ (first element needs to be real)
          * @param size number of complex samples to process
          */
-        int lut_length;
-        int sin_length;
-        float *sine_tab;
-        float current_fs_offset;  // [Hz]
-        float current_fc_offset;  // [Hz]
-        float *previous_write_here;
-        RingBuffer<float> *real_dc_rb;
-        RingBuffer<float> *imag_dc_rb;
+        int lut_length_;
+        int sin_length_;
+        float *sine_tab_;
+        float current_fs_offset_;  // [Hz]
+        float current_fc_offset_;  // [Hz]
+        float *previous_write_here_;
+        RingBuffer<float> *real_dc_rb_;
+        RingBuffer<float> *imag_dc_rb_;
 
-        const static float two_pi;
-        bool do_remodulate, do_handle_fs, do_agc;
+        const static float two_pi_;
+        bool do_remodulate_, do_handle_fs_, do_agc_;
 
         // number and size of buffers used by dongle or filewrapper
-        size_t inner_buf_num, inner_buff_size;
+        size_t inner_buf_num_, inner_buff_size_;
 };
 
 #endif /* ABSTRACT_DATA_FEEDER_H_ */

@@ -1,11 +1,13 @@
-/**
+﻿/**
  * @class UserInput
  * @brief UserInput implementation, global argp configuration
  *
  * @author Krzysztof Szczęsny, kaszczesny@gmail.com
- * @date Created on: 1 May 2015
- * @version 1.0
+ * @author Miroslaw Szewczyk, mirsze@student.agh.edu.pl
+ * @date Created on: 1 May 2015 - version 1.0
+ * @date 7 July 2017 - version 3.0
  * @copyright Copyright (c) 2015 Krzysztof Szczęsny
+ * @copyright Copyright (c) 2017 Miroslaw Szewczyk added protocol for resampling
  * @par License
  *
  * This program is free software: you can redistribute it and/or modify
@@ -55,7 +57,8 @@ UserInput::UserInput()
     graphic_(NULL),
     output_(NULL),
     resamplingFreq_(NULL),
-    decodingAlg_(DataDecoder::ALG_UNSPEC),
+    resample_quality_(Resampler2::LINEAR),          // default resampling type if not specified
+    decodingAlg_(DataDecoder::ALG_UNSPEC),          // default decoding algorithm if not specified
     bugfix_applied_(false) {
 
     }
@@ -80,6 +83,7 @@ int UserInput::RunArgp(int argc, char **argv) {
         { "list-devices",  'l',  0,         OPTION_NO_USAGE, "Lists all available supported tuners and exits" },
         { "open-tuner",    't', "TUNER_NO", OPTION_ARG_OPTIONAL | OPTION_NO_USAGE, "Use n-th available tuner as input source (by default first tuner is used)" },
         { "open-file",     421, "FILENAME", OPTION_NO_USAGE, "Use FILENAME as input source" },
+        { "file-type",     424, "FILETYPE", OPTION_NO_USAGE, "Use FILETYPE={int8, uint8, int16, uint16, float, double, raw} to define how read samples from file, raw==uint8" },
         { 0,                0,   0,         0, "Output options:", 3 },
         { "silent",        's',  0,         0, "Don't play on speakers (applicable in conjunction with -o switch)" },
         { "no-rds",        'r',  0,         0, "Don't display current channel RDS" },
@@ -89,10 +93,11 @@ int UserInput::RunArgp(int argc, char **argv) {
         { "katowice",      422,  0,         OPTION_HIDDEN, "Setup for Record3_katowice_iq.raw"},
         { "antena",        423,  0,         OPTION_HIDDEN, "Setup for antena-1_dab_229072kHz_fs2048kHz_gain42_1.raw"},
         {0,                 0,   0,         0, "Algorithm options:", 4},
-        { "resampling_fs",  500,  "RESAMPLING_FS",  0,  "Resampling frequency: sinc_fast, linear or zero-order"},
-        { "convolutional",  501,  "CONVOLUTIONAL",  0,  "Use decoding algorithms: viterbi"},
+        { "resampling",  500,  "TYPE",  0,  "Use TYPE={nearest, linear, pchip, spline}. Only when read samples from file, pchip and spline are not yet supported, default is linear"},
+        { "convolutional",  501,  "CONVOLUTIONAL",  0,  "Decoding algorithms: CONVOLUTIONAL={viterbi, spiral, hard}. Default is viterbi, spiral and hard are not yet supported"},
         { 0,                0,   0,         0, "Informative options:", -1},
         { "verbose",       'v',  0,         0, "Verbose" },
+        { "open-file",     421, "FILENAME", OPTION_NO_USAGE, "Use FILENAME as input source" },
         { 0 }
     };
 
@@ -102,6 +107,8 @@ int UserInput::RunArgp(int argc, char **argv) {
         "\n-l\tlist available devices"
             "\n[-t[TUNER_NO=0]]\tuse n-th tuner"
             "\n--open-file=FILENAME\tread samples from FILENAME"
+            "\n--resampling_mode=nearest/linear/pchip/spline\tchoose specified resampling mode"
+            "\n--convolutional=viterbi/spiral/hard\tchoose algorithm to decode"
             "\n [-s] -o OUTPUT\tsave audio to OUPUT",
         "Exemplary application of sdrdab\v"
             "\nThis application shows how sdrdab can be used. It allows "
@@ -131,6 +138,13 @@ void UserInput::Postprocessing(argp_state *state) {
                 "You cannot use -s flag without specifying the -o OUTPUT option.");
     }
 
+    if (this->file_type_ && this->file_ == NULL) {
+        argp_error(state,
+                   "You cannot use --file-type flag without specifying the --open-file flag.");
+    }
+
+
+
     if (this->verbose_) {
         fprintf(stderr, "Input notices:\n");
     }
@@ -154,6 +168,13 @@ void UserInput::Postprocessing(argp_state *state) {
     } else {
         if (this->verbose_) {
             fprintf(stderr, "\tReading samples from file: %s\n", this->file_);
+        }
+
+        if (!this->file_type_ && this->file_) {
+            file_type_ = type_uint8;
+            if (this->verbose_) {
+                fprintf(stderr, "\tDefault file type is uint8.\n");
+            }
         }
     }
 
@@ -229,7 +250,7 @@ void UserInput::Postprocessing(argp_state *state) {
 
 int UserInput::Parser(int key, char *arg, argp_state *state) {
     if (state == NULL) {
-        return EINVAL;
+        return EINVAL;//user_input->resamplingFreq_ = arg;
     }
 
     UserInput *user_input = static_cast<UserInput *>(state->input);
@@ -312,27 +333,55 @@ int UserInput::Parser(int key, char *arg, argp_state *state) {
             user_input->output_ = "out-ant.ogg";
             break;
 
-        case 500:
-            user_input->resamplingFreq_ = arg;
-
-            if (strcmp(user_input->resamplingFreq_, "sinc_fast") == 0) {
-                // TODO
-            } else if (strcmp(user_input->resamplingFreq_, "linear") == 0) {
-                // TODO
-            } else if (strcmp(user_input->resamplingFreq_, "zero-order") == 0) {
-                // TODO
+        case 424: //--file-type
+            if (arg[0] == '\0') {
+                argp_error(state,
+                           "--file-type flag was given, but empty type was specified.");
+            } else if (strcmp(arg, "int8") == 0) {
+                user_input->file_type_ = type_int8;
+            } else if (strcmp(arg, "uint8") == 0) {
+                user_input->file_type_ = type_uint8;
+            } else if (strcmp(arg, "int16") == 0) {
+                user_input->file_type_ = type_int16;
+            } else if (strcmp(arg, "uint16") == 0) {
+                user_input->file_type_ = type_uint16;
+            } else if (strcmp(arg, "float") == 0) {
+                user_input->file_type_ = type_float;
+            } else if (strcmp(arg, "double") == 0) {
+                user_input->file_type_ = type_double;
+            } else if (strcmp(arg, "raw") == 0) {
+                user_input->file_type_ = type_raw;
             } else {
                 argp_error(state,
-                    "Resampling frequency not specified.");
+                           "Bad sample type given [raw, uint8, int8, uint16, int16, float, double]");
+            }
+            break;
+
+        case 500:
+            if (strcmp(arg, "nearest") == 0) {
+                user_input->resample_quality_ = Resampler2::NN;
+            } else if (strcmp(arg, "linear") == 0) {
+                user_input->resample_quality_ = Resampler2::LINEAR;
+            } else if (strcmp(arg, "pchip") == 0) {
+                // user_input->resample_quality_ = Resampler2::PCHIP;
+                argp_error(state, "Resampling pchip is not supported.");
+            } else if (strcmp(arg, "spline") == 0) {
+                // user_input->resample_quality_ = Resampler2::SPLINE;
+                argp_error(state, "Resampling spline is not supported.");
+            }else {
+                argp_error(state, "Resampling quality is not specified. Use: nearest, linear (default), pchip (not supported), spline (not supported)");
             }
             break;
 
         case 501:
             if(strcmp(arg, "viterbi") == 0) {
                 user_input->decodingAlg_ = DataDecoder::ALG_VITERBI_TZ;
+            } else if (strcmp(arg, "spiral") == 0){
+                argp_error(state, "Spiral algorithm not supported.");
+            } else if (strcmp(arg, "hard") == 0){
+                argp_error(state, "Hard algorithm not supported.");
             } else {
-                argp_error(state,
-                    "Algorithm not specified.");
+                argp_error(state, "Algorithm not specified.");
             }
             break;
 
@@ -408,3 +457,4 @@ bool UserInput::FromTuner(void) {
     else
         return true;
 }
+

@@ -1,11 +1,12 @@
-/**
+﻿/**
  * @class SignaledWorkerThread
  * @brief Wrapper for threads that allow running small batches of work without constantly creating/destroying threads. It also supports notifying when the work is done.
  *
  * @author Kacper Żuk <sdr@kacperzuk.pl>
  * @date 7 July 2016 - version 2.0 beta
  * @date 1 November 2016 - version 2.0
- * @version 2.0
+ * @date 7 July 2017 - version 3.0
+ * @version 3.0
  * @copyright Copyright (c) 2016 Kacper Żuk
  *
  * @par License
@@ -31,8 +32,10 @@
 
 static void Resample(void *data) {
     resampleData *res_data = reinterpret_cast<resampleData*>(data);
-    RtlDataFeeder *data_feeder = reinterpret_cast<RtlDataFeeder*>(res_data->data_feeder);
-    data_feeder->HandleDrifts(0, res_data->fs_drift);
+    AbstractDataFeeder *data_feeder = reinterpret_cast<AbstractDataFeeder*>(res_data->data_feeder);
+    data_feeder->HandleDrifts(res_data->fc_drift, res_data->fs_drift);
+    res_data->fc_drift = 0;
+    res_data->fs_drift = 0;
 }
 
 static void AudioProcess(void *data) {

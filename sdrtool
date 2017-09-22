@@ -4,6 +4,8 @@
 if [ $# -eq 0 ]; then
     echo "Usage:"
     echo -e "\033[31m./sdrtool\e[0m build [Scanbuild|Debug|Profiling|Release|Unittest|clean]- builds sdrdab and sdrdab-cli in ./build/. Default target is Debug"
+    echo -e "\033[31m./sdrtool\e[0m create-package creates debian package from compiled files. Script should be run in project root directory."
+    echo -e "\033[31m./sdrtool\e[0m test-package - tests created debian package. Script should be run in directory containing deb package."
     echo -e "\033[31m./sdrtool\e[0m test-antena [-v] - decode *antena file* to speakers"
     echo -e "\033[31m./sdrtool\e[0m test-katowice [-v] - decode *Katowice file* to speakers"
     echo -e ""
@@ -14,9 +16,8 @@ if [ $# -eq 0 ]; then
     echo -e ""
     echo -e "\033[31m./sdrtool\e[0m install-deps - installs dependencies"
     echo -e "\033[31m./sdrtool\e[0m download-data-light - download a few IQ samples"
-    echo -e "\033[31m./sdrtool\e[0m download-data - download all IQ samples (huge!!!)"
+    echo -e "\033[31m./sdrtool\e[0m download-data - download all IQ samples (~64GB)"
     echo -e "\033[31m./sdrtool\e[0m download-ut - download data for UT"
-    echo -e "\033[31m./sdrtool\e[0m download-all - download everything"
     echo -e ""
     echo -e "\033[31m./sdrtool\e[0m doxy - generates docs with doxygen"
     echo -e "\033[31m./sdrtool\e[0m matlab - generates unittest data by Matlab"
@@ -28,6 +29,15 @@ shift
 case "$command" in
     build)
         bash scripts/build.sh "$@"
+        ;;
+    create-package)
+        bash scripts/packages/make_deb.sh --default --config scripts/packages/config_template.source
+        ;;
+    test-package)
+        bash scripts/packages/make_deb.sh --test --config scripts/packages/config_template.source
+        ;;
+    show-dependencies)
+        bash scripts/packages/make_deb.sh --dynamic_dependencies --config scripts/packages/config_template.source
         ;;
     run-unittests)
         bash scripts/runTests.sh "$@"
@@ -54,13 +64,10 @@ case "$command" in
         bash scripts/runDownload.sh "data-light"
         ;;
     download-data)
+        bash scripts/runDownload.sh "data-light"
         bash scripts/runDownload.sh "data"
         ;;
     download-ut)
-        bash scripts/runDownload.sh "ut"
-        ;;
-    download-all)
-        bash scripts/runDownload.sh "data"
         bash scripts/runDownload.sh "ut"
         ;;
     doxy)
@@ -70,7 +77,7 @@ case "$command" in
         # make sure data/ut/ exists
         mkdir -p data/ut/
         # delete data for UT
-        rm data/ut/*
+        # rm data/ut/*
         bash scripts/runDownload.sh "ut"
         bash scripts/runMatlab.sh
         ;;

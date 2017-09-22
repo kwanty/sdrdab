@@ -178,7 +178,7 @@ global CIFCount SuperFrameSync DataEnergChain au_start num_aus lan fid
                                                % [133 ... 133] = the octal numbers specifying input-output
 
 % Generation of polynomial for Reed-Solomon decoder being part of DAB+ (ETSI 2010, page 15-16)
-  RSpolynomial = rsgenpoly(255,245,285); % 285 = 100011101 = x^8+x^4+x^3+x^2+1
+  RSpolynomial = rsgenpoly(255,245,285,0); % 285 = 100011101 = x^8+x^4+x^3+x^2+1
                                                
 % ##########################################################################################
 % These parameters should be set AFTER! FIC decoding and choosing a broadcast by a listener!

@@ -1,11 +1,14 @@
-/**
+﻿/**
  * @class UserInput
  * @brief Provides class for storage and parsing of supplied commandline arguments
  *
  * @author Krzysztof Szczęsny, kaszczesny@gmail.com
- * @date Created on: 1 May 2015
- * @version 1.0
+ * @author Miroslaw Szewczyk, mirsze@student.agh.edu.pl
+ * @date Created on: 1 May 2015 - version 1.0
+ * @date 7 July 2017 - version 3.0
+ * @version 3.0
  * @copyright Copyright (c) 2015 Krzysztof Szczęsny
+ * @copyright Copyright (c) 2017 Miroslaw Szewczyk added protocol for resampling
  * @par License
  *
  * This program is free software: you can redistribute it and/or modify
@@ -30,6 +33,8 @@
 #include <inttypes.h>
 /// @endcond
 #include "data_decoder.h"
+#include "../sdrdab/data_format.h"
+#include "RingBuffer/resampling_ring_buffer.h"
 
 /**
  * Stores results of parsed commandline arguments
@@ -43,9 +48,9 @@ class UserInput {
             NO_TUNER_SELECTED = -1,     ///< special TUNER_NO for having no tuner selected
             ///< (this isn't the same as 0)
             ARGP_EXIT_ERR_CODE = 1000,  ///< value for argp_err_exit_status
-            DEFAULT_FREQ_kHz = 229072,  ///< default frequency: 229072 kHz (DAB+ in Cracov)
+            DEFAULT_FREQ_kHz = 218640,  ///< default frequency: 229072 kHz (DAB+ in Cracov)
             MIN_DAB_FREQ_kHz = 174000,  ///< minimum possible DAB frequency [kHz]
-            MAX_DAB_FREQ_kHz = 230000,  ///< maximum possible DAB frequency [kHz]
+            MAX_DAB_FREQ_kHz = 240000,  ///< maximum possible DAB frequency [kHz]
             DEFAULT_FS_kHz = 2048,      ///< default sampling frequency [kHz]
         };
 
@@ -89,8 +94,9 @@ class UserInput {
         uint8_t channel_nr;     ///< initial channel number
         bool list_;             ///< list flag (list available tuners and exit)
         int tuner_;             ///< given tuner number
-        ///< (-1 indicates that it wasn't touched)
+        ///< (-1 indicates that it wasn't touched)f
         const char *file_;      ///< give input file name
+        fileType_t file_type_; ///< give file type
         bool silent_;           ///< silence flag (don't play on speakers)
         bool rds_;              ///< RDS flag (whether RDS-like text is to be displayed)
         bool info_;             ///< channel info flag (dumps very specific channel info)
@@ -98,8 +104,9 @@ class UserInput {
         const char *graphic_;   ///< directory to save SlideShow graphics
         const char *output_;    ///< file to save audio
         const char *resamplingFreq_; ///< resampling frequency
+        const char *convolutional_;   ///< convolutional mode
         DataDecoder::conv_decoder_alg_t decodingAlg_;    ///< decoding algorithm
-
+        Resampler2::resampling_type resample_quality_;       ///< resampling mode
 
     private:
         /**

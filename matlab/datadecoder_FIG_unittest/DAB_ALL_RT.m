@@ -1,13 +1,23 @@
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+﻿%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Masterthesis
 % Zurcher Hochschule fur Angewandte Wissenschaften
 % Zentrum fur Signalverarbeitung und Nachrichtentechnik
 % (c) Michael Hoin
 % 12.4.2011 ZSN
 % info.zsn@zhaw.ch
+%
+% Code modified/extended (to DAB+ and Modes 2,3,4) by:
+% (c) Tomasz Zielinski
+% AGH University of Science and Technology
+% Telecommunications Department
+% Krakow, Poland
+% 15.03.2015
+% tzielin@agh.edu.pl
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+% -----------------------------------------------------------------------------------------
+% Distance between consecutive frames in samples
+% -----------------------------------------------------------------------------------------
 clc; clear all; close all; fclose('all');
 
 global NSymbPerFrame NSampPerFrame NSampPerSymb NSampPerNull NCarrPerSymb Nfft NSampPerGuard PhaseRefSymb sigPhaseRefSymb fs df_fract df_int df FrameStartpoints FrameLengths

@@ -11,7 +11,8 @@
  * @date 7 July 2015 - version 1.0 beta
  * @date 7 July 2016 - version 2.0 beta
  * @date 1 November 2016 - version 2.0
- * @version 2.0
+ * @date 7 July 2017 - version 3.0
+ * @version 3.0
  * @copyright Copyright (c) 2015 Jaroslaw Bulat, Sebastian Lesniak
  * @copyright Copyright (c) 2016 Jaroslaw Bulat, Sebastian Lesniak, Kacper Zuk
  * @par License
@@ -46,6 +47,7 @@
 #include "threading/blocking_queue.h"
 #include "threading/signaled_worker_thread.h"
 #include <deque>
+#include "../sdrdab/data_format.h"
 
 class Scheduler
 {
@@ -115,14 +117,17 @@ class Scheduler
 
     // used in estimating fc_drift and fs drift
     float * fc_drift_table_;
-    const size_t fs_drift_table_length_;
     float estimated_fc_drift_;
     bool fc_drift_table_full_;
     bool fc_converged_;
     uint8_t recalc_fc_drift_;
     uint8_t fc_counter_;
 
-    std::deque<float> fs_drift_queue_;
+    static const int fs_drift_table_length_ = 10;
+    int fs_drift_counter_;
+    float fs_table_[fs_drift_table_length_];
+    bool fs_drift_table_full_;
+    bool fs_drift_stable_;
     float fs_drift_; ///< Calculated sampling frequency drift in ppm (parts per milion)
 
     uint8_t number_of_frames_for_estimate_fsdrift_; ///< For how many frames calculate fs_drift
@@ -213,7 +218,6 @@ class Scheduler
      */
     void ResetFsDrift() {
         fs_drift_=0;
-        fs_drift_queue_.clear();
     };
 
     /**
@@ -225,6 +229,16 @@ class Scheduler
      * EstimateFcDrift method - estimates fc_drift.
      */
     float EstimateFcDrift();
+
+    /**
+     * EstimateFsDrift method - estimates fs_drift.
+     */
+    void CalculateFsDrift();
+
+    /**
+     * SkipCalculations method - changes counters for Fc and Fs calculations to skip next few frames.
+     */
+    void SkipAfterFsChange();
 
     /**
      * ConvergedFcHandle method - handles fc_drift when we are converged value.
@@ -373,9 +387,11 @@ public:
             const char * input_filename; ///< path to file with raw samples
         };
         data_source_t data_source; ///< type of data source (tells which union field is used
+        fileType_t file_type;
         bool use_speakers; ///< tells whether audio is to be played via speakers (PulseSink)
         const char * output_filename; ///< where to save .ogg audio
         DataDecoder::conv_decoder_alg_t convolutional_alg; ///< which convolutional decoder alg will be used
+        Resampler2::resampling_type resample_quality;
         uint8_t start_station_nr; ///< initial station identifier
         SchedulerConfig_t() ///< Fills structure with sensible values
             : sampling_rate(2048*1000),
@@ -385,6 +401,7 @@ public:
               use_speakers(true),
               output_filename(NULL),
               convolutional_alg(DataDecoder::ALG_VITERBI_TZ),
+              resample_quality(Resampler2::LINEAR),
               start_station_nr(255) {};
     };
 
@@ -408,8 +425,8 @@ public:
      * @param data data source type
      * @return next state
      */
-    state_t Init(const char * dongle_or_file_name, uint8_t internal_buffer_number, size_t internal_buffer_size, uint32_t sample_rate,
-                 uint32_t carrier_freq, data_source_t data);
+    state_t Init(fileType_t  fileType, const char * dongle_or_file_name, uint8_t internal_buffer_number, size_t internal_buffer_size, uint32_t sample_rate,
+                 uint32_t carrier_freq, data_source_t data, Resampler2::resampling_type resample_quality);
 
     /**
      * Process method - starting program logic (state machine)

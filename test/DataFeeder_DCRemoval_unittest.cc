@@ -14,7 +14,7 @@ class DcRemovalTest: public testing::Test {
             data_loaded2 = false;
             data_to_test = new float[16384*5];
             dcremoval_expected_result = new float[16384*5];
-            mydatafeeder = new FileDataFeeder("whatever.exe.dll",2048,2048000,229072000,8);
+            mydatafeeder = new FileDataFeeder("whatever.exe.dll",2048,2048000,229072000,8, ResamplingRingBuffer::SRC_SINC_FASTEST);
         }
         virtual ~DcRemovalTest() {
             delete[] data_to_test;

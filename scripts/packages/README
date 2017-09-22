@@ -1,0 +1,68 @@
+Created: 2017
+Author: Konrad Banka <aruko12@gmail.com>
+
+TOOL:
+This script (make_deb.sh) is used to create debian package out of compiled binaries/libraries, meta-data and extra files.
+
+OPTIONS:
+--config FILE - Point file from which setup variable are being read.
+    Script is bundled with template config file named config_template.source
+--root PATH - Point path to use assign as PROJECT_ROOT.
+    This variable can used to specify setup variables more dynamically.
+    By default PROJECT_ROOT is current directory.
+--clean, --prepare, --create, --test - these flags are described in STEPS section below.
+--default - Combines flags: --clean, --prepare, --create
+--dynamic_dependencies - List dynamic package dependencies (description in DEPENDENCIES section).
+--help - Print this document and exit
+
+STEPS:
+Note: Options listed with steps are the ones,
+    that need to be provided during invocation for this step to execute.
+
+* Parsing input options
+* Loading config file if specified (option: --config)
+* Cleaning directory used for packaging (options: --clean, --default)
+* Preparing directory structure, copying files, creating meta-files for package (options: --prepare, --default)
+* Creating debian package (options: --create, --default)
+* Testing package for issues (option: --test)
+
+
+DEPENDENCIES:
+Script can also generate dependencies for binaries in package by passing --dynamic_dependencies flag.
+Packages selected as dependencies are always the first one found by apt-file for each linked library.
+It may choose non-optimal packages as dependencies, as well as duplicate entries.
+
+SETUP VARIABLES - FILES AND DIRECTORIES:
+
+
+PROJECT_ROOT - variable used to simplify dir organisation.
+    It is not used directly in script, but can be helpful to define other setup variables.
+
+PACKAGE_DIR - directory to populate with package-related files
+CONTROL_DIR - pointer to DEBIAN directory inside PACKAGE_DIR, used for storing meta-files
+RESULT_DIR - directory, where created package will be placed into
+
+EXTRA_DATA_DIR - directory containing extra files for package like manual, copyright, etc.
+
+MATCH_BINARIES - directory/file/glob containing bianries to be included in package
+MOVE_BINARIES - path for binaries to be installed in system, must be relative to PACKAGE_ROOT
+
+MATCH_LIBRARIES, MOVE_LIBRARIES - as above, but related to shared libraries, currently unused
+
+MATCH_DOCS - path to file containing uncompressed manual for binary
+MOVE_DOCS - path for manual to be moved in system, must be relative to PACKAGE_ROOT
+
+MATCH_COPYRIGHT, MOVE_COPYRIGHT - as above, but related to copyright file
+
+PREINST_SCRIPT, POSTRM_SCRIPT - path to preinst, postrm maintainer scripts
+
+SETUP VARIABLES - META DATA:
+
+CTL_PACKAGE, CTL_VERSION, CTL_PRIORITY, CTL_SECTION, CTL_MAINTAINER,
+CTL_ARCHITECTURE, CTL_HOMEPAGE, CTL_DEPENDS, CTL_DESCRIPTION:
+    These variables correspond to appropriate fields in DEBIAN/control file.
+    For more information manual pages for
+    deb-control and deb-version shoud be checked.
+
+CTL_LONG_DESCRIPTION_FILE - as above, however variable does not store text of long description,
+    but points to file containing it.

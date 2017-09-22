@@ -1,4 +1,4 @@
-/**
+﻿/**
  * @class DataDecoder
  * @brief Data decoding - from dqpsk to ADTS AAC cointainer
  *
@@ -14,8 +14,8 @@
  * @author Adrian Wlosiak (DataDecoder::ConvDecoderWrapper, DataDecoder::ConvDecoderInitWrapper)
  * @date 7 July 2015 - version 1.0 beta
  * @date 7 July 2016 - version 2.0 beta
- * @date 1 November 2016 - version 2.0
- * @version 2.0
+ * @date 7 July 2017 - version 3.0
+ * @version 3.0
  * @copyright Copyright (c) 2015 Jaroslaw Bulat, Dawid Rymarczyk, Jan Twardowski, Adrian Karbowiak, Szymon Dabrowski, Ernest Biela, Rafal Palej, Tomasz Zieliński.
  * @copyright Copyright (c) 2016 Jaroslaw Bulat, Dawid Rymarczyk, Jan Twardowski, Adrian Karbowiak, Szymon Dabrowski, Ernest Biela, Rafal Palej, Tomasz Zieliński, Marcin Trebunia, Adrian Wlosiak
  *
@@ -65,6 +65,7 @@ public:
 
     enum conv_decoder_alg_t {
         ALG_VITERBI_TZ,
+        //ALG_XXX, // prepared for other decoding algorithm
         ALG_UNSPEC //when no value is specified. UserInput will change it to ALG_VITERBI_TZ
     };
 

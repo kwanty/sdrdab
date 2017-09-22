@@ -1,4 +1,3 @@
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Masterthesis
 % Zurcher Hochschule fur Angewandte Wissenschaften
@@ -6,8 +5,19 @@
 % (c) Michael Hoin
 % 12.4.2011 ZSN
 % info.zsn@zhaw.ch
+%
+% Code modified/extended (to DAB+ and Modes 2,3,4) by:
+% (c) Tomasz Zielinski
+% AGH University of Science and Technology
+% Telecommunications Department
+% Krakow, Poland
+% 15.03.2015
+% tzielin@agh.edu.pl
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+% -----------------------------------------------------------------------------------------
+% Distance between consecutive frames in samples
+% -----------------------------------------------------------------------------------------
 % -----------------------------------------------------------------------------------------
 % FIGs reading and interpretation (result dispayed on the screen)
 

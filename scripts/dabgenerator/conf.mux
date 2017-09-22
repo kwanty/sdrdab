@@ -1,0 +1,175 @@
+general { 
+	dabmode 4
+	nbframes 5000 
+}
+
+remotecontrol { telnetport 0 }
+
+ensemble { 
+	id 0x4fff 
+	ecc 0xec ; Extended Country Code
+
+	local-time-offset auto 
+	international-table 1 
+	label "mmbtools" 
+	shortlabel "mmbtools" 
+}
+
+services { 
+	srv-p1 {
+		label "awalker DABp1A"
+		shortlabel "awDABp1A"
+	} 
+	srv-p2 {
+		label "awalker DABp1B"
+		shortlabel "awDABp1B"
+	} 
+	srv-p3 {
+		label "disfigure DABp2A"
+		shortlabel "dfDABp2A"
+	} 
+	srv-p4 {
+		label "disfigure DABp2B"
+		shortlabel "dfDABp2B"
+	} 
+	srv-p5 {
+		label "halvorsen DABp3A"
+		shortlabel "hvDABp3A"
+	} 
+	srv-p6 {
+		label "halvorsen DABp3B"
+		shortlabel "hvDABp3B"
+	} 
+	srv-p7 {
+		label "mendum DABp4A"
+		shortlabel "mdDABp4A"
+	} 
+	srv-p8 {
+		label "mendum DABp4B"
+		shortlabel "mdDABp4B"
+	} 
+
+
+
+}
+
+subchannels { 
+	sub-p1 { 
+		type dabplus 
+		inputfile "alan_walker.dabp" 
+		bitrate 88 
+		id 1
+		protection-profile EEP_A 
+		protection 1
+	} 
+	sub-p2 { 
+		type dabplus 
+		inputfile "alan_walker96.dabp" 
+		bitrate 96 
+		id 2
+		protection-profile EEP_B			
+		protection 1 
+	} 
+	sub-p3 { 
+		type dabplus
+		inputfile "disfigure.dabp" 
+		bitrate 88 
+		id 3
+		protection-profile EEP_A 
+		protection 2
+	} 
+	sub-p4 { 
+		type dabplus
+		inputfile "disfigure96.dabp" 
+		bitrate 96
+		id 4
+		protection-profile EEP_B 
+		protection 2
+	} 
+	sub-p5 { 
+		type dabplus
+		inputfile "halvorsen.dabp" 
+		bitrate 88 
+		id 5
+		protection-profile EEP_A 
+		protection 3
+	} 
+	sub-p6 { 
+		type dabplus
+		inputfile "halvorsen96.dabp" 
+		bitrate 96
+		id 6
+		protection-profile EEP_B 
+		protection 3
+	} 
+	sub-p7 { 
+		type dabplus
+		inputfile "mendum.dabp" 
+		bitrate 88 
+		id 7
+		protection-profile EEP_A 
+		protection 4
+	} 
+	sub-p8 { 
+		type dabplus
+		inputfile "mendum96.dabp" 
+		bitrate 96
+		id 8
+		protection-profile EEP_B 
+		protection 4
+	}
+}
+
+components { 
+	comp-p1 { 
+		label Prog1
+		shortlabel P1
+		service srv-p1 
+		subchannel sub-p1 
+	} 
+	comp-p2 { 
+		label Prog2
+		shortlabel P2 
+		service srv-p2 
+		subchannel sub-p2 
+	}
+	comp-p3 { 
+		label Prog3
+		shortlabel P3
+		service srv-p3 
+		subchannel sub-p3 
+	} 
+	comp-p4 { 
+		label Prog4
+		shortlabel P4 
+		service srv-p4 
+		subchannel sub-p4 
+	} 
+	comp-p5 { 
+		label Prog5
+		shortlabel P5
+		service srv-p5 
+		subchannel sub-p5 
+	} 
+	comp-p6 { 
+		label Prog6
+		shortlabel P6 
+		service srv-p6 
+		subchannel sub-p6 
+	} 
+	comp-p7 { 
+		label Prog7
+		shortlabel P7
+		service srv-p7 
+		subchannel sub-p7 
+	} 
+	comp-p8 { 
+		label Prog8
+		shortlabel P8 
+		service srv-p8 
+		subchannel sub-p8 
+	} 
+}
+
+outputs { output1 "file://DABpMultiplexMode4.eti?type=raw" }
+

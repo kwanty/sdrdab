@@ -1,0 +1,5 @@
+ sdrdab-decoder (also simply called sdrdab) is C++ library
+ designed to work with RTL2832U stick (and other compatibile tuners),
+ using it to gather and decode DAB signal.
+ Decoded audio can be played immediately or be saved to file.
+ All DAB transmission modes are supported, as well as DAB+ standard.

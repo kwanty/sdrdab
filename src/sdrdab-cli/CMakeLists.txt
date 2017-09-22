@@ -14,6 +14,8 @@ if (GLIB_PKG_FOUND)
 include_directories(${GLIB_PKG_INCLUDE_DIRS})
 ENDIF()
 
+# This line should be used, to link dynamic sdrdab library
+#set(CMAKE_LIBRARY_PATH ${CMAKE_BiNARY_DIR}/lib ${CMAKE_LIBRARY_PATH})
 target_link_libraries("sdrdab-cli" "sdrdab")
 target_link_libraries("sdrdab-cli" "gstreamer-1.0")
 target_link_libraries("sdrdab-cli" "gobject-2.0")

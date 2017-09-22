@@ -1,0 +1,18 @@
+The script installs odr tools.
+If the script would not like to run because of various reasons, please run the
+commands contained in it or better go to:
+http://wiki.opendigitalradio.org/Installer_scripts
+There might be an updated version.
+
+TAKE CARE:
+ImageMagick and Ubuntu 16.04
+----------------------------
+Please note that Ubuntu 16.04 still (09.03.2017) ships a version of ImageMagick
+that was affected by a memory leak (see #2). Hence ODR-PadEnc will increasingly
+consume memory until it crashes!
+
+Until Ubuntu backports the bugfix, you should therefore use a more recent
+version of ImageMagick (6.9.2-2 or higher).
+
+How to update ImageMagick:
+https://www.imagemagick.org/discourse-server/viewtopic.php?t=29006

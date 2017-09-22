@@ -1,0 +1,169 @@
+By Milosz Sliwinski
+Matlab function distort. Its main objective is setting awgn, fs and fc drifts to clear recording.
+Help message exists in function and it explains how to use script.
+Structures that are used in scripts should be in format:
+
+dataN = struct('fs_drift',[10],'fc_drift',[10],'snr',[10],'time_begin',[10],'time_end',[10]);
+
+and all structures should be added to one structure table.
+Please do not change names while creating structures which mean e.g. 'fs_drift' should have also exact name 'fs_drift'
+fs_drift and fc_drift are provided in Hz, awgn descripted by 'snr' should be provided by writting expected snr. If it is set to 0 than there is no awgn.
+time_begin and time_end are used to set the time interval of particular distortion. It is better when the timers are integrals.
+Delivering more than one distortion simutaniously doesn't generate any problem.
+
+Example:
+
+While using structures below, drift shifts 50Hz should appear in 4th, 8th and 12th second.
+
+    data1 = struct('fs_drift',[50],'fc_drift',[50],'snr',[10],'time_begin',[4],'time_end',[26]);
+    data2 = struct('fs_drift',[50],'fc_drift',[50],'snr',[10],'time_begin',[8],'time_end',[22]);
+    data3 = struct('fs_drift',[50],'fc_drift',[50],'snr',[10],'time_begin',[12],'time_end',[18]);
+	
+	enter_table = [data1 data2 data3];
+
+Output drift is sum of all drifts in particular time e.g. between 12th and 18th second fs and fc drifts will be set to 150, 8-12 and 18-22 will be set to 100.
+Output from SDR is following. Pay attention on lines pointed out by adding '!!!!!'
+
+INIT CRTHR(): 
+GOING TO SYNC STATE
+
+SYNC  Sync(): first_null: 196618, second_null: 393233, frame_size: 196615
+Mode: 1, null: 196618
+SYNC  Sync(): NULL:1318, Fs:-50.86, Fc: 0.000, SNR(RAW):  inf(39.59) dB
+SYNC  Sync(): NULL:1328, Fs:  0.00, Fc: 0.000, SNR(RAW):  inf(39.59) dB
+SYNC  Sync(): NULL:1328, Fs:  0.00, Fc: 0.000, SNR(RAW):  inf(39.59) dB
+SYNC  Sync(): NULL:1328, Fs:  0.00, Fc: 0.000, SNR(RAW):  inf(39.59) dB
+SYNC  Sync(): NULL:1328, Fs:  0.00, Fc: 0.000, SNR(RAW):  inf(39.59) dB
+SYNC  Sync(): NULL:1328, Fs:  0.00, Fc: 0.000, SNR(RAW):  inf(39.59) dB
+SYNC  Sync(): NULL:1328, Fs:  0.00, Fc: 0.000, SNR(RAW):  inf(39.59) dB
+SYNC  Sync(): NULL:1328, Fs:  0.00, Fc: 0.000, SNR(RAW):  inf(39.59) dB
+SYNC  Sync(): NULL:1328, Fs:  0.00, Fc: 0.000, SNR(RAW):  inf(39.59) dB
+SYNC  Sync(): NULL:1328, Fs:  0.00, Fc: 0.000, SNR(RAW):  inf(39.59) dB
+SYNC  Sync(): NULL:1328, Fs:  0.00, Fc: 0.000, SNR(RAW):  inf(39.59) dB
+GOING TO CONF STATE
+
+CONF  Conf(): NULL:1328, Fs:  0.00, Fc: 0.000, SNR(RAW):  inf(39.59) dB
+
+1. Name: Not Available, start address - size: 0 - 84, protection level - type: 2 - 0, is long: 1, serviceId: 12817
+2. Name: Not Available, start address - size: 84 - 96, protection level - type: 2 - 0, is long: 1, serviceId: 12834
+3. Name: Not Available, start address - size: 180 - 84, protection level - type: 2 - 0, is long: 1, serviceId: 12851
+4. Name: Not Available, start address - size: 264 - 84, protection level - type: 2 - 0, is long: 1, serviceId: 12835
+5. Name: Not Available, start address - size: 348 - 48, protection level - type: 2 - 0, is long: 1, serviceId: 12965
+6. Name: Not Available, start address - size: 396 - 48, protection level - type: 2 - 0, is long: 1, serviceId: 12966
+7. Name: Not Available, start address - size: 444 - 72, protection level - type: 2 - 0, is long: 1, serviceId: 12967
+9. Name: Not Available, start address - size: 516 - 78, protection level - type: 2 - 0, is long: 1, serviceId: 12290
+
+GOING TO CONFSTATION STATE
+
+C ST Recon(): 
+GOING TO PLAY STATE
+
+PLAY  Play(): NULL:1328, Fs:  0.00, Fc: 0.000, SNR(RAW):  inf(39.59) dB, 
+PLAY  Play(): NULL:1328, Fs:  0.00, Fc: 0.000, SNR(RAW):  inf(39.59) dB, Audio: 0 B
+PLAY  Play(): NULL:1328, Fs:  0.00, Fc: 0.000, SNR(RAW):  inf(39.59) dB, Audio: 0 B
+PLAY  Play(): NULL:1328, Fs:  0.00, Fc: 0.000, SNR(RAW):  inf(39.59) dB, Audio: 0 B
+PLAY  Play(): NULL:1328, Fs:  0.00, Fc: 0.000, SNR(RAW):  inf(39.59) dB, Audio: 0 B
+PLAY  Play(): NULL:1328, Fs:  0.00, Fc: 0.000, SNR(RAW):  inf(39.59) dB, 
+PLAY  Play(): NULL:1328, Fs:  0.00, Fc: 0.000, SNR(RAW):  inf(39.59) dB, 
+PLAY  Play(): NULL:1328, Fs:  0.00, Fc: 0.000, SNR(RAW):  inf(39.59) dB, 
+PLAY  Play(): NULL:1328, Fs:  0.00, Fc: 0.000, SNR(RAW):  inf(39.59) dB, 
+PLAY  Play(): NULL:1328, Fs:  0.00, Fc: 0.000, SNR(RAW):  inf(39.59) dB, 
+PLAY  Play(): NULL:1328, Fs:  0.00, Fc: 0.000, SNR(RAW):  inf(39.59) dB, 
+PLAY  Play(): NULL:1328, Fs:  0.00, Fc: 0.000, SNR(RAW):  inf(39.59) dB, Audio: 0 B
+PLAY  Play(): NULL:1328, Fs:  0.00, Fc: 0.000, SNR(RAW):  inf(39.59) dB, 
+PLAY  Play(): NULL:1328, Fs:  0.00, Fc: 0.000, SNR(RAW):  inf(39.59) dB, 
+PLAY  Play(): NULL:1328, Fs:  0.00, Fc: 0.000, SNR(RAW):  inf(39.59) dB, 
+PLAY  Play(): NULL:1328, Fs:  0.00, Fc: 0.000, SNR(RAW):  inf(39.59) dB, 
+PLAY  Play(): NULL:1328, Fs:  0.00, Fc: 0.000, SNR(RAW):  inf(39.59) dB, 
+PLAY  Play(): NULL:1328, Fs:  0.00, Fc: 0.000, SNR(RAW):  inf(39.59) dB, Audio: 0 BAudio: 1559 BAudio: 1559 BAudio: 1559 BAudio: 1559 B
+PLAY  Play(): NULL:1328, Fs:  0.00, Fc: 0.000, SNR(RAW):  inf(39.59) dB, 
+PLAY  Play(): NULL:1328, Fs:  0.00, Fc: 0.000, SNR(RAW):  inf(39.59) dB, 
+PLAY  Play(): NULL:1328, Fs:  0.00, Fc: 0.000, SNR(RAW):  inf(39.59) dB, 
+PLAY  Play(): NULL:1328, Fs:  0.00, Fc: 0.000, SNR(RAW):  inf(39.59) dB, Audio: 0 B
+PLAY  Play(): NULL:1328, Fs:  0.00, Fc: 0.000, SNR(RAW):  inf(39.59) dB, 
+PLAY  Play(): NULL:1328, Fs:  0.00, Fc: 0.000, SNR(RAW):  inf(39.59) dB, 
+PLAY  Play(): NULL:1328, Fs:  0.00, Fc: 0.000, SNR(RAW):  inf(39.59) dB, 
+PLAY  Play(): NULL:1328, Fs:  0.00, Fc: 0.000, SNR(RAW):  inf(39.59) dB, Audio: 1559 B
+PLAY  Play(): NULL:1328, Fs:  0.00, Fc: 0.000, SNR(RAW):  inf(39.59) dB, 
+PLAY  Play(): NULL:1328, Fs:  0.00, Fc: 0.000, SNR(RAW):  inf(39.59) dB, Audio: 1559 BAudio: 1559 BAudio: 1559 BAudio: 0 BAudio: 1559 BAudio: 1559 BAudio: 1559 BAudio: 1559 B
+PLAY  Play(): NULL:1331, Fs:  0.60, Fc: 0.000, SNR(RAW): 8.46(15.69) dB, 
+PLAY  Play(): NULL:1333, Fs:  1.20, Fc: 0.000, SNR(RAW): 8.18(21.28) dB, 
+PLAY  Play(): NULL:1332, Fs:  1.80, Fc: 0.000, SNR(RAW): 8.34(15.43) dB, 
+PLAY  Play(): NULL:1333, Fs:  2.40, Fc: 0.000, SNR(RAW): 7.91(11.84) dB, Audio: 0 B
+!!!!!PLAY  Play(): NULL:1333, Fs:  3.00, Fc: 0.048, SNR(RAW): 8.13(12.23) dB, !!!!!
+PLAY  Play(): NULL:1333, Fs:  3.60, Fc: 0.049, SNR(RAW): 8.42(15.82) dB, 
+PLAY  Play(): NULL:1339, Fs: 55.95, Fc: 0.049, SNR(RAW): 8.76(20.81) dB, Audio: 1559 B
+PLAY  Play(): NULL:1326, Fs:-10.17, Fc: 0.053, SNR(RAW): 8.28(15.02) dB, 
+PLAY  Play(): NULL:1333, Fs: 25.43, Fc: 0.054, SNR(RAW): 7.73(11.99) dB, 
+PLAY  Play(): NULL:1333, Fs: 25.43, Fc: 0.050, SNR(RAW): 8.25(12.03) dB, Audio: 1559 BAudio: 1559 BAudio: 1559 BAudio: 0 BAudio: 1559 BAudio: 1559 BAudio: 1559 BAudio: 1559 B
+PLAY  Play(): NULL:1333, Fs: 25.43, Fc: 0.049, SNR(RAW): 8.68(15.74) dB, 
+PLAY  Play(): NULL:1333, Fs: 25.43, Fc: 0.050, SNR(RAW): 8.66(20.64) dB, 
+PLAY  Play(): NULL:1332, Fs: 20.35, Fc: 0.054, SNR(RAW): 8.08(15.32) dB, 
+PLAY  Play(): NULL:1333, Fs: 25.43, Fc: 0.049, SNR(RAW): 8.08(11.64) dB, Audio: 0 B
+PLAY  Play(): NULL:1333, Fs: 25.43, Fc: 0.049, SNR(RAW): 8.33(11.96) dB, 
+PLAY  Play(): NULL:1333, Fs: 25.43, Fc: 0.051, SNR(RAW): 8.25(16.05) dB, 
+PLAY  Play(): NULL:1333, Fs: 25.43, Fc: 0.048, SNR(RAW): 8.79(21.15) dB, 
+PLAY  Play(): NULL:1332, Fs: 20.35, Fc: 0.049, SNR(RAW): 8.32(14.85) dB, Audio: 1559 B
+PLAY  Play(): NULL:1333, Fs: 25.43, Fc: 0.052, SNR(RAW): 7.85(11.69) dB, 
+PLAY  Play(): NULL:1333, Fs:  6.00, Fc: 0.047, SNR(RAW): 8.71(12.11) dB, 
+PLAY  Play(): NULL:1333, Fs: 25.43, Fc: 0.047, SNR(RAW): 8.83(15.65) dB, Audio: 1559 B
+PLAY  Play(): NULL:1333, Fs: 25.43, Fc: 0.051, SNR(RAW): 8.70(21.45) dB, Audio: 0 BAudio: 1559 BAudio: 0 BAudio: 1559 BAudio: 1559 BAudio: 1559 BAudio: 1559 B
+PLAY  Play(): NULL:1332, Fs: 20.35, Fc: 0.054, SNR(RAW): 8.27(14.73) dB, 
+PLAY  Play(): NULL:1333, Fs: 25.43, Fc: 0.051, SNR(RAW): 7.95(11.98) dB, 
+PLAY  Play(): NULL:1333, Fs: 25.43, Fc: 0.049, SNR(RAW): 8.14(11.86) dB, 
+PLAY  Play(): NULL:1333, Fs: 25.43, Fc: 0.055, SNR(RAW): 7.90(15.84) dB, 
+PLAY  Play(): NULL:1333, Fs: 25.43, Fc: 0.050, SNR(RAW): 8.61(20.89) dB, Audio: 0 B
+PLAY  Play(): NULL:1332, Fs: 20.35, Fc: 0.047, SNR(RAW): 8.70(15.36) dB, 
+PLAY  Play(): NULL:1333, Fs: 25.43, Fc: 0.054, SNR(RAW): 7.70(11.72) dB, 
+PLAY  Play(): NULL:1333, Fs: 25.43, Fc: 0.050, SNR(RAW): 8.30(11.52) dB, Audio: 1559 B
+PLAY  Play(): NULL:1333, Fs: 25.43, Fc: 0.052, SNR(RAW): 8.23(15.88) dB, Audio: 1559 BAudio: 1559 BAudio: 1559 BAudio: 0 BAudio: 1559 BAudio: 1559 BAudio: 1559 BAudio: 1559 B
+PLAY  Play(): NULL:1333, Fs: 25.43, Fc: 0.049, SNR(RAW): 8.70(20.53) dB, 
+PLAY  Play(): NULL:1332, Fs: 20.35, Fc: 0.052, SNR(RAW): 8.30(14.54) dB, 
+PLAY  Play(): NULL:1333, Fs:  6.00, Fc: 0.056, SNR(RAW): 7.58(11.58) dB, 
+PLAY  Play(): NULL:1333, Fs: 25.43, Fc: 0.052, SNR(RAW): 7.82(12.19) dB, Audio: 0 B
+PLAY  Play(): NULL:1333, Fs: 25.43, Fc: 0.052, SNR(RAW): 8.22(15.97) dB, 
+PLAY  Play(): NULL:1333, Fs: 25.43, Fc: 0.049, SNR(RAW): 8.68(21.25) dB, 
+PLAY  Play(): NULL:1332, Fs: 20.35, Fc: 0.045, SNR(RAW): 8.88(15.22) dB, 
+PLAY  Play(): NULL:1333, Fs: 25.43, Fc: 0.051, SNR(RAW): 8.23(11.66) dB, Audio: 1559 B
+PLAY  Play(): NULL:1333, Fs: 25.43, Fc: 0.049, SNR(RAW): 8.41(12.29) dB, Audio: 1559 BAudio: 1559 BAudio: 1559 BAudio: 0 BAudio: 1559 BAudio: 1559 BAudio: 1559 BAudio: 1559 B
+PLAY  Play(): NULL:1333, Fs: 25.43, Fc: 0.052, SNR(RAW): 8.32(15.99) dB, 
+PLAY  Play(): NULL:1333, Fs: 25.43, Fc: 0.054, SNR(RAW): 8.37(20.97) dB, 
+!!!!!PLAY  Play(): NULL:1337, Fs: 45.78, Fc: 0.098, SNR(RAW): 3.63(16.13) dB, !!!!!
+PLAY  Play(): NULL:1337, Fs: 45.78, Fc: 0.050, SNR(RAW): 2.86( 9.03) dB, Audio: 0 B
+PLAY  Play(): NULL:1337, Fs: 45.78, Fc: 0.098, SNR(RAW): 3.10( 9.81) dB, 
+PLAY  Play(): NULL:1338, Fs: 50.86, Fc: 0.097, SNR(RAW): 3.53(16.75) dB, 
+PLAY  Play(): NULL:1338, Fs: 50.86, Fc: 0.051, SNR(RAW): 3.21(25.29) dB, 
+PLAY  Play(): NULL:1338, Fs:  6.00, Fc: 0.051, SNR(RAW): 3.29(16.24) dB, Audio: 1559 B
+PLAY  Play(): NULL:1337, Fs: 45.78, Fc: 0.097, SNR(RAW): 3.44( 9.30) dB, 
+PLAY  Play(): NULL:1338, Fs: 50.86, Fc: 0.100, SNR(RAW): 3.05( 9.64) dB, 
+PLAY  Play(): NULL:1337, Fs: 45.78, Fc: 0.102, SNR(RAW): 3.16(16.91) dB, Audio: 1559 B
+PLAY  Play(): NULL:1338, Fs: 50.86, Fc: 0.103, SNR(RAW): 3.33(24.96) dB, Audio: 1559 BAudio: 1559 BAudio: 0 BAudio: 1559 BAudio: 1559 BAudio: 1559 BAudio: 1559 B
+PLAY  Play(): NULL:1338, Fs: 50.86, Fc: 0.103, SNR(RAW): 3.36(16.15) dB, 
+PLAY  Play(): NULL:1337, Fs: 45.78, Fc: 0.096, SNR(RAW): 3.34( 8.52) dB, 
+PLAY  Play(): NULL:1338, Fs: 50.86, Fc: 0.098, SNR(RAW): 3.15( 9.49) dB, 
+PLAY  Play(): NULL:1337, Fs: 45.78, Fc: 0.101, SNR(RAW): 3.39(16.59) dB, 
+PLAY  Play(): NULL:1338, Fs: 50.86, Fc: 0.104, SNR(RAW): 3.26(24.95) dB, Audio: 0 B
+PLAY  Play(): NULL:1338, Fs: 50.86, Fc: 0.104, SNR(RAW): 3.28(16.30) dB, 
+PLAY  Play(): NULL:1337, Fs: 45.78, Fc: 0.110, SNR(RAW): 2.49( 9.01) dB, Audio: 1559 B
+PLAY  Play(): NULL:1338, Fs: 50.86, Fc: 0.104, SNR(RAW): 2.51( 9.38) dB, 
+PLAY  Play(): NULL:1337, Fs: 45.78, Fc: 0.104, SNR(RAW): 3.09(16.88) dB, Audio: 1559 BAudio: 1559 BAudio: 1559 BAudio: 0 BAudio: 0 BAudio: 0 BAudio: 0 BAudio: 1559 B
+PLAY  Play(): NULL:1338, Fs:  6.00, Fc: 0.096, SNR(RAW): 3.64(25.66) dB, 
+PLAY  Play(): NULL:1338, Fs: 50.86, Fc: 0.092, SNR(RAW): 3.85(16.11) dB, 
+PLAY  Play(): NULL:1337, Fs: 45.78, Fc: 0.096, SNR(RAW): 3.53( 9.11) dB, 
+PLAY  Play(): NULL:1338, Fs: 50.86, Fc: 0.098, SNR(RAW): 3.06( 9.27) dB, 
+PLAY  Play(): NULL:1337, Fs: 45.78, Fc: 0.105, SNR(RAW): 3.03(16.59) dB, Audio: 0 B
+PLAY  Play(): NULL:1338, Fs: 50.86, Fc: 0.106, SNR(RAW): 2.94(25.17) dB, Audio: 1559 B
+PLAY  Play(): NULL:1338, Fs: 50.86, Fc: 0.100, SNR(RAW): 3.42(16.02) dB, 
+PLAY  Play(): NULL:1337, Fs: 45.78, Fc: 0.101, SNR(RAW): 2.92( 8.48) dB, 
+PLAY  Play(): NULL:1331, Fs: 15.26, Fc: 0.098, SNR(RAW): 3.24( 9.67) dB, Audio: 1559 BAudio: 1559 BAudio: 1559 BAudio: 0 BAudio: 1559 BAudio: 1559 BAudio: 1559 BAudio: 1559 B
+PLAY  Play(): NULL:1344, Fs: 81.38, Fc: 0.106, SNR(RAW): 2.93(17.06) dB, 
+PLAY  Play(): NULL:1338, Fs: 50.86, Fc: 0.100, SNR(RAW): 3.38(25.25) dB, 
+PLAY  Play(): NULL:1338, Fs: 50.86, Fc: 0.100, SNR(RAW): 3.28(16.20) dB, 
+PLAY  Play(): NULL:1337, Fs: 45.78, Fc: 0.101, SNR(RAW): 3.09( 8.81) dB, Audio: 0 B
+PLAY  Play(): NULL:1338, Fs: 50.86, Fc: 0.100, SNR(RAW): 3.19( 9.14) dB, 
+PLAY  Play(): NULL:1337, Fs:  6.00, Fc: 0.097, SNR(RAW): 3.36(17.15) dB, Audio: 1559 B^C
+
+Distanse between lines are ~40 samples which mean 40*100ms=4s so drift shifts are created in proper places.
+We cannot be 100% sure about initial synchronization that's why I am looking at second drift swich
+
+

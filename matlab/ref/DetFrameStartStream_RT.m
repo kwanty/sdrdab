@@ -44,6 +44,8 @@ if( length(Signal) > 2*NSampPerFrame )  % continue only if Signal is long enough
   else                         NSampPerSynchro = 2*NSampPerNull;
   end
 
+  nullFFT = zeros(1, Nfft);
+  load('matrixForDecodeNULLv2.mat');
   SUM = zeros(1,NSampPerSynchro);
   SUM(1) = sum( ABS_Signal(1:NSampPerNull) );
   for n = 2 : NSampPerSynchro; 
@@ -52,6 +54,7 @@ if( length(Signal) > 2*NSampPerFrame )  % continue only if Signal is long enough
   [dummy imin] = min(SUM);
   i = imin+NSampPerNull;
 
+       nullFFT = fft(Signal(i-Nfft-Nfft/8:i-1-Nfft/8));
        if( PlotOn ) % Show detected first sample of the Phase Reference OFDM Symbol 
            i,
            figure('Name','REAL Signal');
@@ -343,10 +346,47 @@ if( length(Signal) > 2*NSampPerFrame )  % continue only if Signal is long enough
              subplot(212); plot( 1:NSampPerSymb, imag(s)/max(abs(s)), 'bx', 1:NSampPerSymb, imag(sigPhaseRefSymb  /max(abs(sigPhaseRefSymb  ))),'ro');
              title('AFTER DF & ADC - IMAG(time): PhaseRef Symbol (o) OFDM Symbol (x)');
              ERR_TIME_PHASE_REF = max(abs(s-sigPhaseRefSymb  )), pause
-         end
+          end
+          
+          x = abs(nullFFT);
+          x(1) = 0;
+          null = [x(1280:2048); x(1: 769)];
+          maximum = max(null)
+          average_x = mean(x(769:1280))
+          pause
+          null = null./maximum;
+          if (maximum - average_x) > 10
+              prog = (16*average_x)/maximum;
+          else
+              prog = (4*average_x)/maximum;
+          end
+          for c = 1 : 24
+              for p = 1 : 70
+                  match = 0;
+                  for n = 1 : 1538
+                      if null(n) > prog
+                          null(n) = 1;
+                      else
+                          null(n) = 0;
+                      end
+                      if (A(n,p,c) * null(n)) == 1
+                          match = match + 1;
+                          if match >= 14
+                              figure
+                              plot(null);hold on
+                              plot(A(:,p,c), 'r--');
+                              X = [p c]
+                              match = 0;
+                              pause
+                              close
+                          end
+                      end
+                  end
+              end
+          end
 
     return;  % <================= !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-
+    
 %@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@       
 end % of if (sufficient signal length) - sampling frequency correction
 %@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@

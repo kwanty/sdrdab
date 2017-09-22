@@ -1,11 +1,14 @@
-/**
+﻿/**
  * @class CLIScheduler
  * @brief CLIScheduler implementation
  *
  * @author Krzysztof Szczęsny, kaszczesny@gmail.com
- * @date Created on: 3 June 2015
- * @version 1.0
+ * @author Miroslaw Szewczyk, mirsze@student.agh.edu.pl
+ * @date Created on: 3 June 2015 - version 1.0
+ * @date 7 July 2017 - version 3.0
+ * @version 3.0
  * @copyright Copyright (c) 2015 Krzysztof Szczęsny
+ * @copyright Copyright (c) 2017 Miroslaw Szewczyk added protocol for resampling
  * @pre sdrdab + librtlsdr (dynamic linkage)
  * @pre libreadline6
  * @par License
@@ -286,9 +289,10 @@ void *CLIScheduler::Start(void *this_ptr) {
     config.use_speakers = !(this_->user_input_->silent_);
     config.output_filename = this_->user_input_->output_;
     config.convolutional_alg = this_->user_input_->decodingAlg_;
+    config.resample_quality = this_->user_input_->resample_quality_;
     if (this_->user_input_->channel_nr > 0)
         config.start_station_nr = this_->user_input_->channel_nr;
-
+    config.file_type = this_->user_input_->file_type_;
     this_->Scheduler::Start(config);
 
     this_->scheduler_thread_running_ = false;

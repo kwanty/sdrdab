@@ -12,26 +12,21 @@ local.properties
 *~
 /src/sdrdab-gui/ui_*.h
 
-# Eclipse Core
+# varoius IDE tempfiles
 .metadata
 .settings/
-
-# CDT-specific
-
-# JDT-specific (Eclipse Java Development Tools)
 .classpath
-
-# PDT-specific
 .buildpath
-
-# sbteclipse plugin
 .target
-
-# TeXlipse plugin
 .texlipse
-
-# Sublime ST3
 .sublime-project.sublime-workspace
+cmake-build-debug/
+.cproject
+.atom-build.json
+.externalToolBuilders/
+.gitlab-ci.yml
+.project
+.sublime-project
 
 # CMake build dir
 build/
@@ -44,3 +39,8 @@ matlab/**/*.aac
 
 # Data files
 data/
+
+
+# Debian package and package-building directory
+/package/
+sdrdab-decoder*.deb

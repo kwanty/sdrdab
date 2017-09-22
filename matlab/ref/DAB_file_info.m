@@ -41,7 +41,6 @@
     % ------------------------------------------------------------------------------------------
     
       if(Mode==1) % London Mode=1, only DAB
-      if(Mode==1) % London Mode=1, only DAB
         % ReadFile = fopen('../../data/London_mode1_iq.dat', 'rb');
         % SubChStartAdr =   0; Protection = 3;   SubChSize = 96; Audiokbps =  128; UEP = true; % ok
         % SubChStartAdr =  96; Protection = 3;   SubChSize = 96; Audiokbps =  128; UEP = true; % ok
@@ -172,10 +171,10 @@ end
 % Only DAB+
 % Record3.dat KATOWICE #############################################################################################
 
-if(1) ReadFile = fopen('../../data/Record3_katowice_iq.dat', 'rb'); fs_file = 2.048e6;  sigtype=1;  fi=0;  coef = 0; end
+if(0) ReadFile = fopen('../../data/Record3_katowice_iq.dat', 'rb'); fs_file = 2.048e6;  sigtype=1;  fi=0;  coef = 0; end
 
       % DAB+ only
-if(1) SubChStartAdr = 0;    SubChSize = 84;   Audiokbps = 0;  Protection = ['3A'];  UEP=false;  end     % DAB+  Channel #1
+if(0) SubChStartAdr = 0;    SubChSize = 84;   Audiokbps = 0;  Protection = ['3A'];  UEP=false;  end     % DAB+  Channel #1
 if(0) SubChStartAdr = 84;   SubChSize = 96;   Audiokbps = 0;  Protection = ['3A'];  UEP=false;  end     % DAB+  Channel #2
 if(0) SubChStartAdr = 180;  SubChSize = 84;   Audiokbps = 0;  Protection = ['3A'];  UEP=false;  end     % DAB+  Channel #3
 if(0) SubChStartAdr = 264;  SubChSize = 84;   Audiokbps = 0;  Protection = ['3A'];  UEP=false;  end     % DAB+  Channel #4
@@ -314,12 +313,12 @@ if(0) ReadFile = 'SDRSharp_20150103_194351Z_229069kHz_IQ.wav';  fs_file = 2.048e
       % DAB+ KRAK�W - JB
 if(0) ReadFile = fopen('antena_3_dab_229072kHz_fs2048kHz_gain44_BAD.raw', 'rb'); fs_file=2.048e6; sigtype=4; fi=0; coef=0.9; end
 if(0) ReadFile = fopen('antena_3_dab_229072kHz_fs2048kHz_gain44_OK.raw', 'rb');  fs_file=2.048e6; sigtype=4; fi=0; coef=0.9; end
-if(0) ReadFile = fopen('../../data/antena-1_dab_229072kHz_fs2048kHz_gain42_1.raw', 'rb');  fs_file=2.048e6; sigtype=4; fi=0; coef=0.9; end
+if(1) ReadFile = fopen('../../data/antena-1_dab_229072kHz_fs2048kHz_gain42_1.raw', 'rb');  fs_file=2.048e6; sigtype=4; fi=0; coef=0.9; end
 
 % #################################################################################################################
 % DAB+ Krak�w
 
-if(0) SubChStartAdr =   0; SubChSize = 84;  Audiokbps = 0;    Protection = ['3A']; UEP=false;  end % Channel #7 DAB+
+if(1) SubChStartAdr =   0; SubChSize = 84;  Audiokbps = 0;    Protection = ['3A']; UEP=false;  end % Channel #7 DAB+
 if(0) SubChStartAdr =  84; SubChSize = 96;  Audiokbps = 0;    Protection = ['3A']; UEP=false;  end % Channel #7 DAB+
 if(0) SubChStartAdr = 180; SubChSize = 84;  Audiokbps = 0;    Protection = ['3A']; UEP=false;  end % Channel #7 DAB+
 if(0) SubChStartAdr = 264; SubChSize = 84;  Audiokbps = 0;    Protection = ['3A']; UEP=false;  end % Channel #7 DAB+

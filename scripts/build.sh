@@ -13,7 +13,6 @@
 source "scripts/common.sh"
 
 set -e
-
 target="$1"
 
 # capitalize first letter
@@ -77,6 +76,27 @@ case $target in
         echo ""
         echo "Binary files can be found at: ${BUILD_DIR_REL}/bin/"
         ;;
+
+# This didn't work but I leave it here, for future usage
+#    cross_*)
+#        cmakeOpts="-DCROSS_COMPILE=ON "
+#        if [ ${target} == "cross_rpi3" ]; then
+#            makeOpts="-j4 VERBOSE=ON"
+#            cmakeOpts="$cmakeOpts -DCMAKE_BUILD_TYPE=Debug -DSBC_RPI3=ON"
+#        fi
+#        if ! [ -f "${BUILD_DIR_REL}/.target-Debug" ]; then
+#            rm -rf ${BUILD_DIR_REL}/
+#            mkdir -p ${BUILD_DIR_REL}
+#            cmake -E chdir ${BUILD_DIR_REL}/ cmake ${cmakeOpts} ../
+#            touch ${BUILD_DIR_REL}/.target-Debug
+#        fi
+#        make -C ${BUILD_DIR_REL}/ ${makeOpts}
+#
+#        echo ""
+#        echo ""
+#        echo "Binary files can be found at: ${BUILD_DIR_REL}/bin/"
+#        ;;
+
     eclipse_*) # active configuration: Debug | Release | Unittest
         subTarget=${target:8}
         if [ ${subTarget} = "Unittest" ];then

@@ -1,0 +1,53 @@
+.TH sdrdab-decoder 1 "RTL stick compatible application"
+
+.SH NAME sdrdab-decoder \- Sdrdab example Cli
+
+
+.SH DESCRIPTION
+sdrdab-cli is an exemplary application of sdrdab. You can try it out even without the RTL stick - just supply an input file.
+
+This application shows how sdrdab can be used. It allows user to decode DAB/DAB+ signal either from RTL2832U tuner or from raw samples file. Audio stream can be played immediately on speakers and/or saved to file.
+
+
+.SH SYNOPSIS
+Usage: sdrdab-cli [OPTION...] 
+  or:  sdrdab-cli [OPTION...] -l	list available devices
+  or:  sdrdab-cli [OPTION...] [-t[TUNER_NO=0]]	use n-th tuner
+  or:  sdrdab-cli [OPTION...] --open-file=FILENAME	read samples from FILENAME
+  or:  sdrdab-cli [OPTION...] [-s] -o OUTPUT	save audio to OUPUT
+
+.SH OPTIONS
+ Core radio options:
+  -c, --channel=CHANN          Optionally start decoding specified channel instead of the first one. This requires a number, not name
+  -f, --frequency=FREQ         Carrier frequency in kHz. Default value: 229072 (DAB+ in Krakow)
+                               
+ Input options:                
+  -l, --list-devices           Lists all available supported tuners and exits
+      --open-file=FILENAME     Use FILENAME as input source
+  -t, --open-tuner[=TUNER_NO]  Use n-th available tuner as input source (by default first tuner is used)
+                               
+ Output options:               
+  -i, --detailed-info          Print verbosely channel information every time ENTER is pressed
+  -o, --output=OUTPUT          Save audio to OUTPUT file
+  -s, --silent                 Don't play on speakers (applicable in conjunction with -o switch)
+                               
+ Algorithm options:
+      --convolutional=CONVOLUTIONAL
+                               Use decoding algorithms: viterbi
+      --resampling_fs=RESAMPLING_FS
+                               Resampling frequency: sinc_fast, linear or zero-order
+
+ Informative options:          
+  -?, --help                   Give help list
+      --usage                  Give a short usage message
+  -v, --verbose                Verbose
+  -V, --version                Print program version
+
+.SH INTERACTIVE
+After being started, this program goes into interactive command-line mode. List of supported commands:
+  station		Change current station.
+  list		Display list of available stations.
+  quit		Exit program.
+  help		Display help message.
+  license		Display license information.
+  restart		Restart program.

@@ -16,6 +16,11 @@ file( GLOB_RECURSE SDRDAB_SOURCES "*.cc" )
 add_library("sdrdab" ${SDRDAB_SOURCES})
 include_directories(src)
 
+#include(../cmake/Modules/FindGStreamer.cmake)
+#include_directories( ${GSTREAMER_INCLUDE_DIR})
+#add_definitions(${GSTREAMER_DEFINITIONS})
+#target_link_libraries("sdrdab" ${GSTREAMER_LIBRARIES})
+
 target_include_directories("sdrdab" "PUBLIC" "/usr/include/gstreamer-1.0/") #TODO
 target_include_directories("sdrdab" "PUBLIC" "/usr/lib/gstreamer-1.0/include") #TODO ARCH_COMPAT
 target_include_directories("sdrdab" "PUBLIC" "/usr/local/lib/gstreamer-1.0/include/") #TODO MAC_COMPAT

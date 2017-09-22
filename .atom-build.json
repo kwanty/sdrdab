@@ -1,0 +1,5 @@
+{
+  "cmd": "sh {PROJECT_PATH}/build.sh",
+  "name": "sdrdab-complete"
+}
+

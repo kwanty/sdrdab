@@ -28,6 +28,8 @@ endif()
 #    endif()
 #endif()
 
+
+
 if(PROFILING)
     add_definitions(-pg)
     set(CMAKE_EXE_LINKER_FLAGS  "${CMAKE_EXE_LINKER_FLAGS} -pg")
@@ -35,6 +37,9 @@ endif()
 
 add_subdirectory(src/sdrdab)
 add_subdirectory(src/sdrdab-cli)
+
+# comment next line if you don't want to build Qt GUI
+add_subdirectory(src/sdrdab-gui)
 
 if(MAKE_TESTS)
     add_subdirectory(test)

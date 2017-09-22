@@ -1,5 +1,13 @@
+/Debug/
+/Release/
+/src/html/
 sdrdab.doxytag
 *.db
 *.aac
 *.ogg
+/matlab/*~
+/matlab/ref/*~
+/matlab/*.png
+/core
+/*_debug
 

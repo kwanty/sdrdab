@@ -34,7 +34,7 @@
 /// @endcond
 #include "data_decoder.h"
 #include "../sdrdab/data_format.h"
-#include "RingBuffer/resampling_ring_buffer.h"
+#include "Resampler/resampler.h"
 
 /**
  * Stores results of parsed commandline arguments
@@ -106,7 +106,7 @@ class UserInput {
         const char *resamplingFreq_; ///< resampling frequency
         const char *convolutional_;   ///< convolutional mode
         DataDecoder::conv_decoder_alg_t decodingAlg_;    ///< decoding algorithm
-        Resampler2::resampling_type resample_quality_;       ///< resampling mode
+        Resampler::resampling_type resample_quality_;       ///< resampling mode
 
     private:
         /**

@@ -7,7 +7,7 @@ Version. 3.0, 2017-09-23
     - Remove custom RTL-SDR, now using system librtlsdr0
     - Refactoring fs and fc drift support (need more testing and tuning)
     - Support input RAW IQ files with formats: (u)int8, (u)int16, float, double, raw (uint8)
-    - Custom resampler (RF IQ data) of type NN and Linear, code integrated as Resampler2
+    - Custom resampler (RF IQ data) of type NN and Linear, code integrated as Resampler
     - Custom implementation of ReedSolomon decoder
     - Matlab model of various distortions (distort IQ samples for development purpose)
     - XPAD implementation, text only (need more development and integration)

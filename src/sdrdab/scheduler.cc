@@ -145,7 +145,7 @@ static void CheckAudioBuffer(size_t size, void * data)
 }
 
 Scheduler::state_t Scheduler::Init(fileType_t  file_type, const char * dongle_or_file_name, uint8_t internal_buffer_number, size_t internal_buffer_size, uint32_t sample_rate,
-                                   uint32_t carrier_freq, data_source_t data_source, Resampler2::resampling_type resample_quality)
+                                   uint32_t carrier_freq, data_source_t data_source, Resampler::resampling_type resample_quality)
 {
     PrintSystemStateIfVerbose( "Init" );
 

@@ -124,10 +124,8 @@ public:
 private:
 #endif
     bool verbose_;
-public:
     void setVerbose_(bool verbose_);
 
-private:
     ///< verbose mode
     int null_position_;         ///< position of first sample of NULL symbol related to beginning of the frame,
     nullQuality null_quality_;  ///< null quality

@@ -85,7 +85,7 @@ public:
      */
     std::vector <uint8_t> xpad_data_;
     std::vector <uint8_t> cli_data_; //vector to gather text from xpad
-    int xpad_lenght_declared_,data_readed_, pointer_, databytes_, appType_, offset_, last_;
+    int xpad_lenght_declared_, databytes_, appType_, last_;
 
     /**
      * Decode XPAD Data from superframe

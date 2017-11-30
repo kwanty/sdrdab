@@ -1,14 +1,12 @@
 /*
- * @class Resampler
+ * @class Resampler2
  *
- * @author Kacper Patro patro.kacper@gmail.com (Resampler)
+ * @author Grzegorz Skołyszewski skolyszewski.grzegorz@gmail.com (Resampler2)  new 100%
  *
- * @date 7 July 2015 - version 1.0 beta
- * @date 7 July 2016 - version 2.0 beta
- * @date 1 November 2016 - version 2.0
- * @version 2.0
+ * @date 12 June 2017 - version 3.0
+ * @version 3.0
  *
- * @copyright Copyright (c) 2015 Kacper Patro
+ * @copyright Copyright (c) 2017 Grzegorz Skołyszewski
  *
  * @par License
  *
@@ -28,58 +26,159 @@
  */
 
 #include "resampler.h"
-#include <stdio.h>
 
-#define CHUNK_LEN 256
-
-long ResamplerCallbacks::WriteCall(void *cb_data, float **data) {
-    Resampler::Data *pcb_data;
-
-    if((pcb_data = reinterpret_cast<Resampler::Data *>(cb_data)) == NULL)
-        return 0;
-
-    if(data == NULL)
-        return 0;
-
-    *(data) = pcb_data->in_data_ptr + (pcb_data->current_count*pcb_data->channels); //move pointer properly, taking into account read data and number of channels
-
-    long frames;
-
-    if(pcb_data->total - pcb_data->current_count > CHUNK_LEN)   //reading in CHUNK_LEN parts, checking if there is enough data left
-        frames = CHUNK_LEN;
-    else
-        frames = pcb_data->total - pcb_data->current_count;
-
-    pcb_data->current_count += frames;
-
-    return frames;
+Resampler::Resampler(resampling_type type, size_t inner_buffer_size):
+    conv_type_(type),
+    length_(inner_buffer_size),
+    pointer_(0),
+    first_iteration_(0),
+    debug(0) {
+        data_buffer_ = new float[inner_buffer_size];
+        previous_sample_Q_ = 0.0;
+        previous_sample_I_ = 0.0;
+        previous_sample_position_[0] = 0.0;
+        previous_sample_position_[1] = 0.0;
 }
 
-Resampler::Resampler(int conv_type, int chann):
-    converter_type_(conv_type) {
-        data_.current_count = 0;
-        data_.total = 0;
-        data_.in_data_ptr = NULL;
-        data_.channels = chann;
+Resampler::~Resampler(){
+    delete[] data_buffer_;
 
-        int error;
-        if((src_state_ = src_callback_new(ResamplerCallbacks::WriteCall, conv_type, chann, &error, &data_)) == NULL) {
-            printf("Resampler error: src_callback_new() failed: %s", src_strerror(error));
-        }
+}
+
+size_t Resampler::ResampleIntoBuffer(float *src_buf, size_t input_length, float ratio){
+    size_t resampled_data_count = 0;
+
+    if(first_iteration_){
+        previous_sample_Q_ = src_buf[0];
+        previous_sample_I_ = src_buf[1];
+        //first_iteration_ = 0;
     }
 
-Resampler::~Resampler() {
-    src_delete(src_state_);
+    switch(conv_type_) {
+        case NN:
+            resampled_data_count = ResampleNn(src_buf, input_length, ratio);
+            break;
+        case LINEAR:
+            resampled_data_count = ResampleLinear(src_buf, input_length, ratio);
+            break;
+        case PCHIP:
+            //PCHIP
+            break;
+        case SPLINE:
+            //SPLINE
+            break;
+    }
+    return resampled_data_count;
 }
 
-void Resampler::SetSourceBuffer(float *source_buffer, size_t length) {
-    src_reset(src_state_);
+size_t Resampler::ResampleNn(float *src_buf, size_t input_length, float ratio){
+    size_t desired_length = size_t((input_length/2)*ratio);
+    
+    if(desired_length * 2 > FreeSpaceInBuffer()){
+        if(debug)
+            printf("Not enough space in circular buffer, not writing into");
+        return 0;
+    }
+    
+    long double stime, dt;
+    size_t rounded_stime;
+    float * data_buffer_ptr = data_buffer_ + pointer_;
+    size_t generated_samples = 0, used_samples = 0;
+    dt = 1/ratio;
 
-    data_.current_count = 0;
-    data_.total = length/data_.channels;
-    data_.in_data_ptr = source_buffer;
+    stime = 0.0;
+    
+    
+    while(rounded_stime+3 <= input_length){
+        rounded_stime = RoundDownToEven(stime);
+        data_buffer_ptr[0] = InterpolateNn(src_buf[rounded_stime], src_buf[rounded_stime + 2], (stime - rounded_stime) / 2);
+        data_buffer_ptr[1] = InterpolateNn(src_buf[rounded_stime+1], src_buf[rounded_stime + 3], (stime - rounded_stime) / 2);
+        generated_samples += 2;
+        stime = generated_samples*dt;
+        data_buffer_ptr += 2;
+    }
+    used_samples = rounded_stime;
+    //printf("gs: %lu, us: %lu\n",generated_samples, used_samples);
+
+    previous_sample_I_ = src_buf[input_length-2];
+    previous_sample_Q_ = src_buf[input_length-1];
+    pointer_ = pointer_ + generated_samples;
+    first_iteration_ = 0;
+    return generated_samples;
 }
 
-long Resampler::Resample(float *destination_buffer, size_t length, float ratio) {
-    return src_callback_read(src_state_, ratio, length/data_.channels, destination_buffer)*data_.channels;
+size_t Resampler::ResampleLinear(float *src_buf, size_t input_length, float ratio){
+    size_t desired_length = size_t((input_length/2)*ratio);
+    
+    if(desired_length * 2 > FreeSpaceInBuffer()){
+        if(debug)
+            printf("Not enough space in circular buffer, not writing into");
+        return 0;
+    }
+    
+    double stime, dt;
+    size_t rounded_stime;
+    float * data_buffer_ptr = data_buffer_ + pointer_;
+    size_t generated_samples = 0, used_samples = 0;
+    dt = 1/ratio;
+
+    stime = 0.0;
+    rounded_stime = RoundDownToEven(stime);
+
+
+    while(rounded_stime+3 <= input_length){
+        rounded_stime = RoundDownToEven(stime);
+        data_buffer_ptr[0] = InterpolateLinear(src_buf[rounded_stime], src_buf[rounded_stime + 2], (stime - rounded_stime) / 2);
+        data_buffer_ptr[1] = InterpolateLinear(src_buf[rounded_stime+1], src_buf[rounded_stime + 3], (stime - rounded_stime) / 2);
+        generated_samples += 2;
+        stime = generated_samples*dt;
+        data_buffer_ptr += 2;
+    }
+        used_samples = rounded_stime;
+    //printf("gs: %lu, us: %lu\n",generated_samples, used_samples);
+
+    previous_sample_I_ = src_buf[rounded_stime + 1];
+    previous_sample_Q_ = src_buf[rounded_stime + 2];
+    pointer_ = pointer_ + generated_samples;
+    first_iteration_ = 0;
+    return generated_samples;
+}
+
+size_t Resampler::CopyFromBuffer(float *dst_buffer, size_t copy_length){
+    if(DataStoredInBuffer() < copy_length) // check if there's enough data in buffer
+    {
+        if(debug)
+            printf("Not enough data in resampling buffer\n");
+        return 0;
+    }
+    memcpy(dst_buffer, data_buffer_, sizeof(float)*(copy_length));
+    // evaluate how many samples left in the buffer and copy them to the beginning of the buffer
+    if(DataStoredInBuffer() > copy_length){
+        memcpy(data_buffer_, data_buffer_ + copy_length, sizeof(float)*(pointer_ - copy_length));
+        pointer_ = pointer_ - copy_length;
+    }else{
+        pointer_ = 0;
+    }
+
+    return copy_length;
+}
+
+size_t Resampler::DataStoredInBuffer(){
+    return pointer_;
+}
+
+inline size_t Resampler::FreeSpaceInBuffer(){
+    return length_ - pointer_;
+}
+
+inline float Resampler::InterpolateLinear(float a, float b, float distance){
+    return a + (distance * (b - a));
+}
+
+inline float Resampler::InterpolateNn(float a, float b, float distance){
+    return (distance <= 0.5) ? a : b;
+}
+
+inline size_t Resampler::RoundDownToEven(float a){
+    return size_t(a) & ~1;
 }

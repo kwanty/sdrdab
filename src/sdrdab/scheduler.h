@@ -391,7 +391,7 @@ public:
         bool use_speakers; ///< tells whether audio is to be played via speakers (PulseSink)
         const char * output_filename; ///< where to save .ogg audio
         DataDecoder::conv_decoder_alg_t convolutional_alg; ///< which convolutional decoder alg will be used
-        Resampler2::resampling_type resample_quality;
+        Resampler::resampling_type resample_quality;
         uint8_t start_station_nr; ///< initial station identifier
         SchedulerConfig_t() ///< Fills structure with sensible values
             : sampling_rate(2048*1000),
@@ -401,7 +401,7 @@ public:
               use_speakers(true),
               output_filename(NULL),
               convolutional_alg(DataDecoder::ALG_VITERBI_TZ),
-              resample_quality(Resampler2::LINEAR),
+              resample_quality(Resampler::LINEAR),
               start_station_nr(255) {};
     };
 
@@ -426,7 +426,7 @@ public:
      * @return next state
      */
     state_t Init(fileType_t  fileType, const char * dongle_or_file_name, uint8_t internal_buffer_number, size_t internal_buffer_size, uint32_t sample_rate,
-                 uint32_t carrier_freq, data_source_t data, Resampler2::resampling_type resample_quality);
+                 uint32_t carrier_freq, data_source_t data, Resampler::resampling_type resample_quality);
 
     /**
      * Process method - starting program logic (state machine)

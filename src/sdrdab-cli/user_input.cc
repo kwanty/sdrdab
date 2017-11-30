@@ -57,7 +57,7 @@ UserInput::UserInput()
     graphic_(NULL),
     output_(NULL),
     resamplingFreq_(NULL),
-    resample_quality_(Resampler2::LINEAR),          // default resampling type if not specified
+    resample_quality_(Resampler::LINEAR),          // default resampling type if not specified
     decodingAlg_(DataDecoder::ALG_UNSPEC),          // default decoding algorithm if not specified
     bugfix_applied_(false) {
 
@@ -359,14 +359,14 @@ int UserInput::Parser(int key, char *arg, argp_state *state) {
 
         case 500:
             if (strcmp(arg, "nearest") == 0) {
-                user_input->resample_quality_ = Resampler2::NN;
+                user_input->resample_quality_ = Resampler::NN;
             } else if (strcmp(arg, "linear") == 0) {
-                user_input->resample_quality_ = Resampler2::LINEAR;
+                user_input->resample_quality_ = Resampler::LINEAR;
             } else if (strcmp(arg, "pchip") == 0) {
-                // user_input->resample_quality_ = Resampler2::PCHIP;
+                // user_input->resample_quality_ = Resampler::PCHIP;
                 argp_error(state, "Resampling pchip is not supported.");
             } else if (strcmp(arg, "spline") == 0) {
-                // user_input->resample_quality_ = Resampler2::SPLINE;
+                // user_input->resample_quality_ = Resampler::SPLINE;
                 argp_error(state, "Resampling spline is not supported.");
             }else {
                 argp_error(state, "Resampling quality is not specified. Use: nearest, linear (default), pchip (not supported), spline (not supported)");

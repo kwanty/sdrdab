@@ -14,13 +14,13 @@ class DcRemovalTest: public testing::Test {
             data_loaded2 = false;
             data_to_test = new float[16384*5];
             dcremoval_expected_result = new float[16384*5];
-            mydatafeeder = new FileDataFeeder("whatever.exe.dll",2048,2048000,229072000,8, ResamplingRingBuffer::SRC_SINC_FASTEST);
+            mydatafeeder = new FileDataFeeder(type_uint8,"non_existing_file",2048,2048000,229072000,8, Resampler::LINEAR);
         }
+
         virtual ~DcRemovalTest() {
             delete[] data_to_test;
             delete[] dcremoval_expected_result;
         }
-
 
         virtual void SetUp() {
             data_loaded1 = MatlabIO::ReadData(data_to_test, "./data/ut/dcremoval_data.txt", 16384*5);

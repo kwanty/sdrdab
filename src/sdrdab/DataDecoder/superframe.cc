@@ -317,13 +317,11 @@ bool SuperFrame::CRC16( uint8_t *data, size_t length ){
 
 
 void SuperFrame::XPADDecoder(uint8_t* data){
-    int k=0;
-    offset_=1;
-    for (pointer_=0; pointer_ < SIZE_OF_SUPERFRAME; pointer_++) {
-        data_readed_=0;
+    size_t offset_=1;
+    for (size_t pointer_=0; pointer_ < SIZE_OF_SUPERFRAME; pointer_++) {
+        size_t data_readed_=0;
         if (data[pointer_ + 1] == 0x20 && data[pointer_ + 2] == 0x02) {
-            k++;
-            for(int CI=0; CI<4; CI++) {
+            for(size_t CI=0; CI<4; CI++) {
                 if(data[pointer_-CI]==0x00){
                     break;
                 }
@@ -334,25 +332,20 @@ void SuperFrame::XPADDecoder(uint8_t* data){
                     case 2:
                         appType_ = 2;
                         if (data[pointer_ - CI - 1] == 0x00){ //ONE CI OR LAST CI
-
                             xpad_lenght_declared_ = (data[pointer_ - CI - 2 - data_readed_] & 0x0F) +1;
                             offset_ = 4 + data_readed_;
                             if(!data[pointer_-CI-3] & 0x80);
                             switch(data[pointer_-CI-2] & 0x60) {
-                                case 0x60:
-                                    //printf("ONE AND ONLY ONE\n");
+                                case 0x60:      //ONE AND ONLY ONE
                                     last_=2;
                                     break;
-                                case 0x40:
-                                    //printf("FIRST\n");
+                                case 0x40:      //FIRST
                                     last_=0;
                                     break;
-                                case 0x20:
-                                    //printf("LAST\n");
+                                case 0x20:      //LAST
                                     if(last_ == 1 || last_ == 0) last_=2;
                                     break;
-                                case 0x0:
-                                    //printf("INTERMEDIATE\n");
+                                case 0x0:       //INTERMEDIATE
                                     if(last_==0) last_=1;
                                     break;
                             }
@@ -370,9 +363,13 @@ void SuperFrame::XPADDecoder(uint8_t* data){
                     case 3:
                         //printf("APP TYPE 3 - SEGMENT CONTINUE\n");
                         appType_ = 3;
-                        if (data[pointer_ - CI - 1] == 0x00) offset_ = 2 - CI;
-                        else if (data[pointer_ - CI - 2] == 0x00) offset_ = 3 - CI;
-                        else offset_ = 4 - CI;
+                        if (data[pointer_ - CI - 1] == 0x00){
+                            offset_ = 2 - CI;
+                        }else if (data[pointer_ - CI - 2] == 0x00){
+                            offset_ = 3 - CI;
+                        }else {
+                            offset_ = 4 - CI;
+                        }
                         break;
                     case 12:
                         //printf("APP TYPE 12 - MOT");
@@ -434,28 +431,34 @@ void SuperFrame::XPADDecoder(uint8_t* data){
 
                 switch (appType_) {
                     case 1:
+//                        printf("case 1\n");
                         if(last_==2 && cli_data_ != xpad_data_) {
                             cli_data_ = xpad_data_;
 //                            printf("\n\n");
-//                            for (int j = 0; j < xpad_data_.size(); j++) {
+                            for(size_t j = 0; j < xpad_data_.size(); j++) {
 //                                printf("%c", xpad_data_[j]);
-//                            }
+                            }
 //                            printf("\n\n");
                         }
                         xpad_data_.clear();
                         break;
                     case 2:
-
+//                        printf(">>>>>>>>>>>>>>>> case 2\n");
                     case 3:
-                        for (int i = 0; i < databytes_; i++) {
-                            if(xpad_lenght_declared_==0)                            {
+//                        printf(">>>>>>>>>>>>>>>> case 3\n");
+                        for(size_t i = 0; i < databytes_; i++) {
+//                            printf(">%d, %c<\n",data[pointer_ - offset_ -i],data[pointer_ - offset_ -i]);
+                            if(xpad_lenght_declared_==0){
+//                                printf("CRC\n\n");
 //                                TBD: CRC16()
                                 break;
                             }
                             xpad_data_.push_back(data[pointer_ - offset_ -i]);
                             xpad_lenght_declared_--;
                             data_readed_++;
-                            if(appType_==2) data_readed_+=2;
+                            if(appType_==2) {
+                                data_readed_ += 2;
+                            }
                         }
                         break;
                     default:

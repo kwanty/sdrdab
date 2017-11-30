@@ -44,7 +44,7 @@
 // TODO: debug -> verbose
 
 FileDataFeeder::FileDataFeeder(fileType_t file_type_, const char *file_name, size_t buf_s,
-        uint32_t sample_rate, uint32_t carrier_freq, int number_of_bits, Resampler2::resampling_type type):AbstractDataFeeder(number_of_bits){
+        uint32_t sample_rate, uint32_t carrier_freq, int number_of_bits, Resampler::resampling_type type):AbstractDataFeeder(number_of_bits){
 
     s_rate_ = sample_rate;
 
@@ -55,7 +55,7 @@ FileDataFeeder::FileDataFeeder(fileType_t file_type_, const char *file_name, siz
     inner_buff_size_ = buf_s;
     inner_buf_num_ = 1;
 
-    resampler2_ = new Resampler2(type,inner_buff_size_*4);
+    resampler_ = new Resampler(type,inner_buff_size_*4);
     normalization_buffer_ = new float[buf_s];
 
     file_type = file_type_;
@@ -70,7 +70,7 @@ FileDataFeeder::~FileDataFeeder() {
     delete[] file_wrapper_buffer_;
     //delete resampling_buffer_;
     delete[] normalization_buffer_;
-    delete resampler2_;
+    delete resampler_;
     delete[] file_buffer;
     delete[] buffer_to_process;
 };
@@ -114,7 +114,7 @@ void FileDataFeeder::ReadAsync(void *data_needed){
         if (params->finish_rtl_process) {
             return;
         }
-        // if we have enough data in Resampler2's buffer, we can read it before reading from file (see Resampler2 behavior)
+        // if we have enough data in Resampler's buffer, we can read it before reading from file (see Resampler behavior)
         if (!EnoughDataInBuffer(params->block_size)) {
 //            if(verbose)
 //                printf("Not enough data in resampling buffer, reading from file\n");
@@ -147,7 +147,7 @@ void FileDataFeeder::ReadAsync(void *data_needed){
                 pthread_mutex_unlock(params->lock_buffer);
                 continue;
             }else{ // else if the ratio is not 1.0, we process data by resampling it into resampling buffer
-                resampler2_->ResampleIntoBuffer(buffer_to_process,number_written_samplesIQ*2,ratio);
+                resampler_->ResampleIntoBuffer(buffer_to_process,number_written_samplesIQ*2,ratio);
             }
         } 
 
@@ -207,11 +207,11 @@ inline float FileDataFeeder::PickRatio(size_t block_size){
 };
 
 inline bool FileDataFeeder::EnoughDataInBuffer(size_t expected_amount){
-    return resampler2_->DataStoredInBuffer()>=expected_amount;
+    return resampler_->DataStoredInBuffer()>=expected_amount;
 };
 
 inline void FileDataFeeder::WriteResampledOut(data_feeder_ctx_t *ptctx, BlockingQueue<int> *event_queue){
-    resampler2_->CopyFromBuffer(ptctx->write_here, ptctx->block_size);
+    resampler_->CopyFromBuffer(ptctx->write_here, ptctx->block_size);
     previous_write_here_ = ptctx->write_here;
     ptctx->data_stored = true;
     event_queue->push(ptctx->thread_id);

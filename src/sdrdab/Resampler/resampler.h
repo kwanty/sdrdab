@@ -1,14 +1,12 @@
 /*
  * @class Resampler
  *
- * @author Kacper Patro patro.kacper@gmail.com (Resampler)
+ * @author Grzegorz Skołyszewski skolyszewski.grzegorz@gmail.com (Resampler) new 100%
  *
- * @date 7 July 2015 - version 1.0 beta
- * @date 7 July 2016 - version 2.0 beta
- * @date 1 November 2016 - version 2.0
- * @version 2.0
+ * @date 12 June 2017 - version 3.0
+ * @version 3.0
  *
- * @copyright Copyright (c) 2015 Kacper Patro
+ * @copyright Copyright (c) 2017 Grzegorz Skołyszewski
  *
  * @par License
  *
@@ -27,79 +25,152 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
  */
 
-#ifndef SRC_RESAMPLER_H_
-#define SRC_RESAMPLER_H_
 
-#include <samplerate.h>
-#include <stdint.h>
-#include <cstddef>
+#ifndef RESAMPLER_H_
+#define RESAMPLER_H_
 
-/**
- * @namespace ResamplerCallbacks
- * @brief This namespace provides necessary for Resampler class callbacks (libsamplerate callbacks)
- */
-namespace ResamplerCallbacks {
-
-    /**
-     * libsamplerate callback. Check libsamplerate documentation for more
-     */
-    extern "C" long WriteCall(void *cb_data, float **data);
-
-}
+#include <stdio.h>
+#include <string.h>
+#include <iostream>
+#include <cmath>
 
 /**
  * @class Resampler
- * @brief Resampling - facade for libsamplerate
+ * @brief Resampling used to accumulate sampling frequency drifts in playing from file (to any destination) mode.
  *
- * Resampling should be fast, reliable and configurable, depending on needs
+ * Two resampling (interpolation) modes: Nearest Neighbor (zero order), Linear (first order).
  *
- * @author Kacper Patro patro.kacper@gmail.com
+ * @author Grzegorz Skołyszewski skolyszewski.grzegorz@gmail.com
  * @copyright Public domain
- * @pre libsamplerate
  */
 class Resampler {
-    public:
-        /**
-         * Resampler constructor
-         * @param[in] conv Resampler type, check out libsamplerate doc for valid values
-         * @param[in] chann Number of interleaved channels, for monophonic data should be one
-         */
-        Resampler(int conv, int chann);
-        virtual ~Resampler();
+public:
+    /**
+    * @brief enum for resampling type
+    *
+    */
+    enum resampling_type
+    {
+        NN          = 0,
+        LINEAR,
+        PCHIP,
+        SPLINE
+    };
+    /**
+    * Resampler constructor
+    * @param[in] type Resampler type, enum specifying type of resampling (interpolation used). See @resampling_type
+    * @param[in] inner_buffer_size Size of inner buffer used to store resampled data
+    */
+    Resampler(resampling_type type, size_t inner_buffer_size);
+    virtual ~Resampler();
 
-        /**
-         * Sets input buffer parameters
-         * @param[in] source Pointer to source buffer
-         * @param[in] length Number of items in source buffer
-         */
-        void SetSourceBuffer(float *source, size_t length);
+    /**
+    * Main Resampler method, takes data from source buffer of specified length and ratio, then resamples it into inner buffer.
+    * Depending on conv_type_, it invokes right resampling method. This is actually only a wrapper, all the processing is done with methods invoked by this one.
+    * @param[in] *src_buf Pointer to source data buffer
+    * @param[in] input_length Length of data from source buffer to read and process
+    * @param[in] ratio Resampling ratio (calculated from fs drifts)
+    * @param[out] Returns Number of samples written into inner buffer
+    */
+    size_t ResampleIntoBuffer(float *src_buf, size_t input_length, float ratio);
+    /**
+    * Copies data from inner buffer to destination buffer. Number of samples copied is specified by copy_length
+    * @param[in] *dst_buffer Pointer to destination buffer
+    * @param[in] copy_length Length of data to copy from inner buffer to destination buffer
+    * @param[out] Returns Number of samples copied into destination buffer
+    */
+    size_t CopyFromBuffer(float *dst_buffer, size_t copy_length);
+    /**
+    * Returns number of samples stored in inner buffer
+    * @param[out] Returns number of samples stored in inner buffer
+    */
+    size_t DataStoredInBuffer();
+    /**
+    * Returns free space in buffer (amount of space that we can write into without overwriting old data or going out buffer boundary).
+    * @param[out] Returns free space in buffer
+    */
+    size_t FreeSpaceInBuffer();
 
-        /**
-         * Resamples data
-         * @param[out] destination_buffer Pointer to destination buffer
-         * @param[in] length Maximum number of items to write into destination buffer
-         * @param[in] ratio Resampling ratio
-         * @return Number of items written into destination buffer
-         */
-        long Resample(float *destination_buffer, size_t length, float ratio);
+#ifndef GOOGLE_UNIT_TEST
+private:
+#endif
+    /**
+    * Nearest Neighbor resampling processing method. Samples are interpolated with the value of nearest lying sample. Very fast, needs very good SNR to produce reliable samples.
+    * @param[in] *src_buf Pointer to source data buffer
+    * @param[in] input_length Length of data from source buffer to read and process
+    * @param[in] ratio Resampling ratio (calculated from fs drifts)
+    * @param[out] Returns Number of samples written into inner buffer
+    */
+    size_t ResampleNn(float *src_buf, size_t input_length, float ratio);
+    /**
+    * Linear resampling processing method. Samples are interpolated linearly. Fast (slower than NN), reliable.
+    * @param[in] *src_buf Pointer to source data buffer
+    * @param[in] input_length Length of data from source buffer to read and process
+    * @param[in] ratio Resampling ratio (calculated from fs drifts)
+    * @param[out] Returns Number of samples written into inner buffer
+    */
+    size_t ResampleLinear(float *src_buf, size_t input_length, float ratio);
+    /**
+    * Interpolates value between samples a and b depending on the distance from them. If the interpolated sample is closer to sample A, it takes it's value, same with sample B.
+    * @param[in] a Value of sample a 
+    * @param[in] b Value of sample b
+    * @param[in] distance Distance from sample a (distance from sample a to b is equal 1)
+    * @param[out] Returns value of seeked sample
+    */
+    float InterpolateNn(float a, float b, float distance);
+    /**
+    * Interpolates value between samples a and b depending on the distance from them. Interpolation is linear ( |b-a| * distance) where distance if value between (0..1).
+    * @param[in] a Value of sample a 
+    * @param[in] b Value of sample b
+    * @param[in] distance Distance from sample a (distance from sample a to b is equal 1)
+    * @param[out] Returns value of seeked sample
+    */
+    float InterpolateLinear(float a, float b, float distance);
+    /**
+    * Rounds down to closest even number. I.e. invoked on 3.14 returns 2.
+    * @param[in] a Input number
+    * @param[out] Returns maximum even number lower than input
+    */
+    size_t RoundDownToEven(float a);
 
-        /**
-         * @struct Data
-         * @brief This struct contains Resampler input buffer parameters
-         */
-        struct Data {
-            size_t current_count;   /**< Number of frames read */
-            size_t total;   /**< Total number of frames */
-            float *in_data_ptr; /**< Pointer to input data */
-            int channels;   /**< Number of channels */
-        };
+    /**
+    * Can be used to manipulate interpolation type
+    */
+    resampling_type conv_type_;
+    /**
+    * Inner data buffer, should be at least 3 times longer than maximum Resampler input to assure stability
+    */
+    float *data_buffer_;
+    /**
+    * Debug boolean, if set to True, processing displays additional information to stdout
+    */
+    int debug;
+    /**
+    * Used store Q sample value that will be useful in the next iteration of Resampler processing
+    */
+    float previous_sample_Q_;
+    /**
+    * Used store I sample value that will be useful in the next iteration of Resampler processing
+    */
+    float previous_sample_I_;
+    /**
+    * Array to store sample positions that will be useful in the next iteration of Resampler processing
+    */
+    double previous_sample_position_[2];
+    /**
+    * Variable used to determine where the last useful sample produced by processing is in the buffer. All the samples from the beggining of data_buffer_ to pointer_ are important and must be used.
+    */
+    size_t pointer_;
+    /**
+    * Length of inner buffer (data_buffer_)
+    */
+    size_t length_;
+    /**
+    * Indicates that this is first iteration of Resampler after object creation
+    */
+    int first_iteration_;
 
-    private:
-        Data data_; /**< Internal Data element */
-        int converter_type_;    /**< Converter type, check libsamplerate documentation for more */
-
-        SRC_STATE *src_state_;  /**< Internal libsamplerate element state */
 
 };
 
-#endif /* SRC_RESAMPLER_H_ */
+#endif /* RESAMPLER_H_ */

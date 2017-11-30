@@ -38,6 +38,7 @@
 #include <sys/time.h>
 #include <threading/blocking_queue.h>
 #include "abstract_data_feeder.h"
+#include "Resampler/resampler.h"
 #include "data_format.h"
 
 class FileDataFeeder : public AbstractDataFeeder {
@@ -51,7 +52,7 @@ class FileDataFeeder : public AbstractDataFeeder {
          * @param carrier_freq center frequency of data saved in file
          * @param number_of_bits number_of_bits^2 is a length of sinus LUT table
          */
-        FileDataFeeder(fileType_t fileType, const char *file_name, size_t buf_s, uint32_t sample_rate, uint32_t carrier_freq, int number_of_bits, Resampler2::resampling_type type);
+        FileDataFeeder(fileType_t fileType, const char *file_name, size_t buf_s, uint32_t sample_rate, uint32_t carrier_freq, int number_of_bits, Resampler::resampling_type type);
         ~FileDataFeeder();
 
         virtual uint32_t GetCenterFrequency(void);
@@ -68,8 +69,7 @@ class FileDataFeeder : public AbstractDataFeeder {
 #endif
         int file_descriptor_;
         uint32_t s_rate_,c_freq_; ///< these values need to be kept
-        ResamplingRingBuffer* resampling_buffer_;
-        Resampler2* resampler2_;
+        Resampler* resampler_;
         float *normalization_buffer_;
         unsigned char *file_wrapper_buffer_;
         float * nic;

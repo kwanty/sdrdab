@@ -60,7 +60,7 @@
 #include <pthread.h>
 #include <ctime>
 #include "data_format.h"
-#include "RingBuffer/resampling_ring_buffer.h"
+#include "RingBuffer/ring_buffer.h"
 
 /**
  * Start collecting data from DataFeeder
